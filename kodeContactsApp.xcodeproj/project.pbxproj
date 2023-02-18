@@ -16,6 +16,7 @@
 		9EFB85B4299BAC4500E2B6CA /* kodeContactsAppTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EFB85B3299BAC4500E2B6CA /* kodeContactsAppTests.swift */; };
 		9EFB85BE299BAC4500E2B6CA /* kodeContactsAppUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EFB85BD299BAC4500E2B6CA /* kodeContactsAppUITests.swift */; };
 		9EFB85C0299BAC4500E2B6CA /* kodeContactsAppUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EFB85BF299BAC4500E2B6CA /* kodeContactsAppUITestsLaunchTests.swift */; };
+		9EFB85D529A1580700E2B6CA /* EmployeesData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EFB85D429A1580700E2B6CA /* EmployeesData.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -50,6 +51,7 @@
 		9EFB85BD299BAC4500E2B6CA /* kodeContactsAppUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = kodeContactsAppUITests.swift; sourceTree = "<group>"; };
 		9EFB85BF299BAC4500E2B6CA /* kodeContactsAppUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = kodeContactsAppUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		9EFB85CC299BAE1600E2B6CA /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
+		9EFB85D429A1580700E2B6CA /* EmployeesData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmployeesData.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -108,6 +110,7 @@
 				9EFB85A5299BAC4500E2B6CA /* Assets.xcassets */,
 				9EFB85A7299BAC4500E2B6CA /* LaunchScreen.storyboard */,
 				9EFB85AA299BAC4500E2B6CA /* Info.plist */,
+				9EFB85D429A1580700E2B6CA /* EmployeesData.swift */,
 			);
 			path = kodeContactsApp;
 			sourceTree = "<group>";
@@ -261,6 +264,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				9EFB85A1299BAC4100E2B6CA /* ViewController.swift in Sources */,
+				9EFB85D529A1580700E2B6CA /* EmployeesData.swift in Sources */,
 				9EFB859D299BAC4100E2B6CA /* AppDelegate.swift in Sources */,
 				9EFB859F299BAC4100E2B6CA /* SceneDelegate.swift in Sources */,
 			);
