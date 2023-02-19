@@ -17,6 +17,9 @@
 		9EFB85BE299BAC4500E2B6CA /* kodeContactsAppUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EFB85BD299BAC4500E2B6CA /* kodeContactsAppUITests.swift */; };
 		9EFB85C0299BAC4500E2B6CA /* kodeContactsAppUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EFB85BF299BAC4500E2B6CA /* kodeContactsAppUITestsLaunchTests.swift */; };
 		9EFB85D529A1580700E2B6CA /* EmployeesData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EFB85D429A1580700E2B6CA /* EmployeesData.swift */; };
+		9EFB85DD29A25DFF00E2B6CA /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = 9EFB85DC29A25DFF00E2B6CA /* SnapKit */; };
+		9EFB85E129A277FC00E2B6CA /* Inter-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 9EFB85DF29A277FB00E2B6CA /* Inter-Medium.ttf */; };
+		9EFB85E229A277FC00E2B6CA /* Inter-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 9EFB85E029A277FB00E2B6CA /* Inter-Regular.ttf */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -52,6 +55,8 @@
 		9EFB85BF299BAC4500E2B6CA /* kodeContactsAppUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = kodeContactsAppUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		9EFB85CC299BAE1600E2B6CA /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		9EFB85D429A1580700E2B6CA /* EmployeesData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmployeesData.swift; sourceTree = "<group>"; };
+		9EFB85DF29A277FB00E2B6CA /* Inter-Medium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Inter-Medium.ttf"; sourceTree = "<group>"; };
+		9EFB85E029A277FB00E2B6CA /* Inter-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Inter-Regular.ttf"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -59,6 +64,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9EFB85DD29A25DFF00E2B6CA /* SnapKit in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -103,6 +109,7 @@
 		9EFB859B299BAC4100E2B6CA /* kodeContactsApp */ = {
 			isa = PBXGroup;
 			children = (
+				9EFB85DE29A277D200E2B6CA /* fonts */,
 				9EFB859C299BAC4100E2B6CA /* AppDelegate.swift */,
 				9EFB859E299BAC4100E2B6CA /* SceneDelegate.swift */,
 				9EFB85A0299BAC4100E2B6CA /* ViewController.swift */,
@@ -132,6 +139,15 @@
 			path = kodeContactsAppUITests;
 			sourceTree = "<group>";
 		};
+		9EFB85DE29A277D200E2B6CA /* fonts */ = {
+			isa = PBXGroup;
+			children = (
+				9EFB85DF29A277FB00E2B6CA /* Inter-Medium.ttf */,
+				9EFB85E029A277FB00E2B6CA /* Inter-Regular.ttf */,
+			);
+			path = fonts;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -148,6 +164,9 @@
 			dependencies = (
 			);
 			name = kodeContactsApp;
+			packageProductDependencies = (
+				9EFB85DC29A25DFF00E2B6CA /* SnapKit */,
+			);
 			productName = kodeContactsApp;
 			productReference = 9EFB8599299BAC4100E2B6CA /* kodeContactsApp.app */;
 			productType = "com.apple.product-type.application";
@@ -220,6 +239,9 @@
 				Base,
 			);
 			mainGroup = 9EFB8590299BAC4100E2B6CA;
+			packageReferences = (
+				9EFB85DB29A25DFF00E2B6CA /* XCRemoteSwiftPackageReference "SnapKit" */,
+			);
 			productRefGroup = 9EFB859A299BAC4100E2B6CA /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -236,6 +258,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9EFB85E129A277FC00E2B6CA /* Inter-Medium.ttf in Resources */,
+				9EFB85E229A277FC00E2B6CA /* Inter-Regular.ttf in Resources */,
 				9EFB85A9299BAC4500E2B6CA /* LaunchScreen.storyboard in Resources */,
 				9EFB85A6299BAC4500E2B6CA /* Assets.xcassets in Resources */,
 				9EFB85A4299BAC4100E2B6CA /* Main.storyboard in Resources */,
@@ -628,6 +652,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		9EFB85DB29A25DFF00E2B6CA /* XCRemoteSwiftPackageReference "SnapKit" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/SnapKit/SnapKit.git";
+			requirement = {
+				branch = develop;
+				kind = branch;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		9EFB85DC29A25DFF00E2B6CA /* SnapKit */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 9EFB85DB29A25DFF00E2B6CA /* XCRemoteSwiftPackageReference "SnapKit" */;
+			productName = SnapKit;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 9EFB8591299BAC4100E2B6CA /* Project object */;
 }
