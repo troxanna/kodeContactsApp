@@ -20,6 +20,7 @@
 		9EFB85DD29A25DFF00E2B6CA /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = 9EFB85DC29A25DFF00E2B6CA /* SnapKit */; };
 		9EFB85E129A277FC00E2B6CA /* Inter-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 9EFB85DF29A277FB00E2B6CA /* Inter-Medium.ttf */; };
 		9EFB85E229A277FC00E2B6CA /* Inter-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 9EFB85E029A277FB00E2B6CA /* Inter-Regular.ttf */; };
+		9EFB85E429A2B75E00E2B6CA /* EmployeeInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EFB85E329A2B75D00E2B6CA /* EmployeeInfoViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -57,6 +58,7 @@
 		9EFB85D429A1580700E2B6CA /* EmployeesData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmployeesData.swift; sourceTree = "<group>"; };
 		9EFB85DF29A277FB00E2B6CA /* Inter-Medium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Inter-Medium.ttf"; sourceTree = "<group>"; };
 		9EFB85E029A277FB00E2B6CA /* Inter-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Inter-Regular.ttf"; sourceTree = "<group>"; };
+		9EFB85E329A2B75D00E2B6CA /* EmployeeInfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmployeeInfoViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -118,6 +120,7 @@
 				9EFB85A7299BAC4500E2B6CA /* LaunchScreen.storyboard */,
 				9EFB85AA299BAC4500E2B6CA /* Info.plist */,
 				9EFB85D429A1580700E2B6CA /* EmployeesData.swift */,
+				9EFB85E329A2B75D00E2B6CA /* EmployeeInfoViewController.swift */,
 			);
 			path = kodeContactsApp;
 			sourceTree = "<group>";
@@ -289,6 +292,7 @@
 			files = (
 				9EFB85A1299BAC4100E2B6CA /* ViewController.swift in Sources */,
 				9EFB85D529A1580700E2B6CA /* EmployeesData.swift in Sources */,
+				9EFB85E429A2B75E00E2B6CA /* EmployeeInfoViewController.swift in Sources */,
 				9EFB859D299BAC4100E2B6CA /* AppDelegate.swift in Sources */,
 				9EFB859F299BAC4100E2B6CA /* SceneDelegate.swift in Sources */,
 			);
@@ -473,7 +477,6 @@
 				INFOPLIST_FILE = kodeContactsApp/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
-				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
@@ -502,7 +505,6 @@
 				INFOPLIST_FILE = kodeContactsApp/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
-				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";

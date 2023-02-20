@@ -12,12 +12,13 @@ class ViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        createSearchBar()
         contentConfigurationView()
         view.addSubview(tableView)
         tableView.snp.makeConstraints({ make in
             make.edges.equalToSuperview()
         })
-        //tableView.delegate = self
+        tableView.delegate = self
         tableView.dataSource = self
         tableView.register(UITableViewCell.self, forCellReuseIdentifier: "cell")
         contentConfigurationTableView()
@@ -31,12 +32,20 @@ class ViewController: UIViewController {
     private var employeesData: [Person] = []
 }
 
-//MARK: UITableViewDataSource
+//MARK: UITableViewDelegate
+extension ViewController: UITableViewDelegate {
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        //employeesData.count == 0 -> Другой экран
+        let viewController = EmployeeInfoViewController()
+        navigationController?.pushViewController(viewController, animated: true)
+    }
+}
 
+//MARK: UITableViewDataSource
 extension ViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         //employeesData.count
-        return 10
+        return 20
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -52,7 +61,6 @@ extension ViewController: UITableViewDataSource {
 }
  
 //MARK: Private methods for iOS 14
-
 @available(iOS 14.0, *)
 extension ViewController {
     @available(iOS 14.0, *)
@@ -102,6 +110,11 @@ extension ViewController {
     private func contentConfigurationView() {
         view.backgroundColor = UIColor(red: 0.898, green: 0.898, blue: 0.898, alpha: 1)
     }
+    
+    private func createSearchBar() {
+        let searchBar = UISearchBar()
+        searchBar.sizeToFit()
+        navigationItem.titleView = searchBar
+    }
 }
 
-//В модель данных добавить опциональные значения (avatarImage, департамент), добавить enum с департаментами
