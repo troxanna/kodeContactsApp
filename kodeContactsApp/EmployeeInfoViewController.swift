@@ -247,7 +247,7 @@ extension EmployeeInfoViewController {
     }
 }
 
-//MARK: Private data functions
+//MARK: Private data formatter functions
 extension EmployeeInfoViewController {
     private func fullData() {
         let tmpYear = getUserAge(from: person.birthday)
@@ -257,7 +257,7 @@ extension EmployeeInfoViewController {
         position.text = person.position
         dateBirthDay.text = ConvertDateBirthDay()
         age.text = "\(tmpYear.0) \(tmpYear.1) "
-        numberPhone.text = person.phone
+        numberPhone.text = formatPhoneNumber(number: person.phone)
     }
     
     private func ConvertDateBirthDay() -> String {
@@ -292,6 +292,26 @@ extension EmployeeInfoViewController {
         }
         //Обработать исключение
         return (0, "")
+    }
+    
+    private func formatPhoneNumber(number: String) -> String {
+        let mask = "+7 (XXX) XXX XX XX"
+        var result = ""
+        var index = number.startIndex
+        for ch in mask where index < number.endIndex {
+            if number[index] == "-" {
+                result.append(ch)
+                index = number.index(after: index)
+            }
+            else if ch == "X" {
+                result.append(number[index])
+                index = number.index(after: index)
+            }
+            else {
+                result.append(ch)
+            }
+        }
+        return result
     }
 }
 
