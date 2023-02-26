@@ -89,6 +89,12 @@ class EmployeeInfoViewController: UIViewController {
         return image
     }()
     
+    private let blurView: BlurEffectView = {
+        let view = BlurEffectView()
+//        view.alpha = 0.7
+        return view
+    }()
+    
     private let stackDateBirthDay = UIStackView()
 
     //MARK: Override functions
@@ -326,17 +332,27 @@ extension EmployeeInfoViewController {
         let actionSheet = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
         let actionCall = UIAlertAction(title: numberPhone.title(for: .normal), style: .default) {(actionSheet) in
             self.callPhoneNumber()
+            self.blurView.removeFromSuperview()
         }
-        let actionCancel = UIAlertAction(title: "Отмена", style: .cancel, handler: nil)
+        let actionCancel = UIAlertAction(title: "Отмена", style: .cancel){(actionSheet) in
+            self.blurView.removeFromSuperview()
+        }
         actionSheet.addAction(actionCall)
         actionSheet.addAction(actionCancel)
-        self.present(actionSheet, animated: true, completion: nil)
+        self.present(actionSheet, animated: true){() in
+            self.view.addSubview(self.blurView)
+            self.blurView.snp.makeConstraints({ make in
+                make.edges.equalToSuperview()
+            })
+            
+        }
         contentConfigurationNumberPhoneAlert(actionSheet: actionSheet)
     }
     
     private func contentConfigurationNumberPhoneAlert(actionSheet: UIAlertController) {
         actionSheet.view.tintColor = UIColor(red: 50/255, green: 50/255, blue: 50/255, alpha: 1)
         actionSheet.view.layer.cornerRadius = 13
+        
     }
     
     private func callPhoneNumber() {
