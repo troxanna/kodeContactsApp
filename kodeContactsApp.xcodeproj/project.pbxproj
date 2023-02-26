@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		9EE85EB229ABB2B5001A94E4 /* ExtensionUIButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EE85EB129ABB2B5001A94E4 /* ExtensionUIButton.swift */; };
 		9EFB859D299BAC4100E2B6CA /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EFB859C299BAC4100E2B6CA /* AppDelegate.swift */; };
 		9EFB859F299BAC4100E2B6CA /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EFB859E299BAC4100E2B6CA /* SceneDelegate.swift */; };
 		9EFB85A1299BAC4100E2B6CA /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EFB85A0299BAC4100E2B6CA /* ViewController.swift */; };
@@ -41,6 +42,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		9EE85EB129ABB2B5001A94E4 /* ExtensionUIButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtensionUIButton.swift; sourceTree = "<group>"; };
 		9EFB8599299BAC4100E2B6CA /* kodeContactsApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = kodeContactsApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9EFB859C299BAC4100E2B6CA /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		9EFB859E299BAC4100E2B6CA /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -121,6 +123,7 @@
 				9EFB85AA299BAC4500E2B6CA /* Info.plist */,
 				9EFB85D429A1580700E2B6CA /* EmployeesData.swift */,
 				9EFB85E329A2B75D00E2B6CA /* EmployeeInfoViewController.swift */,
+				9EE85EB129ABB2B5001A94E4 /* ExtensionUIButton.swift */,
 			);
 			path = kodeContactsApp;
 			sourceTree = "<group>";
@@ -293,6 +296,7 @@
 				9EFB85A1299BAC4100E2B6CA /* ViewController.swift in Sources */,
 				9EFB85D529A1580700E2B6CA /* EmployeesData.swift in Sources */,
 				9EFB85E429A2B75E00E2B6CA /* EmployeeInfoViewController.swift in Sources */,
+				9EE85EB229ABB2B5001A94E4 /* ExtensionUIButton.swift in Sources */,
 				9EFB859D299BAC4100E2B6CA /* AppDelegate.swift in Sources */,
 				9EFB859F299BAC4100E2B6CA /* SceneDelegate.swift in Sources */,
 			);

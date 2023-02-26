@@ -56,11 +56,13 @@ class EmployeeInfoViewController: UIViewController {
         return label
     }()
     
-    private let numberPhone: UILabel = {
-        let label = UILabel()
-        label.font = UIFont(name: "Inter-Medium", size: 16) ?? UIFont.systemFont(ofSize: 16, weight: .medium)
-        label.textColor = UIColor(red: 5/255, green: 5/255, blue: 16/255, alpha: 1)
-        return label
+    private let numberPhone: UIButton = {
+        let button = UIButton()
+        button.setImage(UIImage(named: Icons.phone.rawValue), for: .normal)
+        button.backgroundColor = .white
+        button.titleLabel?.font = UIFont(name: "Inter-Medium", size: 16) ?? UIFont.systemFont(ofSize: 16, weight: .medium)
+        button.setTitleColor(UIColor(red: 5/255, green: 5/255, blue: 16/255, alpha: 1), for: .normal)
+        return button
     }()
     
     private let employeeInfoView: UIView = {
@@ -87,14 +89,7 @@ class EmployeeInfoViewController: UIViewController {
         return image
     }()
     
-    private let imagePhone: UIImageView = {
-        let image = UIImageView()
-        image.image = UIImage(named: Icons.phone.rawValue)
-        return image
-    }()
-    
     private let stackDateBirthDay = UIStackView()
-    private let stackNumberPhone = UIStackView()
 
     //MARK: Override functions
     override func viewDidLoad() {
@@ -180,7 +175,8 @@ extension EmployeeInfoViewController {
         
         configurationEmployeeDateBirthdayView()
         configurationHorizontalLine()
-        configurationEmployeeNumberPhoneView()
+        configurationEmployeeNumberPhoneButton()
+        
     }
     
     private func configurationHorizontalLine() {
@@ -222,28 +218,18 @@ extension EmployeeInfoViewController {
         })
     }
     
-    private func configurationEmployeeNumberPhoneView() {
-        stackNumberPhone.axis = .horizontal
-        stackNumberPhone.alignment = .center
-        stackNumberPhone.addArrangedSubview(imagePhone)
-        stackNumberPhone.addArrangedSubview(numberPhone)
+    private func configurationEmployeeNumberPhoneButton() {
 
+        employeeDetailsInfoView.addSubview(numberPhone)
         numberPhone.snp.makeConstraints({ make in
-            make.height.equalTo(60)
-            make.left.equalTo(imagePhone.snp.right).offset(14)
-        })
-
-        
-        employeeDetailsInfoView.addSubview(stackNumberPhone)
-        stackNumberPhone.snp.makeConstraints({ make in
             make.left.equalTo(employeeDetailsInfoView.snp.left).inset(16)
-            make.right.equalTo(employeeDetailsInfoView.snp.right).inset(16)
             make.top.equalTo(line.snp.bottom)
+            make.height.equalTo(60)
         })
+        numberPhone.setTitleInsets(imageTitlePadding: 14)
         
-        imagePhone.snp.makeConstraints({ make in
-            make.size.equalTo(CGSize(width: 20, height: 20))
-        })
+        numberPhone.addTarget(self, action: #selector(buttonNumberPhonePressed), for: .touchUpInside)
+
     }
 }
 
@@ -257,7 +243,7 @@ extension EmployeeInfoViewController {
         position.text = person.position
         dateBirthDay.text = ConvertDateBirthDay()
         age.text = "\(tmpYear.0) \(tmpYear.1) "
-        numberPhone.text = formatPhoneNumber(number: person.phone)
+        numberPhone.setTitle(formatPhoneNumber(number: person.phone), for: .normal)
     }
     
     private func ConvertDateBirthDay() -> String {
@@ -313,6 +299,17 @@ extension EmployeeInfoViewController {
         }
         return result
     }
+    
+    private func removeNumberFormat(number: String) -> String {
+        let digits = CharacterSet.decimalDigits
+        var text = ""
+        for char in number.unicodeScalars {
+            if digits.contains(char) {
+                text.append(char.description)
+            }
+        }
+        return text
+    }
 }
 
 //MARK: Public functions
@@ -322,3 +319,29 @@ extension EmployeeInfoViewController {
         print(person)
     }
 }
+
+//MARK: Action sheet
+extension EmployeeInfoViewController {
+    @objc private func buttonNumberPhonePressed() {
+        let actionSheet = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
+        let actionCall = UIAlertAction(title: numberPhone.title(for: .normal), style: .default) {(actionSheet) in
+            self.callPhoneNumber()
+        }
+        let actionCancel = UIAlertAction(title: "Отмена", style: .cancel, handler: nil)
+        actionSheet.addAction(actionCall)
+        actionSheet.addAction(actionCancel)
+        self.present(actionSheet, animated: true, completion: nil)
+        contentConfigurationNumberPhoneAlert(actionSheet: actionSheet)
+    }
+    
+    private func contentConfigurationNumberPhoneAlert(actionSheet: UIAlertController) {
+        actionSheet.view.tintColor = UIColor(red: 50/255, green: 50/255, blue: 50/255, alpha: 1)
+        actionSheet.view.layer.cornerRadius = 13
+    }
+    
+    private func callPhoneNumber() {
+        let url: NSURL = URL(string: "TEL://+\(removeNumberFormat(number: numberPhone.title(for: .normal)!))")! as NSURL
+        UIApplication.shared.open(url as URL, options: [:], completionHandler: nil)
+    }
+}
+
