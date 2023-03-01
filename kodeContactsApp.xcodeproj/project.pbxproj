@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		9E12CE4029AFB71E000771F8 /* ErrorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E12CE3F29AFB71E000771F8 /* ErrorViewController.swift */; };
+		9E12CE4229AFC4AC000771F8 /* Inter-SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 9E12CE4129AFC4AC000771F8 /* Inter-SemiBold.ttf */; };
+		9E12CE4429AFC4B5000771F8 /* Inter-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 9E12CE4329AFC4B5000771F8 /* Inter-Bold.ttf */; };
 		9EFB859D299BAC4100E2B6CA /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EFB859C299BAC4100E2B6CA /* AppDelegate.swift */; };
 		9EFB859F299BAC4100E2B6CA /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EFB859E299BAC4100E2B6CA /* SceneDelegate.swift */; };
 		9EFB85A1299BAC4100E2B6CA /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EFB85A0299BAC4100E2B6CA /* ViewController.swift */; };
@@ -42,6 +45,9 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		9E12CE3F29AFB71E000771F8 /* ErrorViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorViewController.swift; sourceTree = "<group>"; };
+		9E12CE4129AFC4AC000771F8 /* Inter-SemiBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Inter-SemiBold.ttf"; sourceTree = "<group>"; };
+		9E12CE4329AFC4B5000771F8 /* Inter-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Inter-Bold.ttf"; sourceTree = "<group>"; };
 		9EFB8599299BAC4100E2B6CA /* kodeContactsApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = kodeContactsApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9EFB859C299BAC4100E2B6CA /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		9EFB859E299BAC4100E2B6CA /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -124,6 +130,7 @@
 				9EFB85D429A1580700E2B6CA /* EmployeesData.swift */,
 				9EFB85E329A2B75D00E2B6CA /* EmployeeInfoViewController.swift */,
 				9EFB85E529A39BCE00E2B6CA /* EmployeeTableViewCell.swift */,
+				9E12CE3F29AFB71E000771F8 /* ErrorViewController.swift */,
 			);
 			path = kodeContactsApp;
 			sourceTree = "<group>";
@@ -148,6 +155,8 @@
 		9EFB85DE29A277D200E2B6CA /* fonts */ = {
 			isa = PBXGroup;
 			children = (
+				9E12CE4129AFC4AC000771F8 /* Inter-SemiBold.ttf */,
+				9E12CE4329AFC4B5000771F8 /* Inter-Bold.ttf */,
 				9EFB85DF29A277FB00E2B6CA /* Inter-Medium.ttf */,
 				9EFB85E029A277FB00E2B6CA /* Inter-Regular.ttf */,
 			);
@@ -264,8 +273,10 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9E12CE4229AFC4AC000771F8 /* Inter-SemiBold.ttf in Resources */,
 				9EFB85E129A277FC00E2B6CA /* Inter-Medium.ttf in Resources */,
 				9EFB85E229A277FC00E2B6CA /* Inter-Regular.ttf in Resources */,
+				9E12CE4429AFC4B5000771F8 /* Inter-Bold.ttf in Resources */,
 				9EFB85A9299BAC4500E2B6CA /* LaunchScreen.storyboard in Resources */,
 				9EFB85A6299BAC4500E2B6CA /* Assets.xcassets in Resources */,
 				9EFB85A4299BAC4100E2B6CA /* Main.storyboard in Resources */,
@@ -293,6 +304,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9E12CE4029AFB71E000771F8 /* ErrorViewController.swift in Sources */,
 				9EFB85A1299BAC4100E2B6CA /* ViewController.swift in Sources */,
 				9EFB85D529A1580700E2B6CA /* EmployeesData.swift in Sources */,
 				9EFB85E429A2B75E00E2B6CA /* EmployeeInfoViewController.swift in Sources */,
