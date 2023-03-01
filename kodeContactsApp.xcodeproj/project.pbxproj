@@ -16,6 +16,7 @@
 		9EFB85B4299BAC4500E2B6CA /* kodeContactsAppTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EFB85B3299BAC4500E2B6CA /* kodeContactsAppTests.swift */; };
 		9EFB85BE299BAC4500E2B6CA /* kodeContactsAppUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EFB85BD299BAC4500E2B6CA /* kodeContactsAppUITests.swift */; };
 		9EFB85C0299BAC4500E2B6CA /* kodeContactsAppUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EFB85BF299BAC4500E2B6CA /* kodeContactsAppUITestsLaunchTests.swift */; };
+		9F3EE20DF5E3A79484B6BEED /* Pods_kodeContactsApp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CF46926BC1F79BD626738A2E /* Pods_kodeContactsApp.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -36,7 +37,11 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		9EFB8599299BAC4100E2B6CA /* kodeContactsApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = kodeContactsApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		2EFDDAE566D207D5C520E3B1 /* Pods-kodeContactsApp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-kodeContactsApp.debug.xcconfig"; path = "Target Support Files/Pods-kodeContactsApp/Pods-kodeContactsApp.debug.xcconfig"; sourceTree = "<group>"; };
+		6DC899923867EBC5E76D64BC /* Pods-kodeContactsApp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-kodeContactsApp.release.xcconfig"; path = "Target Support Files/Pods-kodeContactsApp/Pods-kodeContactsApp.release.xcconfig"; sourceTree = "<group>"; };
+		9E12CE3C29AFB21F000771F8 /* kodeContactsApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = kodeContactsApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		9E12CE3D29AFB21F000771F8 /* kodeContactsAppTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; name = kodeContactsAppTests.xctest; path = "/Users/anevodchikova/Desktop/development/swift/projects/kodeContactsApp/build/Debug-iphoneos/kodeContactsAppTests.xctest"; sourceTree = "<absolute>"; };
+		9E12CE3E29AFB21F000771F8 /* kodeContactsAppUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; name = kodeContactsAppUITests.xctest; path = "/Users/anevodchikova/Desktop/development/swift/projects/kodeContactsApp/build/Debug-iphoneos/kodeContactsAppUITests.xctest"; sourceTree = "<absolute>"; };
 		9EFB859C299BAC4100E2B6CA /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		9EFB859E299BAC4100E2B6CA /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		9EFB85A0299BAC4100E2B6CA /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -44,12 +49,11 @@
 		9EFB85A5299BAC4500E2B6CA /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		9EFB85A8299BAC4500E2B6CA /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		9EFB85AA299BAC4500E2B6CA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		9EFB85AF299BAC4500E2B6CA /* kodeContactsAppTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = kodeContactsAppTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		9EFB85B3299BAC4500E2B6CA /* kodeContactsAppTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = kodeContactsAppTests.swift; sourceTree = "<group>"; };
-		9EFB85B9299BAC4500E2B6CA /* kodeContactsAppUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = kodeContactsAppUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		9EFB85BD299BAC4500E2B6CA /* kodeContactsAppUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = kodeContactsAppUITests.swift; sourceTree = "<group>"; };
 		9EFB85BF299BAC4500E2B6CA /* kodeContactsAppUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = kodeContactsAppUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		9EFB85CC299BAE1600E2B6CA /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
+		CF46926BC1F79BD626738A2E /* Pods_kodeContactsApp.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_kodeContactsApp.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -57,6 +61,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9F3EE20DF5E3A79484B6BEED /* Pods_kodeContactsApp.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -77,6 +82,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		489B443185C0E979CFBA98ED /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				CF46926BC1F79BD626738A2E /* Pods_kodeContactsApp.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		9EFB8590299BAC4100E2B6CA = {
 			isa = PBXGroup;
 			children = (
@@ -84,18 +97,10 @@
 				9EFB859B299BAC4100E2B6CA /* kodeContactsApp */,
 				9EFB85B2299BAC4500E2B6CA /* kodeContactsAppTests */,
 				9EFB85BC299BAC4500E2B6CA /* kodeContactsAppUITests */,
-				9EFB859A299BAC4100E2B6CA /* Products */,
+				BB8C56272FB0D7026EDEED27 /* Pods */,
+				489B443185C0E979CFBA98ED /* Frameworks */,
+				9E12CE3C29AFB21F000771F8 /* kodeContactsApp.app */,
 			);
-			sourceTree = "<group>";
-		};
-		9EFB859A299BAC4100E2B6CA /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				9EFB8599299BAC4100E2B6CA /* kodeContactsApp.app */,
-				9EFB85AF299BAC4500E2B6CA /* kodeContactsAppTests.xctest */,
-				9EFB85B9299BAC4500E2B6CA /* kodeContactsAppUITests.xctest */,
-			);
-			name = Products;
 			sourceTree = "<group>";
 		};
 		9EFB859B299BAC4100E2B6CA /* kodeContactsApp */ = {
@@ -129,6 +134,15 @@
 			path = kodeContactsAppUITests;
 			sourceTree = "<group>";
 		};
+		BB8C56272FB0D7026EDEED27 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				2EFDDAE566D207D5C520E3B1 /* Pods-kodeContactsApp.debug.xcconfig */,
+				6DC899923867EBC5E76D64BC /* Pods-kodeContactsApp.release.xcconfig */,
+			);
+			path = Pods;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -136,9 +150,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 9EFB85C3299BAC4500E2B6CA /* Build configuration list for PBXNativeTarget "kodeContactsApp" */;
 			buildPhases = (
+				1AEE26E103288172520E085D /* [CP] Check Pods Manifest.lock */,
 				9EFB8595299BAC4100E2B6CA /* Sources */,
 				9EFB8596299BAC4100E2B6CA /* Frameworks */,
 				9EFB8597299BAC4100E2B6CA /* Resources */,
+				ED0DE1B0A95A7A8CAD38F039 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -146,7 +162,7 @@
 			);
 			name = kodeContactsApp;
 			productName = kodeContactsApp;
-			productReference = 9EFB8599299BAC4100E2B6CA /* kodeContactsApp.app */;
+			productReference = 9E12CE3C29AFB21F000771F8 /* kodeContactsApp.app */;
 			productType = "com.apple.product-type.application";
 		};
 		9EFB85AE299BAC4500E2B6CA /* kodeContactsAppTests */ = {
@@ -164,7 +180,7 @@
 			);
 			name = kodeContactsAppTests;
 			productName = kodeContactsAppTests;
-			productReference = 9EFB85AF299BAC4500E2B6CA /* kodeContactsAppTests.xctest */;
+			productReference = 9E12CE3D29AFB21F000771F8 /* kodeContactsAppTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
 		9EFB85B8299BAC4500E2B6CA /* kodeContactsAppUITests */ = {
@@ -182,7 +198,7 @@
 			);
 			name = kodeContactsAppUITests;
 			productName = kodeContactsAppUITests;
-			productReference = 9EFB85B9299BAC4500E2B6CA /* kodeContactsAppUITests.xctest */;
+			productReference = 9E12CE3E29AFB21F000771F8 /* kodeContactsAppUITests.xctest */;
 			productType = "com.apple.product-type.bundle.ui-testing";
 		};
 /* End PBXNativeTarget section */
@@ -217,7 +233,7 @@
 				Base,
 			);
 			mainGroup = 9EFB8590299BAC4100E2B6CA;
-			productRefGroup = 9EFB859A299BAC4100E2B6CA /* Products */;
+			productRefGroup = 9EFB8590299BAC4100E2B6CA;
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
@@ -254,6 +270,48 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		1AEE26E103288172520E085D /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-kodeContactsApp-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		ED0DE1B0A95A7A8CAD38F039 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-kodeContactsApp/Pods-kodeContactsApp-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-kodeContactsApp/Pods-kodeContactsApp-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-kodeContactsApp/Pods-kodeContactsApp-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		9EFB8595299BAC4100E2B6CA /* Sources */ = {
@@ -436,6 +494,7 @@
 		};
 		9EFB85C4299BAC4500E2B6CA /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 2EFDDAE566D207D5C520E3B1 /* Pods-kodeContactsApp.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -450,10 +509,7 @@
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-				);
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited)";
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = "-2.kodeContactsApp";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -465,6 +521,7 @@
 		};
 		9EFB85C5299BAC4500E2B6CA /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 6DC899923867EBC5E76D64BC /* Pods-kodeContactsApp.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -479,10 +536,7 @@
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-				);
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited)";
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = "-2.kodeContactsApp";
 				PRODUCT_NAME = "$(TARGET_NAME)";
