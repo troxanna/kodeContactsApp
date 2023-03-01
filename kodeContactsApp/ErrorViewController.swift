@@ -66,7 +66,10 @@ extension ErrorViewController {
         errorStack.snp.makeConstraints({ make in
             make.centerX.equalToSuperview()
             make.centerY.equalToSuperview()
-            make.width.greaterThanOrEqualTo(56)
+        })
+        
+        titleErrorLabel.snp.makeConstraints({ make in
+            make.top.equalTo(imageError.snp.bottom).offset(8)
         })
         
     }
