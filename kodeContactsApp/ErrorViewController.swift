@@ -72,6 +72,8 @@ extension ErrorViewController {
             make.top.equalTo(imageError.snp.bottom).offset(8)
         })
         
+        buttonRepeatRequest.addTarget(self, action: #selector(buttonRepeatRequestPressed), for: .touchUpInside)
+        
     }
     
     private func contentConfiguratedErrorView() {
@@ -80,5 +82,11 @@ extension ErrorViewController {
         messageErrorLabel.text = "Постараемся быстро починить"
         buttonRepeatRequest.setTitle("Попробовать снова", for: .normal)
         
+    }
+    
+    
+    @objc private func buttonRepeatRequestPressed() {
+        //после подключения API вызвать запрос списка контактов тут
+        print("RepeatRequest")
     }
 }
