@@ -9,7 +9,13 @@ import UIKit
 import SnapKit
 
 class ViewController: UIViewController {
+    
+    //MARK: Private properties
+        private var tableView = UITableView()
+        private var person = Person(id: "e66c4836-ad5f-4b93-b82a-9251b0f9aca2", firstName: "River", lastName: "Gutkowski", department: "qa", position: "Technician", birthday: "1943-05-26", phone: "335-943-1610", userTag: "FM", avatarURL: "avatarURL")
+        private var employeesData: [Person] = []
 
+    //MARK: Override functions
     override func viewDidLoad() {
         super.viewDidLoad()
         createSearchBar()
@@ -22,14 +28,7 @@ class ViewController: UIViewController {
         tableView.dataSource = self
         tableView.register(EmployeeTableViewCell.self, forCellReuseIdentifier: "cell")
         contentConfigurationTableView()
-        
     }
-    
-//MARK: Private properties
-    
-    private var tableView = UITableView()
-    private var person = Person(id: "e66c4836-ad5f-4b93-b82a-9251b0f9aca2", firstName: "River", lastName: "Gutkowski", department: "qa", position: "Technician", birthday: "1943-05-26", phone: "335-943-1610", userTag: "FM", avatarURL: "avatarURL")
-    private var employeesData: [Person] = []
 }
 
 //MARK: UITableViewDelegate

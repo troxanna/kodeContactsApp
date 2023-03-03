@@ -1,21 +1,29 @@
 PODS:
+  - SkeletonView (1.30.4)
   - SnapKit (5.6.0)
 
 DEPENDENCIES:
+  - SkeletonView (from `https://github.com/Juanpe/SkeletonView.git`)
   - SnapKit (from `https://github.com/SnapKit/SnapKit`)
 
 EXTERNAL SOURCES:
+  SkeletonView:
+    :git: https://github.com/Juanpe/SkeletonView.git
   SnapKit:
     :git: https://github.com/SnapKit/SnapKit
 
 CHECKOUT OPTIONS:
+  SkeletonView:
+    :commit: 0f5eaf82e82441690d38abfc4118c961f113881c
+    :git: https://github.com/Juanpe/SkeletonView.git
   SnapKit:
     :commit: 58320fe80522414bf3a7e24c88123581dc586752
     :git: https://github.com/SnapKit/SnapKit
 
 SPEC CHECKSUMS:
+  SkeletonView: 5a050f6411e697abd4cda0a8d767013399dccd69
   SnapKit: 9eedce9d0d01ad07c7c75194ee7d39b42c04bb1f
 
-PODFILE CHECKSUM: a0d68f32e69cf313deb6c83ad1de9e62c98d51c7
+PODFILE CHECKSUM: 3b0a4a56d0c0dcb20133a281de6924a7cbcc92e9
 
 COCOAPODS: 1.12.0

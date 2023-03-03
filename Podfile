@@ -6,6 +6,7 @@ target 'kodeContactsApp' do
   use_frameworks!
 
   pod 'SnapKit', :git => 'https://github.com/SnapKit/SnapKit'
+  pod 'SkeletonView', :git => 'https://github.com/Juanpe/SkeletonView.git'
 
 
 end
