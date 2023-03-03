@@ -146,10 +146,10 @@ extension EmployeeTableViewCell {
 //MARK: EmployeeTableViewCellProtocol
 extension EmployeeTableViewCell: EmployeeTableViewCellProtocol {
     func fullDataCell(data: Person) {
-        let userTag = data.userTag.lowercased()
+        let userTag = data.userTag?.lowercased()
         titleLabel.text = "\(data.firstName) \(data.lastName)"
         descriptionLabel.text = data.position
         userTagLabel.text = userTag
-        avatarImage.image = UIImage(named: data.avatarURL)
+        avatarImage.image = UIImage(named: data.avatarURL ?? "avatarURL")
     }
 }

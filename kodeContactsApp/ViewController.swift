@@ -28,7 +28,7 @@ class ViewController: UIViewController {
 //MARK: Private properties
     
     private var tableView = UITableView()
-    private var person = Person(id: "e66c4836-ad5f-4b93-b82a-9251b0f9aca2", avatarURL: "avatarURL", firstName: "River", lastName: "Gutkowski", userTag: "FM", department: "qa", position: "Technician", birthday: "1943-05-26", phone: "335-943-1610")
+    private var person = Person(id: "e66c4836-ad5f-4b93-b82a-9251b0f9aca2", firstName: "River", lastName: "Gutkowski", department: "qa", position: "Technician", birthday: "1943-05-26", phone: "335-943-1610", userTag: "FM", avatarURL: "avatarURL")
     private var employeesData: [Person] = []
 }
 
@@ -36,7 +36,7 @@ class ViewController: UIViewController {
 extension ViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         //employeesData.count == 0 -> Другой экран
-        let viewController = ErrorViewController()
+        let viewController = EmployeeInfoViewController()
         //viewController.sendData(person: person)
         navigationController?.pushViewController(viewController, animated: true)
     }

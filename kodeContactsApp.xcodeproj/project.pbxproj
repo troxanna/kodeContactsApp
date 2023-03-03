@@ -7,6 +7,12 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		9E12CEA129B23BAD000771F8 /* EmployeesData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E12CEA029B23BAC000771F8 /* EmployeesData.swift */; };
+		9E12CEA329B23BBA000771F8 /* EmployeeTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E12CEA229B23BBA000771F8 /* EmployeeTableViewCell.swift */; };
+		9E12CEA529B23BD0000771F8 /* EmployeeInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E12CEA429B23BCF000771F8 /* EmployeeInfoViewController.swift */; };
+		9E12CEA929B23BD9000771F8 /* Inter-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 9E12CEA729B23BD9000771F8 /* Inter-Medium.ttf */; };
+		9E12CEAA29B23BD9000771F8 /* Inter-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 9E12CEA829B23BD9000771F8 /* Inter-Regular.ttf */; };
+		9E12CEAE29B23C24000771F8 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9E12CEAD29B23C24000771F8 /* Assets.xcassets */; };
 		9EFB859D299BAC4100E2B6CA /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EFB859C299BAC4100E2B6CA /* AppDelegate.swift */; };
 		9EFB859F299BAC4100E2B6CA /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EFB859E299BAC4100E2B6CA /* SceneDelegate.swift */; };
 		9EFB85A1299BAC4100E2B6CA /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EFB85A0299BAC4100E2B6CA /* ViewController.swift */; };
@@ -40,8 +46,14 @@
 		2EFDDAE566D207D5C520E3B1 /* Pods-kodeContactsApp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-kodeContactsApp.debug.xcconfig"; path = "Target Support Files/Pods-kodeContactsApp/Pods-kodeContactsApp.debug.xcconfig"; sourceTree = "<group>"; };
 		6DC899923867EBC5E76D64BC /* Pods-kodeContactsApp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-kodeContactsApp.release.xcconfig"; path = "Target Support Files/Pods-kodeContactsApp/Pods-kodeContactsApp.release.xcconfig"; sourceTree = "<group>"; };
 		9E12CE3C29AFB21F000771F8 /* kodeContactsApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = kodeContactsApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		9E12CE3D29AFB21F000771F8 /* kodeContactsAppTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; name = kodeContactsAppTests.xctest; path = "/Users/anevodchikova/Desktop/development/swift/projects/kodeContactsApp/build/Debug-iphoneos/kodeContactsAppTests.xctest"; sourceTree = "<absolute>"; };
-		9E12CE3E29AFB21F000771F8 /* kodeContactsAppUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; name = kodeContactsAppUITests.xctest; path = "/Users/anevodchikova/Desktop/development/swift/projects/kodeContactsApp/build/Debug-iphoneos/kodeContactsAppUITests.xctest"; sourceTree = "<absolute>"; };
+		9E12CE9E29B23B94000771F8 /* kodeContactsAppTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = kodeContactsAppTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		9E12CE9F29B23B94000771F8 /* kodeContactsAppUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = kodeContactsAppUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		9E12CEA029B23BAC000771F8 /* EmployeesData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EmployeesData.swift; sourceTree = "<group>"; };
+		9E12CEA229B23BBA000771F8 /* EmployeeTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EmployeeTableViewCell.swift; sourceTree = "<group>"; };
+		9E12CEA429B23BCF000771F8 /* EmployeeInfoViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EmployeeInfoViewController.swift; sourceTree = "<group>"; };
+		9E12CEA729B23BD9000771F8 /* Inter-Medium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Inter-Medium.ttf"; sourceTree = "<group>"; };
+		9E12CEA829B23BD9000771F8 /* Inter-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Inter-Regular.ttf"; sourceTree = "<group>"; };
+		9E12CEAD29B23C24000771F8 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		9EFB859C299BAC4100E2B6CA /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		9EFB859E299BAC4100E2B6CA /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		9EFB85A0299BAC4100E2B6CA /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -90,6 +102,15 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		9E12CEA629B23BD9000771F8 /* fonts */ = {
+			isa = PBXGroup;
+			children = (
+				9E12CEA729B23BD9000771F8 /* Inter-Medium.ttf */,
+				9E12CEA829B23BD9000771F8 /* Inter-Regular.ttf */,
+			);
+			path = fonts;
+			sourceTree = "<group>";
+		};
 		9EFB8590299BAC4100E2B6CA = {
 			isa = PBXGroup;
 			children = (
@@ -100,12 +121,19 @@
 				BB8C56272FB0D7026EDEED27 /* Pods */,
 				489B443185C0E979CFBA98ED /* Frameworks */,
 				9E12CE3C29AFB21F000771F8 /* kodeContactsApp.app */,
+				9E12CE9E29B23B94000771F8 /* kodeContactsAppTests.xctest */,
+				9E12CE9F29B23B94000771F8 /* kodeContactsAppUITests.xctest */,
 			);
 			sourceTree = "<group>";
 		};
 		9EFB859B299BAC4100E2B6CA /* kodeContactsApp */ = {
 			isa = PBXGroup;
 			children = (
+				9E12CEAD29B23C24000771F8 /* Assets.xcassets */,
+				9E12CEA629B23BD9000771F8 /* fonts */,
+				9E12CEA229B23BBA000771F8 /* EmployeeTableViewCell.swift */,
+				9E12CEA029B23BAC000771F8 /* EmployeesData.swift */,
+				9E12CEA429B23BCF000771F8 /* EmployeeInfoViewController.swift */,
 				9EFB859C299BAC4100E2B6CA /* AppDelegate.swift */,
 				9EFB859E299BAC4100E2B6CA /* SceneDelegate.swift */,
 				9EFB85A0299BAC4100E2B6CA /* ViewController.swift */,
@@ -180,7 +208,7 @@
 			);
 			name = kodeContactsAppTests;
 			productName = kodeContactsAppTests;
-			productReference = 9E12CE3D29AFB21F000771F8 /* kodeContactsAppTests.xctest */;
+			productReference = 9E12CE9E29B23B94000771F8 /* kodeContactsAppTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
 		9EFB85B8299BAC4500E2B6CA /* kodeContactsAppUITests */ = {
@@ -198,7 +226,7 @@
 			);
 			name = kodeContactsAppUITests;
 			productName = kodeContactsAppUITests;
-			productReference = 9E12CE3E29AFB21F000771F8 /* kodeContactsAppUITests.xctest */;
+			productReference = 9E12CE9F29B23B94000771F8 /* kodeContactsAppUITests.xctest */;
 			productType = "com.apple.product-type.bundle.ui-testing";
 		};
 /* End PBXNativeTarget section */
@@ -249,8 +277,11 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9E12CEA929B23BD9000771F8 /* Inter-Medium.ttf in Resources */,
+				9E12CEAA29B23BD9000771F8 /* Inter-Regular.ttf in Resources */,
 				9EFB85A9299BAC4500E2B6CA /* LaunchScreen.storyboard in Resources */,
 				9EFB85A6299BAC4500E2B6CA /* Assets.xcassets in Resources */,
+				9E12CEAE29B23C24000771F8 /* Assets.xcassets in Resources */,
 				9EFB85A4299BAC4100E2B6CA /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -318,9 +349,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9E12CEA529B23BD0000771F8 /* EmployeeInfoViewController.swift in Sources */,
 				9EFB85A1299BAC4100E2B6CA /* ViewController.swift in Sources */,
 				9EFB859D299BAC4100E2B6CA /* AppDelegate.swift in Sources */,
 				9EFB859F299BAC4100E2B6CA /* SceneDelegate.swift in Sources */,
+				9E12CEA329B23BBA000771F8 /* EmployeeTableViewCell.swift in Sources */,
+				9E12CEA129B23BAD000771F8 /* EmployeesData.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
