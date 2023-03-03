@@ -88,5 +88,6 @@ extension ErrorViewController {
     @objc private func buttonRepeatRequestPressed() {
         //после подключения API вызвать запрос списка контактов тут
         print("RepeatRequest")
+        print("Test commit")
     }
 }
