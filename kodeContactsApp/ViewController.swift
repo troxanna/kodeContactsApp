@@ -36,8 +36,8 @@ class ViewController: UIViewController {
 extension ViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         //employeesData.count == 0 -> Другой экран
-        let viewController = ErrorViewController()
-        //viewController.sendData(person: person)
+        let viewController = EmployeeInfoViewController()
+        viewController.sendData(person: person)
         navigationController?.pushViewController(viewController, animated: true)
     }
 }

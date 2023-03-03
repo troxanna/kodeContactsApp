@@ -245,7 +245,7 @@ extension EmployeeInfoViewController {
         let tmpYear = getUserAge(from: person.birthday)
         
         nameLabel.text = "\(person.firstName) \(person.lastName)"
-        userTag.text = person.userTag.lowercased()
+        userTag.text = person.userTag?.lowercased()
         position.text = person.position
         dateBirthDay.text = ConvertDateBirthDay()
         age.text = "\(tmpYear.0) \(tmpYear.1) "
