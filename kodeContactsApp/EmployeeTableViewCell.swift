@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import SkeletonView
 
 protocol EmployeeTableViewCellProtocol {
     func fullDataCell(data: Person)
@@ -14,35 +15,48 @@ protocol EmployeeTableViewCellProtocol {
 class EmployeeTableViewCell: UITableViewCell {
     
     //MARK: Private properties
-    private let cellView: UIView = {
-        let view = UIView()
-        return view
-    }()
-    private let titleLabel: UILabel = {
+    
+    static let identifier = "cell"
+    
+    let mainTitleLabel: UILabel = {
         let label = UILabel()
         return label
     }()
-    
-    private let descriptionLabel: UILabel = {
+
+    let titleLabel: UILabel = {
         let label = UILabel()
+        label.textColor = UIColor(red: 5/255, green: 5/255, blue: 6/255, alpha: 1)
+        label.font = UIFont(name: "Inter-Medium", size: 16) ?? UIFont.systemFont(ofSize: 16, weight: .medium)
         return label
     }()
     
-    private let userTagLabel: UILabel = {
+    let descriptionLabel: UILabel = {
         let label = UILabel()
+        label.textColor = UIColor(red: 85/255, green: 85/255, blue: 92/255, alpha: 1)
+        label.font = UIFont(name: "Inter-Regular", size: 13) ?? UIFont.systemFont(ofSize: 13, weight: .regular)
         return label
     }()
     
-    private let avatarImage: UIImageView = {
+    let userTagLabel: UILabel = {
+        let label = UILabel()
+        label.textColor = UIColor(red: 151/255, green: 151/255, blue: 155/255, alpha: 1)
+        label.font = UIFont(name: "Inter-Medium", size: 14) ?? UIFont.systemFont(ofSize: 14, weight: .medium)
+        return label
+    }()
+    
+    let avatarImage: UIImageView = {
         let image = UIImageView()
+//        image.layer.cornerRadius = 50
         return image
     }()
+    
+    
     
     //MARK: Init
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         createEmployeeCell()
-        contentConfigurationCell()
+        configurationSkeletonForCell()
     }
     
     required init?(coder: NSCoder) {
@@ -67,10 +81,6 @@ class EmployeeTableViewCell: UITableViewCell {
 //MARK: Private functions
 extension EmployeeTableViewCell {
     private func createEmployeeCell() {
-        contentView.addSubview(cellView)
-        cellView.snp.makeConstraints({ make in
-            make.edges.equalTo(contentView)
-        })
         
         avatarImage.snp.makeConstraints({ make in
             make.size.equalTo(CGSize(width: 72, height: 72))
@@ -87,59 +97,49 @@ extension EmployeeTableViewCell {
         descriptionLabel.snp.makeConstraints({ make in
             make.height.equalTo(16)
         })
-        configurationStackView()
+        
+        configurationConstraints()
         
     }
     
-    private func configurationStackView() {
-        let xStack = UIStackView()
-        xStack.axis = .horizontal
-        xStack.addArrangedSubview(titleLabel)
-        xStack.addArrangedSubview(userTagLabel)
+    private func configurationConstraints() {
+        contentView.backgroundColor = .white
+
+        mainTitleLabel.addSubview(titleLabel)
+        mainTitleLabel.addSubview(userTagLabel)
         
-        let yStack = UIStackView()
-        yStack.axis = .vertical
-        yStack.addArrangedSubview(xStack)
-        yStack.addArrangedSubview(descriptionLabel)
-        
-        let mainStack = UIStackView()
-        mainStack.axis = .horizontal
-        mainStack.addArrangedSubview(avatarImage)
-        mainStack.addArrangedSubview(yStack)
-        
-        cellView.addSubview(mainStack)
-        
-        mainStack.snp.makeConstraints({ make in
-            make.leading.trailing.equalTo(cellView).inset(16)
+
+        userTagLabel.snp.makeConstraints({ make in
+            make.leading.equalTo(titleLabel.snp.trailing).offset(4)
+            make.bottom.equalTo(titleLabel.snp.bottom)
+        })
+
+        titleLabel.snp.makeConstraints({ make in
+            make.leading.equalTo(mainTitleLabel.snp.leading)
+            make.top.equalTo(mainTitleLabel.snp.top)
+            make.bottom.equalTo(mainTitleLabel.snp.bottom)
+        })
+
+        contentView.addSubview(avatarImage)
+        contentView.addSubview(mainTitleLabel)
+        contentView.addSubview(descriptionLabel)
+
+        avatarImage.snp.makeConstraints({ make in
+            make.leading.equalTo(contentView.snp.leading).offset(16)
+            make.centerY.equalTo(contentView)
         })
         
-        mainStack.spacing = 16
-        yStack.alignment = .top
-        xStack.alignment = .bottom
-        xStack.spacing = 6
-        yStack.distribution = .fillEqually
-        yStack.spacing = -8
-    }
-    
-    private func contentConfigurationCell() {
-        configurationTitle()
-        configurationDescription()
-        configurationUserTag()
-    }
-    
-    private func configurationTitle() {
-        titleLabel.textColor = UIColor(red: 5/255, green: 5/255, blue: 6/255, alpha: 1)
-        titleLabel.font = UIFont(name: "Inter-Medium", size: 16) ?? UIFont.systemFont(ofSize: 16, weight: .medium)
-    }
-    
-    private func configurationDescription() {
-        descriptionLabel.textColor = UIColor(red: 85/255, green: 85/255, blue: 92/255, alpha: 1)
-        descriptionLabel.font = UIFont(name: "Inter-Regular", size: 13) ?? UIFont.systemFont(ofSize: 13, weight: .regular)
-    }
-    
-    private func configurationUserTag() {
-        userTagLabel.textColor = UIColor(red: 151/255, green: 151/255, blue: 155/255, alpha: 1)
-        userTagLabel.font = UIFont(name: "Inter-Medium", size: 14) ?? UIFont.systemFont(ofSize: 14, weight: .medium)
+        mainTitleLabel.snp.makeConstraints({ make in
+            make.trailing.equalTo(contentView.snp.trailing).offset(16)
+            make.top.equalTo(contentView.snp.top).offset(22)
+            make.leading.equalTo(avatarImage.snp.trailing).offset(16)
+        })
+        
+        descriptionLabel.snp.makeConstraints({ make in
+            make.leading.equalTo(mainTitleLabel.snp.leading)
+            make.top.equalTo(mainTitleLabel.snp.bottom).offset(4)
+            make.trailing.equalTo(mainTitleLabel.snp.trailing).offset(16)
+        })
     }
 }
 
@@ -151,5 +151,29 @@ extension EmployeeTableViewCell: EmployeeTableViewCellProtocol {
         descriptionLabel.text = data.position
         userTagLabel.text = userTag
         avatarImage.image = UIImage(named: data.avatarURL ?? "avatarURL")
+    }
+}
+
+//MARK: Skeleton for cell
+extension EmployeeTableViewCell {
+    func configurationSkeletonForCell() {
+        self.isSkeletonable = true
+        contentView.isSkeletonable = true
+        avatarImage.isSkeletonable = true
+        mainTitleLabel.isSkeletonable = true
+        descriptionLabel.isSkeletonable = true
+        
+        descriptionLabel.skeletonTextLineHeight = .fixed(12)
+        mainTitleLabel.skeletonTextLineHeight = .fixed(16)
+
+        mainTitleLabel.linesCornerRadius = 8
+        avatarImage.skeletonCornerRadius = 35
+        descriptionLabel.linesCornerRadius = 6
+                
+        mainTitleLabel.skeletonPaddingInsets.right = 80
+        descriptionLabel.skeletonPaddingInsets.right = 220
+        
+        titleLabel.isHidden = true
+        userTagLabel.isHidden = true
     }
 }
