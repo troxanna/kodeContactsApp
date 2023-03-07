@@ -18,21 +18,20 @@ class ViewController: UIViewController, SkeletonTableViewDataSource {
         return tableView
     }()
 
-    private var person = Person(id: "e66c4836-ad5f-4b93-b82a-9251b0f9aca2", firstName: "River", lastName: "Gutkowski", department: "qa", position: "Technician", birthday: "1943-05-26", phone: "335-943-1610", userTag: "FM", avatarURL: "avatarURL")
-    private var employeesData: [Person] = []
+    private var employees: [User] = []
 
     //MARK: Override functions
+    
+    
     override func viewDidLoad() {
-        print("load tableView")
         super.viewDidLoad()
+        print("viewDidLoad")
+        
         view.addSubview(tableView)
-        print("add tableView")
-        tableView.translatesAutoresizingMaskIntoConstraints = false
         tableView.snp.makeConstraints({ make in
             make.edges.equalToSuperview()
         })
-        // не работает contentInset
-//        tableView.contentInset = UIEdgeInsets(top: 200, left: 0, bottom: 0, right: 0)
+
         createSearchBar()
         contentConfigurationView()
         contentConfigurationTableView()
@@ -42,14 +41,22 @@ class ViewController: UIViewController, SkeletonTableViewDataSource {
         tableView.register(EmployeeTableViewCell.self, forCellReuseIdentifier: EmployeeTableViewCell.identifier)
 
         skeletonShow()
-        DispatchQueue.main.asyncAfter(deadline: .now() + 5, execute: {
-            for _ in 1...10 {
-                self.employeesData.append(self.person)
+        APIManager.shared.getUsers { [weak self] users in
+            DispatchQueue.main.async {
+                guard let self = self else { return }
+                self.employees = users
+                self.tableView.reloadData()
+                self.skeletonHide()
             }
-            self.skeletonHide()
-        })
-        self.tableView.reloadData()
+        }
+    }
+
     
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+    //        нужно ли обновлять tableView когда возвращаемся на него с EmployeeInfoViewController?
+    //        skeletonShow()
+    //  getUsers
     }
 }
 
@@ -57,8 +64,12 @@ class ViewController: UIViewController, SkeletonTableViewDataSource {
 extension ViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         //employeesData.count == 0 -> Другой экран
+        let cell: EmployeeTableViewCell? = tableView.cellForRow(at: indexPath) as? EmployeeTableViewCell
+        
         let viewController = EmployeeInfoViewController()
-        viewController.sendData(person: person)
+        viewController.sendData(person: employees[indexPath.row])
+        let image = cell?.getAvatarImage()
+        viewController.sendImage(image: image)
         navigationController?.pushViewController(viewController, animated: true)
     }
 }
@@ -66,8 +77,7 @@ extension ViewController: UITableViewDelegate {
 //MARK: UITableViewDataSource
 extension ViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        //employeesData.count
-        return employeesData.count
+        return employees.count
     }
     
     func collectionSkeletonView(_ skeletonView: UITableView, cellIdentifierForRowAt indexPath: IndexPath) -> ReusableCellIdentifier {
@@ -76,18 +86,16 @@ extension ViewController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: EmployeeTableViewCell.identifier) as! EmployeeTableViewCell
+        let employee = employees[indexPath.row]
         
-        cell.fullDataCell(data: employeesData[indexPath.row])
-        
-        cell.titleLabel.isHidden = false
-        cell.userTagLabel.isHidden = false
+        cell.fullDataCell(data: employee)
+        cell.configurationSkeletonHideForCell()
         
         return cell
     }
 }
 
 //MARK: Private methods
-
 extension ViewController {
     private func contentConfigurationTableView() {
         tableView.rowHeight = 80
@@ -96,7 +104,7 @@ extension ViewController {
     }
     
     private func contentConfigurationView() {
-        view.backgroundColor = UIColor(red: 0.898, green: 0.898, blue: 0.898, alpha: 1)
+        view.backgroundColor = UIColor(red: 255/255, green: 255/255, blue: 255/255, alpha: 1)
     }
     
     private func createSearchBar() {
@@ -115,9 +123,6 @@ extension ViewController {
     
     private func skeletonHide() {
         self.tableView.stopSkeletonAnimation()
-        self.view.hideSkeleton(reloadDataAfter: true, transition: .crossDissolve(0.5))
+        self.view.hideSkeleton(reloadDataAfter: false, transition: .crossDissolve(0.25))
     }
-    
 }
-
-
