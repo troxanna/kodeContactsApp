@@ -9,6 +9,8 @@ import UIKit
 
 class ErrorViewController: UIViewController {
     
+    //present view controller ?
+    
     private let titleErrorLabel: UILabel = {
         let label = UILabel()
         label.textColor = UIColor(red: 5/255, green: 5/255, blue: 16/255, alpha: 1)

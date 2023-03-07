@@ -12,9 +12,9 @@ enum Icons: String {
     case star, phone, avatarURL, arrowBack
 }
 
-class EmployeeInfoViewController: UIViewController {
+class EmployeeInfoViewController: UIViewController  {
     //MARK: Private properties
-    private var person: Person!
+    private var person: User!
     private let nameLabel: UILabel = {
         let label = UILabel()
         label.font = UIFont(name: "Inter-Bold", size: 24) ?? UIFont.systemFont(ofSize: 24, weight: .bold)
@@ -38,7 +38,6 @@ class EmployeeInfoViewController: UIViewController {
     
     private let avatarImage:UIImageView = {
         let image = UIImageView()
-        image.image = UIImage(named: Icons.avatarURL.rawValue)
         return image
     }()
 
@@ -245,7 +244,7 @@ extension EmployeeInfoViewController {
         let tmpYear = getUserAge(from: person.birthday)
         
         nameLabel.text = "\(person.firstName) \(person.lastName)"
-        userTag.text = person.userTag?.lowercased()
+        userTag.text = person.userTag.lowercased()
         position.text = person.position
         dateBirthDay.text = ConvertDateBirthDay()
         age.text = "\(tmpYear.0) \(tmpYear.1) "
@@ -320,10 +319,15 @@ extension EmployeeInfoViewController {
 
 //MARK: Public functions
 extension EmployeeInfoViewController {
-    func sendData(person: Person) {
+    func sendData(person: User) {
         self.person = person
-        print(person)
     }
+    
+    func sendImage(image: UIImage?) {
+        avatarImage.image = image
+    }
+    
+    
 }
 
 //MARK: Action sheet

@@ -17,6 +17,7 @@
 		9E12CEB829B24C98000771F8 /* BlurEffectView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E12CEB729B24C98000771F8 /* BlurEffectView.swift */; };
 		9E12CEBD29B24D4F000771F8 /* Inter-SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 9E12CEBB29B24D4F000771F8 /* Inter-SemiBold.ttf */; };
 		9E12CEBE29B24D4F000771F8 /* Inter-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 9E12CEBC29B24D4F000771F8 /* Inter-Bold.ttf */; };
+		9E41A84529B4D55400EB60B9 /* APIManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E41A84429B4D55300EB60B9 /* APIManager.swift */; };
 		9EFB859D299BAC4100E2B6CA /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EFB859C299BAC4100E2B6CA /* AppDelegate.swift */; };
 		9EFB859F299BAC4100E2B6CA /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EFB859E299BAC4100E2B6CA /* SceneDelegate.swift */; };
 		9EFB85A1299BAC4100E2B6CA /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EFB85A0299BAC4100E2B6CA /* ViewController.swift */; };
@@ -62,6 +63,7 @@
 		9E12CEB729B24C98000771F8 /* BlurEffectView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BlurEffectView.swift; sourceTree = "<group>"; };
 		9E12CEBB29B24D4F000771F8 /* Inter-SemiBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Inter-SemiBold.ttf"; sourceTree = "<group>"; };
 		9E12CEBC29B24D4F000771F8 /* Inter-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Inter-Bold.ttf"; sourceTree = "<group>"; };
+		9E41A84429B4D55300EB60B9 /* APIManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIManager.swift; sourceTree = "<group>"; };
 		9EFB859C299BAC4100E2B6CA /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		9EFB859E299BAC4100E2B6CA /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		9EFB85A0299BAC4100E2B6CA /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -121,6 +123,31 @@
 			path = fonts;
 			sourceTree = "<group>";
 		};
+		9E9FA87029B5CCDD0057EBB2 /* API */ = {
+			isa = PBXGroup;
+			children = (
+				9E9FA87229B5CCF60057EBB2 /* models */,
+				9E9FA87129B5CCEE0057EBB2 /* services */,
+			);
+			path = API;
+			sourceTree = "<group>";
+		};
+		9E9FA87129B5CCEE0057EBB2 /* services */ = {
+			isa = PBXGroup;
+			children = (
+				9E41A84429B4D55300EB60B9 /* APIManager.swift */,
+			);
+			path = services;
+			sourceTree = "<group>";
+		};
+		9E9FA87229B5CCF60057EBB2 /* models */ = {
+			isa = PBXGroup;
+			children = (
+				9E12CEA029B23BAC000771F8 /* EmployeesData.swift */,
+			);
+			path = models;
+			sourceTree = "<group>";
+		};
 		9EFB8590299BAC4100E2B6CA = {
 			isa = PBXGroup;
 			children = (
@@ -139,12 +166,12 @@
 		9EFB859B299BAC4100E2B6CA /* kodeContactsApp */ = {
 			isa = PBXGroup;
 			children = (
+				9E9FA87029B5CCDD0057EBB2 /* API */,
 				9E12CEA629B23BD9000771F8 /* fonts */,
 				9E12CEB729B24C98000771F8 /* BlurEffectView.swift */,
 				9E12CEB529B24C82000771F8 /* ExtensionUIButton.swift */,
 				9E12CEB129B24B19000771F8 /* ErrorViewController.swift */,
 				9E12CEA229B23BBA000771F8 /* EmployeeTableViewCell.swift */,
-				9E12CEA029B23BAC000771F8 /* EmployeesData.swift */,
 				9E12CEA429B23BCF000771F8 /* EmployeeInfoViewController.swift */,
 				9EFB859C299BAC4100E2B6CA /* AppDelegate.swift */,
 				9EFB859E299BAC4100E2B6CA /* SceneDelegate.swift */,
@@ -364,6 +391,7 @@
 			files = (
 				9E12CEB229B24B19000771F8 /* ErrorViewController.swift in Sources */,
 				9E12CEB629B24C82000771F8 /* ExtensionUIButton.swift in Sources */,
+				9E41A84529B4D55400EB60B9 /* APIManager.swift in Sources */,
 				9E12CEA529B23BD0000771F8 /* EmployeeInfoViewController.swift in Sources */,
 				9EFB85A1299BAC4100E2B6CA /* ViewController.swift in Sources */,
 				9EFB859D299BAC4100E2B6CA /* AppDelegate.swift in Sources */,

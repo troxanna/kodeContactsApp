@@ -8,14 +8,9 @@
 import UIKit
 import SkeletonView
 
-protocol EmployeeTableViewCellProtocol {
-    func fullDataCell(data: Person)
-}
-
 class EmployeeTableViewCell: UITableViewCell {
     
     //MARK: Private properties
-    
     static let identifier = "cell"
     
     let mainTitleLabel: UILabel = {
@@ -46,7 +41,7 @@ class EmployeeTableViewCell: UITableViewCell {
     
     let avatarImage: UIImageView = {
         let image = UIImageView()
-//        image.layer.cornerRadius = 50
+        image.layer.cornerRadius = 50
         return image
     }()
     
@@ -55,8 +50,9 @@ class EmployeeTableViewCell: UITableViewCell {
     //MARK: Init
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
+        
         createEmployeeCell()
-        configurationSkeletonForCell()
+        configurationSkeletonShowForCell()
     }
     
     required init?(coder: NSCoder) {
@@ -64,7 +60,6 @@ class EmployeeTableViewCell: UITableViewCell {
     }
     
     //MARK: Ovveride
-    
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
@@ -99,7 +94,6 @@ extension EmployeeTableViewCell {
         })
         
         configurationConstraints()
-        
     }
     
     private func configurationConstraints() {
@@ -141,22 +135,39 @@ extension EmployeeTableViewCell {
             make.trailing.equalTo(mainTitleLabel.snp.trailing).offset(16)
         })
     }
+    
+    private func fetchAvatarImage(urlString: String) {
+        DispatchQueue.global().async {
+            guard let imageUrl = URL(string: urlString),
+                  let imageData = try? Data(contentsOf: imageUrl) else {
+                      return
+                  }
+            DispatchQueue.main.async {
+                self.avatarImage.image = UIImage(data: imageData)
+            }
+        }
+    }
 }
 
-//MARK: EmployeeTableViewCellProtocol
-extension EmployeeTableViewCell: EmployeeTableViewCellProtocol {
-    func fullDataCell(data: Person) {
-        let userTag = data.userTag?.lowercased()
+//MARK: Public functions
+extension EmployeeTableViewCell {
+    func fullDataCell(data: User) {
+        let userTag = data.userTag.lowercased()
         titleLabel.text = "\(data.firstName) \(data.lastName)"
         descriptionLabel.text = data.position
         userTagLabel.text = userTag
-        avatarImage.image = UIImage(named: data.avatarURL ?? "avatarURL")
+        avatarImage.image = UIImage(named: User.CodingKeys.avatarURL.rawValue)
+        fetchAvatarImage(urlString: data.avatarURL)
+    }
+    
+    func getAvatarImage() -> UIImage? {
+        return avatarImage.image
     }
 }
 
 //MARK: Skeleton for cell
 extension EmployeeTableViewCell {
-    func configurationSkeletonForCell() {
+    func configurationSkeletonShowForCell() {
         self.isSkeletonable = true
         contentView.isSkeletonable = true
         avatarImage.isSkeletonable = true
@@ -175,5 +186,10 @@ extension EmployeeTableViewCell {
         
         titleLabel.isHidden = true
         userTagLabel.isHidden = true
+    }
+    
+    func configurationSkeletonHideForCell() {
+        titleLabel.isHidden = false
+        userTagLabel.isHidden = false
     }
 }

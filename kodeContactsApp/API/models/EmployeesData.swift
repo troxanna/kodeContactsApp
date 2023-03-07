@@ -24,16 +24,16 @@ enum Departaments: String, CaseIterable {
 }
 
 // MARK: - EmployeesData
-struct EmployeesData: Codable {
-    let items: [Person]
+struct Users: Codable {
+    let items: [User]
 }
 
-// MARK: - Person
-struct Person: Codable {
+// MARK: - User
+struct User: Codable {
     let id: String
     let firstName, lastName, department: String
     let position, birthday, phone: String
-    var userTag, avatarURL: String?
+    var userTag, avatarURL: String
 
     enum CodingKeys: String, CodingKey {
         case id
@@ -41,3 +41,5 @@ struct Person: Codable {
         case firstName, lastName, userTag, department, position, birthday, phone
     }
 }
+
+//typealias Users = [User]
