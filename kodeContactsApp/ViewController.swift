@@ -14,24 +14,19 @@ class ViewController: UIViewController, SkeletonTableViewDataSource {
     //MARK: Private properties
     private var tableView:UITableView = {
         let tableView = UITableView()
-        print("init tableView")
         return tableView
     }()
 
     private var employees: [User] = []
 
     //MARK: Override functions
-    
-    
     override func viewDidLoad() {
         super.viewDidLoad()
-        print("viewDidLoad")
-        
         view.addSubview(tableView)
         tableView.snp.makeConstraints({ make in
             make.edges.equalToSuperview()
         })
-
+        
         createSearchBar()
         contentConfigurationView()
         contentConfigurationTableView()

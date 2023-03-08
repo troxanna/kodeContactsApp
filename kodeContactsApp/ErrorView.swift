@@ -1,16 +1,15 @@
 //
-//  ErrorViewController.swift
+//  ErrorView.swift
 //  kodeContactsApp
 //
-//  Created by Anastasia Nevodchikova on 01.03.2023.
+//  Created by Anastasia Nevodchikova on 08.03.2023.
 //
 
 import UIKit
 
-class ErrorViewController: UIViewController {
+class ErrorView: UIView {
     
-    //present view controller ?
-    
+    //MARK: Private properties
     private let titleErrorLabel: UILabel = {
         let label = UILabel()
         label.textColor = UIColor(red: 5/255, green: 5/255, blue: 16/255, alpha: 1)
@@ -20,7 +19,7 @@ class ErrorViewController: UIViewController {
     
     private let messageErrorLabel: UILabel = {
         let label = UILabel()
-        label.textColor = UIColor(red: 5/255, green: 5/255, blue: 16/255, alpha: 1)
+        label.textColor = UIColor(red: 151/255, green: 151/255, blue: 155/255, alpha: 1)
         label.font = UIFont(name: "Inter-Regular", size: 16) ?? UIFont.systemFont(ofSize: 16, weight: .regular)
         return label
     }()
@@ -30,6 +29,8 @@ class ErrorViewController: UIViewController {
         button.backgroundColor = .white
         button.setTitleColor(UIColor(red: 101/255, green: 52/255, blue: 255/255, alpha: 1), for: .normal)
         button.titleLabel?.font = UIFont(name: "Inter-SemiBold", size: 16) ?? UIFont.systemFont(ofSize: 16, weight: .semibold)
+        
+        button.addTarget(self, action: #selector(buttonRepeatRequestPressed), for: .touchUpInside)
         return button
     }()
     
@@ -38,21 +39,24 @@ class ErrorViewController: UIViewController {
         return image
     }()
     
-
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        self.navigationController?.isNavigationBarHidden = true
-        self.view.backgroundColor = .white
-        
-        configuratedErrorView()
-        contentConfiguratedErrorView()
+    //MARK: init
+    init(frame: CGRect, errorDescription: Error) {
+        super.init(frame: frame)
+        configurationErrorView(repeatRequest: errorDescription.repeatRequest)
+        contentConfigurationErrorView(errorDescription: errorDescription)
+        //self.navigationController?.navigationBar.isHidden = true
+        //let errorView = ErrorView(frame: .zero, errorDescription: Error(title: "Мы никого не нашли", message: "Попробуй скорректировать запрос", imageName: "search", repeatRequest: false))
+        //let errorView = ErrorView(frame: .zero, errorDescription: Error(title: "Какой-то сверхразум все сломал", message: "Постараемся быстро починить", imageName: "flyingSaucer", repeatRequest: true))
     }
     
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
 }
 
 //MARK: Private functions
-extension ErrorViewController {
-    private func configuratedErrorView() {
+extension ErrorView {
+    private func configurationErrorView(repeatRequest: Bool) {
         let errorStack = UIStackView()
         errorStack.axis = .vertical
         errorStack.spacing = 12
@@ -61,9 +65,12 @@ extension ErrorViewController {
         errorStack.addArrangedSubview(imageError)
         errorStack.addArrangedSubview(titleErrorLabel)
         errorStack.addArrangedSubview(messageErrorLabel)
-        errorStack.addArrangedSubview(buttonRepeatRequest)
         
-        view.addSubview(errorStack)
+        if (repeatRequest == true) {
+            errorStack.addArrangedSubview(buttonRepeatRequest)
+        }
+        
+        self.addSubview(errorStack)
         
         errorStack.snp.makeConstraints({ make in
             make.centerX.equalToSuperview()
@@ -73,23 +80,21 @@ extension ErrorViewController {
         titleErrorLabel.snp.makeConstraints({ make in
             make.top.equalTo(imageError.snp.bottom).offset(8)
         })
-        
-        buttonRepeatRequest.addTarget(self, action: #selector(buttonRepeatRequestPressed), for: .touchUpInside)
-        
     }
     
-    private func contentConfiguratedErrorView() {
-        imageError.image = UIImage(named: "flyingSaucer")
-        titleErrorLabel.text = "Какой-то сверхразум все сломал"
-        messageErrorLabel.text = "Постараемся быстро починить"
-        buttonRepeatRequest.setTitle("Попробовать снова", for: .normal)
-        
+    private func contentConfigurationErrorView(errorDescription: Error) {
+        imageError.image = UIImage(named: errorDescription.imageName)
+        titleErrorLabel.text = errorDescription.title
+        messageErrorLabel.text = errorDescription.message
+        if errorDescription.repeatRequest == true {
+            buttonRepeatRequest.setTitle("Попробовать снова", for: .normal)
+        }
     }
     
     
     @objc private func buttonRepeatRequestPressed() {
         //после подключения API вызвать запрос списка контактов тут
-        print("RepeatRequest")
-        print("Test commit")
+        
     }
+
 }
