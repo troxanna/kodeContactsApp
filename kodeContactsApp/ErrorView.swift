@@ -7,9 +7,15 @@
 
 import UIKit
 
+//protocol ErrorViewDelegate: AnyObject {
+//    func buttonRepeatRequestPressed()
+//}
+
 class ErrorView: UIView {
     
     //MARK: Private properties
+    weak var delegate: ErrorViewDelegate?
+    
     private let titleErrorLabel: UILabel = {
         let label = UILabel()
         label.textColor = UIColor(red: 5/255, green: 5/255, blue: 16/255, alpha: 1)
@@ -40,7 +46,7 @@ class ErrorView: UIView {
     }()
     
     //MARK: init
-    init(frame: CGRect, errorDescription: Error) {
+    init(frame: CGRect, errorDescription: ErrorData) {
         super.init(frame: frame)
         configurationErrorView(repeatRequest: errorDescription.repeatRequest)
         contentConfigurationErrorView(errorDescription: errorDescription)
@@ -82,7 +88,7 @@ extension ErrorView {
         })
     }
     
-    private func contentConfigurationErrorView(errorDescription: Error) {
+    private func contentConfigurationErrorView(errorDescription: ErrorData) {
         imageError.image = UIImage(named: errorDescription.imageName)
         titleErrorLabel.text = errorDescription.title
         messageErrorLabel.text = errorDescription.message
@@ -94,7 +100,8 @@ extension ErrorView {
     
     @objc private func buttonRepeatRequestPressed() {
         //после подключения API вызвать запрос списка контактов тут
-        
+//        self.removeFromSuperview()
+        self.delegate?.buttonRepeatRequestPressed()
     }
 
 }

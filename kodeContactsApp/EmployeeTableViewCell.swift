@@ -140,8 +140,11 @@ extension EmployeeTableViewCell {
         DispatchQueue.global().async {
             guard let imageUrl = URL(string: urlString),
                   let imageData = try? Data(contentsOf: imageUrl) else {
+                      DispatchQueue.main.async {
+                          self.avatarImage.image = UIImage(named: User.CodingKeys.avatarURL.rawValue)
+                      }
                       return
-                  }
+            }
             DispatchQueue.main.async {
                 self.avatarImage.image = UIImage(data: imageData)
             }
@@ -156,7 +159,6 @@ extension EmployeeTableViewCell {
         titleLabel.text = "\(data.firstName) \(data.lastName)"
         descriptionLabel.text = data.position
         userTagLabel.text = userTag
-        avatarImage.image = UIImage(named: User.CodingKeys.avatarURL.rawValue)
         fetchAvatarImage(urlString: data.avatarURL)
     }
     
