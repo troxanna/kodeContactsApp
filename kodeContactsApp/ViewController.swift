@@ -172,9 +172,12 @@ extension ViewController {
 //MARK: ErrorViewDelegate
 extension ViewController: ErrorViewDelegate {
     func buttonRepeatRequestPressed() {
-        //доработать скелетон при повторном запросе
         headerPreferError = false
         self.navigationController?.navigationBar.isHidden = false
-        self.setupTableView()
+        view.addSubview(tableView)
+        tableView.snp.makeConstraints({ make in
+            make.edges.equalToSuperview()
+        })
+        updateDataTableView()
     }
 }
