@@ -41,7 +41,6 @@ class EmployeeTableViewCell: UITableViewCell {
     
     let avatarImage: UIImageView = {
         let image = UIImageView()
-        image.layer.cornerRadius = 50
         return image
     }()
     
@@ -50,6 +49,7 @@ class EmployeeTableViewCell: UITableViewCell {
     //MARK: Init
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
+        //разобраться с обновлением image при изменении ячейки
         
         createEmployeeCell()
         configurationSkeletonShowForCell()
@@ -62,7 +62,13 @@ class EmployeeTableViewCell: UITableViewCell {
     //MARK: Ovveride
     override func awakeFromNib() {
         super.awakeFromNib()
-        // Initialization code
+        //не работает
+        
+        avatarImage.image = nil
+        
+        avatarImage.layer.cornerRadius = avatarImage.bounds.height / 2
+        avatarImage.clipsToBounds = true
+        avatarImage.contentMode = .scaleAspectFit
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
@@ -140,8 +146,11 @@ extension EmployeeTableViewCell {
         DispatchQueue.global().async {
             guard let imageUrl = URL(string: urlString),
                   let imageData = try? Data(contentsOf: imageUrl) else {
+                      DispatchQueue.main.async {
+                          self.avatarImage.image = UIImage(named: User.CodingKeys.avatarURL.rawValue)
+                      }
                       return
-                  }
+            }
             DispatchQueue.main.async {
                 self.avatarImage.image = UIImage(data: imageData)
             }
@@ -156,7 +165,6 @@ extension EmployeeTableViewCell {
         titleLabel.text = "\(data.firstName) \(data.lastName)"
         descriptionLabel.text = data.position
         userTagLabel.text = userTag
-        avatarImage.image = UIImage(named: User.CodingKeys.avatarURL.rawValue)
         fetchAvatarImage(urlString: data.avatarURL)
     }
     

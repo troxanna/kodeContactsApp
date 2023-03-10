@@ -9,10 +9,14 @@ import UIKit
 import SnapKit
 import SkeletonView
 
+protocol ErrorViewDelegate: AnyObject {
+    func buttonRepeatRequestPressed()
+}
+
 class ViewController: UIViewController, SkeletonTableViewDataSource {
     
     //MARK: Private properties
-    private var tableView:UITableView = {
+    private var tableView: UITableView = {
         let tableView = UITableView()
         return tableView
     }()
@@ -22,6 +26,10 @@ class ViewController: UIViewController, SkeletonTableViewDataSource {
     //MARK: Override functions
     override func viewDidLoad() {
         super.viewDidLoad()
+        setupTableView()
+    }
+    
+    private func setupTableView() {
         view.addSubview(tableView)
         tableView.snp.makeConstraints({ make in
             make.edges.equalToSuperview()
@@ -34,16 +42,9 @@ class ViewController: UIViewController, SkeletonTableViewDataSource {
         tableView.dataSource = self
         tableView.delegate = self
         tableView.register(EmployeeTableViewCell.self, forCellReuseIdentifier: EmployeeTableViewCell.identifier)
-
-        skeletonShow()
-        APIManager.shared.getUsers { [weak self] users in
-            DispatchQueue.main.async {
-                guard let self = self else { return }
-                self.employees = users
-                self.tableView.reloadData()
-                self.skeletonHide()
-            }
-        }
+        
+        self.skeletonShow()
+        self.updateDataTableView()
     }
 
     
@@ -90,7 +91,7 @@ extension ViewController: UITableViewDataSource {
     }
 }
 
-//MARK: Private methods
+//MARK: Private functions
 extension ViewController {
     private func contentConfigurationTableView() {
         tableView.rowHeight = 80
@@ -107,6 +108,30 @@ extension ViewController {
         searchBar.sizeToFit()
         navigationItem.titleView = searchBar
     }
+    
+    private func updateDataTableView() {
+        APIManager.shared.getUsers { [weak self] users in
+            do {
+                let data = try users()
+                DispatchQueue.main.async {
+                    guard let self = self else { return }
+                    self.employees = data
+                    self.tableView.reloadData()
+                    self.skeletonHide()
+                }
+            }
+            catch AppError.emptyDataError {
+                DispatchQueue.main.async {
+                    self?.showError(screenError: .searchError)
+                }
+            }
+            catch {
+                DispatchQueue.main.async {
+                    self?.showError(screenError: .criticalError)
+                }
+            }
+        }
+    }
 }
 
 //MARK: Skeleton for Table View
@@ -119,5 +144,40 @@ extension ViewController {
     private func skeletonHide() {
         self.tableView.stopSkeletonAnimation()
         self.view.hideSkeleton(reloadDataAfter: false, transition: .crossDissolve(0.25))
+    }
+}
+
+//MARK: Handler error
+extension ViewController {
+    private func showError(screenError: ScreenError) {
+        self.tableView.removeFromSuperview()
+        let errorView = screenError.errorView
+        errorView.delegate = self
+        self.view.addSubview(errorView)
+        errorView.snp.makeConstraints({ make in
+            make.edges.equalToSuperview()
+        })
+        
+        switch screenError {
+        case .criticalError:
+            self.navigationController?.navigationBar.isHidden = true
+        default:
+            break
+        }
+        
+        self.skeletonHide()
+    }
+}
+
+//MARK: ErrorViewDelegate
+extension ViewController: ErrorViewDelegate {
+    func buttonRepeatRequestPressed() {
+        headerPreferError = false
+        self.navigationController?.navigationBar.isHidden = false
+        view.addSubview(tableView)
+        tableView.snp.makeConstraints({ make in
+            make.edges.equalToSuperview()
+        })
+        updateDataTableView()
     }
 }
