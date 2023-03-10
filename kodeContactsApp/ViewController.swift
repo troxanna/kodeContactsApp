@@ -13,6 +13,10 @@ protocol ErrorViewDelegate: AnyObject {
     func buttonRepeatRequestPressed()
 }
 
+protocol DepartmentSegmentedControlDelegate: AnyObject {
+    func buttonSegmentPressed(department: String)
+}
+
 class ViewController: UIViewController, SkeletonTableViewDataSource {
     
     //MARK: Private properties
@@ -20,33 +24,29 @@ class ViewController: UIViewController, SkeletonTableViewDataSource {
         let tableView = UITableView()
         return tableView
     }()
+    
+    private var departmentSegmentedControll: DepartmentSegmentedControl = {
+        let segmentedControl = DepartmentSegmentedControl(frame: .zero, items: Departaments.departments)
+        segmentedControl.selectedSegmentIndex = 0
+        return segmentedControl
+    }()
+    
+    private var searchBar: UISearchBar = {
+        let searchBar = UISearchBar()
+        return searchBar
+    }()
 
     private var employees: [User] = []
+    private var filteredEmployees: [User] = []
 
     //MARK: Override functions
     override func viewDidLoad() {
         super.viewDidLoad()
+        contentConfigurationView()
+        createTableView()
+        createSearchBar()
         setupTableView()
     }
-    
-    private func setupTableView() {
-        view.addSubview(tableView)
-        tableView.snp.makeConstraints({ make in
-            make.edges.equalToSuperview()
-        })
-        
-        createSearchBar()
-        contentConfigurationView()
-        contentConfigurationTableView()
-        
-        tableView.dataSource = self
-        tableView.delegate = self
-        tableView.register(EmployeeTableViewCell.self, forCellReuseIdentifier: EmployeeTableViewCell.identifier)
-        
-        self.skeletonShow()
-        self.updateDataTableView()
-    }
-
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
@@ -63,7 +63,7 @@ extension ViewController: UITableViewDelegate {
         let cell: EmployeeTableViewCell? = tableView.cellForRow(at: indexPath) as? EmployeeTableViewCell
         
         let viewController = EmployeeInfoViewController()
-        viewController.sendData(person: employees[indexPath.row])
+        viewController.sendData(person: filteredEmployees[indexPath.row])
         let image = cell?.getAvatarImage()
         viewController.sendImage(image: image)
         navigationController?.pushViewController(viewController, animated: true)
@@ -73,7 +73,7 @@ extension ViewController: UITableViewDelegate {
 //MARK: UITableViewDataSource
 extension ViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return employees.count
+        return filteredEmployees.count
     }
     
     func collectionSkeletonView(_ skeletonView: UITableView, cellIdentifierForRowAt indexPath: IndexPath) -> ReusableCellIdentifier {
@@ -82,7 +82,7 @@ extension ViewController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: EmployeeTableViewCell.identifier) as! EmployeeTableViewCell
-        let employee = employees[indexPath.row]
+        let employee = filteredEmployees[indexPath.row]
         
         cell.fullDataCell(data: employee)
         cell.configurationSkeletonHideForCell()
@@ -104,9 +104,37 @@ extension ViewController {
     }
     
     private func createSearchBar() {
-        let searchBar = UISearchBar()
         searchBar.sizeToFit()
         navigationItem.titleView = searchBar
+    }
+    
+    private func createTableView() {
+        view.addSubview(tableView)
+        view.addSubview(departmentSegmentedControll)
+
+        tableView.snp.makeConstraints({ make in
+            make.right.left.bottom.equalToSuperview()
+            make.top.equalTo(departmentSegmentedControll.snp.bottom).offset(16)
+
+        })
+        
+        departmentSegmentedControll.snp.makeConstraints({ make in
+            make.top.equalTo(view.safeAreaLayoutGuide.snp.top)
+            make.left.right.equalToSuperview()
+        })
+        
+        departmentSegmentedControll.delegate = self
+    }
+    
+    private func setupTableView() {
+        contentConfigurationTableView()
+        
+        tableView.dataSource = self
+        tableView.delegate = self
+        tableView.register(EmployeeTableViewCell.self, forCellReuseIdentifier: EmployeeTableViewCell.identifier)
+        
+        self.skeletonShow()
+        self.updateDataTableView()
     }
     
     private func updateDataTableView() {
@@ -116,6 +144,7 @@ extension ViewController {
                 DispatchQueue.main.async {
                     guard let self = self else { return }
                     self.employees = data
+                    self.filteredEmployees = data
                     self.tableView.reloadData()
                     self.skeletonHide()
                 }
@@ -154,17 +183,20 @@ extension ViewController {
         let errorView = screenError.errorView
         errorView.delegate = self
         self.view.addSubview(errorView)
-        errorView.snp.makeConstraints({ make in
-            make.edges.equalToSuperview()
-        })
         
         switch screenError {
         case .criticalError:
+            errorView.snp.makeConstraints({ make in
+                make.edges.equalToSuperview()
+            })
             self.navigationController?.navigationBar.isHidden = true
+            departmentSegmentedControll.removeFromSuperview()
         default:
-            break
+            errorView.snp.makeConstraints({ make in
+                make.right.left.bottom.equalToSuperview()
+                make.top.equalTo(departmentSegmentedControll.snp.bottom)
+            })
         }
-        
         self.skeletonHide()
     }
 }
@@ -174,10 +206,36 @@ extension ViewController: ErrorViewDelegate {
     func buttonRepeatRequestPressed() {
         headerPreferError = false
         self.navigationController?.navigationBar.isHidden = false
-        view.addSubview(tableView)
-        tableView.snp.makeConstraints({ make in
-            make.edges.equalToSuperview()
-        })
+        createTableView()
         updateDataTableView()
     }
 }
+
+//MARK: DepartmentSegmentedControlDelegate
+extension ViewController: DepartmentSegmentedControlDelegate {
+    func buttonSegmentPressed(department: String) {
+        do {
+            try filteredEmployees(for: department)
+            createTableView()
+            tableView.reloadData()
+        }
+        catch AppError.searchError {
+            showError(screenError: .searchError)
+        }
+        catch {
+            showError(screenError: .criticalError)
+        }
+    }
+    
+    func filteredEmployees(for department: String) throws {
+        if department == Departaments.all.value {
+            filteredEmployees = employees
+        } else {
+            filteredEmployees = employees.filter { Departaments(rawValue: $0.department)?.value == department }
+        }
+        if filteredEmployees.isEmpty {
+            throw AppError.searchError
+        }
+    }
+}
+
