@@ -48,7 +48,6 @@ enum ApiType {
             return request
         }
     }
-    
 }
 
 class APIManager {
@@ -72,10 +71,20 @@ class APIManager {
                 }
                 guard let users = try? JSONDecoder().decode(Users.self, from: data) else { throw AppError.validationError
                 }
+                try self.validationValueDepartment(users: users.items)
                 return users.items
             })
         }.resume()
     }
 }
 
-//add allow value department
+//MARK: Validation functions
+extension APIManager {
+    private func validationValueDepartment(users: [User]) throws {
+        for item in users {
+            guard let _ = Departaments(rawValue: item.department) else {
+                throw AppError.validationError
+            }
+        }
+    }
+}

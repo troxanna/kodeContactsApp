@@ -90,7 +90,6 @@ class EmployeeInfoViewController: UIViewController  {
     
     private let blurView: BlurEffectView = {
         let view = BlurEffectView()
-//        view.alpha = 0.7
         return view
     }()
     

@@ -7,10 +7,6 @@
 
 import UIKit
 
-//protocol ErrorViewDelegate: AnyObject {
-//    func buttonRepeatRequestPressed()
-//}
-
 class ErrorView: UIView {
     
     //MARK: Private properties
@@ -100,7 +96,7 @@ extension ErrorView {
     
     @objc private func buttonRepeatRequestPressed() {
         //после подключения API вызвать запрос списка контактов тут
-//        self.removeFromSuperview()
+        self.removeFromSuperview()
         self.delegate?.buttonRepeatRequestPressed()
     }
 

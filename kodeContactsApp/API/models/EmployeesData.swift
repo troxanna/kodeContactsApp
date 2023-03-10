@@ -9,19 +9,60 @@ import Foundation
 
 //MARK: - Departaments
 enum Departaments: String, CaseIterable {
-    case android = "Android"
-    case ios = "iOS"
-    case design = "Designers"
-    case management = "Managers"
-    case qa = "QA"
-    case back_office = "Back office"
-    case frontend = "Frontend"
-    case hr = "HR"
-    case pr = "PR"
-    case backend = "Backend"
-    case support = "Support"
-    case analytics = "Analytics"
+    case all
+    case android
+    case ios
+    case design
+    case management
+    case qa
+    case back_office
+    case frontend
+    case hr
+    case pr
+    case backend
+    case support
+    case analytics
+    
+    var value: String {
+        switch self {
+        case .all:
+            return "Все"
+        case .android:
+            return "Android"
+        case .ios:
+            return "iOS"
+        case .design:
+            return "Designers"
+        case .management:
+            return "Managers"
+        case .qa:
+            return "QA"
+        case .back_office:
+            return "Back office"
+        case .frontend:
+            return "Frontend"
+        case .hr:
+            return "HR"
+        case .pr:
+            return "PR"
+        case .backend:
+            return "Backend"
+        case .support:
+            return "Support"
+        case .analytics:
+            return "Analytics"
+        }
+    }
+    
+    static var departments: [String] {
+        var array: [String] = []
+        for item in Departaments.allCases {
+            array.append(item.value)
+        }
+        return array
+    }
 }
+
 
 // MARK: - EmployeesData
 struct Users: Codable {
@@ -42,4 +83,4 @@ struct User: Codable {
     }
 }
 
-//typealias Users = [User]
+//typealias Departments = [String]
