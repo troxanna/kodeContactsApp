@@ -8,10 +8,6 @@
 import UIKit
 import SnapKit
 
-enum Icons: String {
-    case star, phone, avatarURL, arrowBack
-}
-
 class EmployeeInfoViewController: UIViewController  {
     //MARK: Private properties
     private var person: User!
@@ -102,6 +98,11 @@ class EmployeeInfoViewController: UIViewController  {
         configurationEmployeeInfoView()
         configurationEmployeeDetailsInfoView()
         fullData()
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+//        navigationItem.titleView = nil
     }
     
 }
@@ -342,25 +343,23 @@ extension EmployeeInfoViewController {
         }
         actionSheet.addAction(actionCall)
         actionSheet.addAction(actionCancel)
-        self.present(actionSheet, animated: true){() in
-            self.view.addSubview(self.blurView)
-            self.blurView.snp.makeConstraints({ make in
-                make.edges.equalToSuperview()
-            })
-            
-        }
+        self.view.addSubview(self.blurView)
+        self.present(actionSheet, animated: true)
         contentConfigurationNumberPhoneAlert(actionSheet: actionSheet)
     }
-    
+
     private func contentConfigurationNumberPhoneAlert(actionSheet: UIAlertController) {
         actionSheet.view.tintColor = UIColor(red: 50/255, green: 50/255, blue: 50/255, alpha: 1)
         actionSheet.view.layer.cornerRadius = 13
-        
+
     }
     
     private func callPhoneNumber() {
-        let url: NSURL = URL(string: "TEL://+\(removeNumberFormat(number: numberPhone.title(for: .normal)!))")! as NSURL
-        UIApplication.shared.open(url as URL, options: [:], completionHandler: nil)
+        if let url = URL(string: "TEL://+\(removeNumberFormat(number: numberPhone.title(for: .normal)!))") {
+            if (UIApplication.shared.canOpenURL(url)) {
+                UIApplication.shared.open(url, options: [:], completionHandler: nil)
+            }
+        }
     }
 }
 

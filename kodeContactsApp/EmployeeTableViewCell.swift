@@ -67,7 +67,8 @@ class EmployeeTableViewCell: UITableViewCell {
         avatarImage.image = nil
         
         avatarImage.layer.cornerRadius = avatarImage.bounds.height / 2
-        avatarImage.clipsToBounds = true
+        avatarImage.layer.masksToBounds = true
+//        avatarImage.clipsToBounds = true
         avatarImage.contentMode = .scaleAspectFit
     }
 

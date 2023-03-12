@@ -26,7 +26,7 @@ enum ScreenError {
     var errorView: ErrorView {
         switch self {
         case .searchError:
-            return ErrorView(frame: .zero, errorDescription: ErrorData(title: "Мы никого не нашли", message: "Попробуй скорректировать запрос", imageName: "search", repeatRequest: false))
+            return ErrorView(frame: .zero, errorDescription: ErrorData(title: "Мы никого не нашли", message: "Попробуй скорректировать запрос", imageName: "searchError", repeatRequest: false))
         case .criticalError:
             return ErrorView(frame: .zero, errorDescription: ErrorData(title: "Какой-то сверхразум все сломал", message: "Постараемся быстро починить", imageName: "flyingSaucer", repeatRequest: true))
         }
