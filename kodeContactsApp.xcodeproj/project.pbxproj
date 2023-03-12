@@ -18,6 +18,8 @@
 		9E12CEBE29B24D4F000771F8 /* Inter-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 9E12CEBC29B24D4F000771F8 /* Inter-Bold.ttf */; };
 		9E24788629BB8FFE003AB605 /* DepartmentSegmentedControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E24788529BB8FFE003AB605 /* DepartmentSegmentedControl.swift */; };
 		9E41A84529B4D55400EB60B9 /* APIManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E41A84429B4D55300EB60B9 /* APIManager.swift */; };
+		9E92BDE029BCBBAC0045F88E /* SearchBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E92BDDF29BCBBAC0045F88E /* SearchBar.swift */; };
+		9E92BDE229BDD6DC0045F88E /* SupportData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E92BDE129BDD6DC0045F88E /* SupportData.swift */; };
 		9E9FA8B429B8C77C0057EBB2 /* ErrorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E9FA8B329B8C77C0057EBB2 /* ErrorView.swift */; };
 		9E9FA8B629B8C90F0057EBB2 /* Error.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E9FA8B529B8C90F0057EBB2 /* Error.swift */; };
 		9E9FA8BA29B93B1E0057EBB2 /* Сonstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E9FA8B929B93B1E0057EBB2 /* Сonstants.swift */; };
@@ -67,6 +69,8 @@
 		9E12CEBC29B24D4F000771F8 /* Inter-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Inter-Bold.ttf"; sourceTree = "<group>"; };
 		9E24788529BB8FFE003AB605 /* DepartmentSegmentedControl.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DepartmentSegmentedControl.swift; sourceTree = "<group>"; };
 		9E41A84429B4D55300EB60B9 /* APIManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIManager.swift; sourceTree = "<group>"; };
+		9E92BDDF29BCBBAC0045F88E /* SearchBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchBar.swift; sourceTree = "<group>"; };
+		9E92BDE129BDD6DC0045F88E /* SupportData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SupportData.swift; sourceTree = "<group>"; };
 		9E9FA8B329B8C77C0057EBB2 /* ErrorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorView.swift; sourceTree = "<group>"; };
 		9E9FA8B529B8C90F0057EBB2 /* Error.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Error.swift; sourceTree = "<group>"; };
 		9E9FA8B929B93B1E0057EBB2 /* Сonstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Сonstants.swift"; sourceTree = "<group>"; };
@@ -132,7 +136,6 @@
 		9E9FA87029B5CCDD0057EBB2 /* API */ = {
 			isa = PBXGroup;
 			children = (
-				9E9FA87229B5CCF60057EBB2 /* models */,
 				9E9FA87129B5CCEE0057EBB2 /* services */,
 			);
 			path = API;
@@ -151,6 +154,7 @@
 			children = (
 				9E12CEA029B23BAC000771F8 /* EmployeesData.swift */,
 				9E9FA8B529B8C90F0057EBB2 /* Error.swift */,
+				9E92BDE129BDD6DC0045F88E /* SupportData.swift */,
 			);
 			path = models;
 			sourceTree = "<group>";
@@ -173,6 +177,7 @@
 		9EFB859B299BAC4100E2B6CA /* kodeContactsApp */ = {
 			isa = PBXGroup;
 			children = (
+				9E9FA87229B5CCF60057EBB2 /* models */,
 				9E9FA8B929B93B1E0057EBB2 /* Сonstants.swift */,
 				9E9FA87029B5CCDD0057EBB2 /* API */,
 				9E12CEA629B23BD9000771F8 /* fonts */,
@@ -185,6 +190,7 @@
 				9EFB859C299BAC4100E2B6CA /* AppDelegate.swift */,
 				9EFB859E299BAC4100E2B6CA /* SceneDelegate.swift */,
 				9EFB85A0299BAC4100E2B6CA /* ViewController.swift */,
+				9E92BDDF29BCBBAC0045F88E /* SearchBar.swift */,
 				9EFB85A2299BAC4100E2B6CA /* Main.storyboard */,
 				9EFB85A5299BAC4500E2B6CA /* Assets.xcassets */,
 				9EFB85A7299BAC4500E2B6CA /* LaunchScreen.storyboard */,
@@ -400,11 +406,13 @@
 			files = (
 				9E12CEB629B24C82000771F8 /* ExtensionUIButton.swift in Sources */,
 				9E41A84529B4D55400EB60B9 /* APIManager.swift in Sources */,
+				9E92BDE029BCBBAC0045F88E /* SearchBar.swift in Sources */,
 				9E9FA8B629B8C90F0057EBB2 /* Error.swift in Sources */,
 				9E12CEA529B23BD0000771F8 /* EmployeeInfoViewController.swift in Sources */,
 				9EFB85A1299BAC4100E2B6CA /* ViewController.swift in Sources */,
 				9E9FA8BA29B93B1E0057EBB2 /* Сonstants.swift in Sources */,
 				9EFB859D299BAC4100E2B6CA /* AppDelegate.swift in Sources */,
+				9E92BDE229BDD6DC0045F88E /* SupportData.swift in Sources */,
 				9E9FA8B429B8C77C0057EBB2 /* ErrorView.swift in Sources */,
 				9E12CEB829B24C98000771F8 /* BlurEffectView.swift in Sources */,
 				9EFB859F299BAC4100E2B6CA /* SceneDelegate.swift in Sources */,
@@ -590,6 +598,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 36LZ2GGLCU;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = kodeContactsApp/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -617,6 +626,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 36LZ2GGLCU;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = kodeContactsApp/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;

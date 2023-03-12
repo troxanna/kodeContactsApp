@@ -31,8 +31,8 @@ class ViewController: UIViewController, SkeletonTableViewDataSource {
         return segmentedControl
     }()
     
-    private var searchBar: UISearchBar = {
-        let searchBar = UISearchBar()
+    private var searchBar: SearchBar = {
+        let searchBar = SearchBar()
         return searchBar
     }()
 
@@ -42,24 +42,22 @@ class ViewController: UIViewController, SkeletonTableViewDataSource {
     //MARK: Override functions
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         contentConfigurationView()
         createTableView()
-        createSearchBar()
         setupTableView()
     }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-    //        нужно ли обновлять tableView когда возвращаемся на него с EmployeeInfoViewController?
-    //        skeletonShow()
-    //  getUsers
+        navigationItem.titleView = searchBar
+        searchBar.delegate = self
     }
 }
 
 //MARK: UITableViewDelegate
 extension ViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        //employeesData.count == 0 -> Другой экран
         let cell: EmployeeTableViewCell? = tableView.cellForRow(at: indexPath) as? EmployeeTableViewCell
         
         let viewController = EmployeeInfoViewController()
@@ -67,12 +65,15 @@ extension ViewController: UITableViewDelegate {
         let image = cell?.getAvatarImage()
         viewController.sendImage(image: image)
         navigationController?.pushViewController(viewController, animated: true)
+        
+        updateSearchBarEndEditing()
     }
 }
 
 //MARK: UITableViewDataSource
 extension ViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        //employeesData.count == 0 -> Другой экран
         return filteredEmployees.count
     }
     
@@ -102,12 +103,7 @@ extension ViewController {
     private func contentConfigurationView() {
         view.backgroundColor = UIColor(red: 255/255, green: 255/255, blue: 255/255, alpha: 1)
     }
-    
-    private func createSearchBar() {
-        searchBar.sizeToFit()
-        navigationItem.titleView = searchBar
-    }
-    
+
     private func createTableView() {
         view.addSubview(tableView)
         view.addSubview(departmentSegmentedControll)
@@ -117,7 +113,6 @@ extension ViewController {
             make.top.equalTo(departmentSegmentedControll.snp.bottom).offset(16)
 
         })
-        
         departmentSegmentedControll.snp.makeConstraints({ make in
             make.top.equalTo(view.safeAreaLayoutGuide.snp.top)
             make.left.right.equalToSuperview()
@@ -189,7 +184,7 @@ extension ViewController {
             errorView.snp.makeConstraints({ make in
                 make.edges.equalToSuperview()
             })
-            self.navigationController?.navigationBar.isHidden = true
+            navigationController?.isNavigationBarHidden = true
             departmentSegmentedControll.removeFromSuperview()
         default:
             errorView.snp.makeConstraints({ make in
@@ -205,7 +200,7 @@ extension ViewController {
 extension ViewController: ErrorViewDelegate {
     func buttonRepeatRequestPressed() {
         headerPreferError = false
-        self.navigationController?.navigationBar.isHidden = false
+        navigationController?.isNavigationBarHidden = false
         createTableView()
         updateDataTableView()
     }
@@ -239,3 +234,35 @@ extension ViewController: DepartmentSegmentedControlDelegate {
     }
 }
 
+//MARK: UISearchBarDelegate
+extension ViewController: UISearchBarDelegate {
+    func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {
+        updateSearchBarForBeginEditing()
+    }
+    
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        print(searchText)
+    }
+
+    func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
+        updateSearchBarEndEditing()
+        searchBar.text = ""
+    }
+    
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+        updateSearchBarEndEditing()
+    }
+    
+    private func updateSearchBarForBeginEditing() {
+        searchBar.setShowsCancelButton(true, animated: true)
+        searchBar.placeholder = nil
+        searchBar.searchTextField.rightViewMode = .never
+    }
+    
+    private func updateSearchBarEndEditing() {
+        searchBar.placeholder = SearchTextFieldData.placeholder.rawValue
+        searchBar.endEditing(true)
+        searchBar.searchTextField.rightViewMode = .always
+        searchBar.setShowsCancelButton(false, animated: true)
+    }
+}
