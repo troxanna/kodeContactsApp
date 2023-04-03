@@ -16,6 +16,11 @@ enum SearchTextFieldData: String {
     case cancelButtonTitle = "Отмена"
 }
 
+enum SortedType: String {
+    case alphabetically = "По алфавиту"
+    case birthday = "По дню рождения"
+}
+
 //enum Fonts {
 //    
 //}

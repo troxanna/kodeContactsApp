@@ -253,6 +253,10 @@ extension ViewController: UISearchBarDelegate {
         updateSearchBarEndEditing()
     }
     
+    func searchBarBookmarkButtonClicked(_ searchBar: UISearchBar) {
+        didTapSortButton()
+    }
+    
     private func updateSearchBarForBeginEditing() {
         searchBar.setShowsCancelButton(true, animated: true)
         searchBar.placeholder = nil
@@ -264,5 +268,12 @@ extension ViewController: UISearchBarDelegate {
         searchBar.endEditing(true)
         searchBar.searchTextField.rightViewMode = .always
         searchBar.setShowsCancelButton(false, animated: true)
+    }
+    
+    private func didTapSortButton() {
+        //delegate?
+        let vc = SortedBottomSheetViewController()
+        vc.modalPresentationStyle = .overCurrentContext
+        self.present(vc, animated: false)
     }
 }
