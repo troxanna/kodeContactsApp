@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		9E12337029DAF5DE00FF3E14 /* SortedBottomSheetViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E12336F29DAF5DE00FF3E14 /* SortedBottomSheetViewController.swift */; };
 		9E12CEA129B23BAD000771F8 /* EmployeesData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E12CEA029B23BAC000771F8 /* EmployeesData.swift */; };
 		9E12CEA329B23BBA000771F8 /* EmployeeTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E12CEA229B23BBA000771F8 /* EmployeeTableViewCell.swift */; };
 		9E12CEA529B23BD0000771F8 /* EmployeeInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E12CEA429B23BCF000771F8 /* EmployeeInfoViewController.swift */; };
@@ -17,6 +18,8 @@
 		9E12CEBD29B24D4F000771F8 /* Inter-SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 9E12CEBB29B24D4F000771F8 /* Inter-SemiBold.ttf */; };
 		9E12CEBE29B24D4F000771F8 /* Inter-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 9E12CEBC29B24D4F000771F8 /* Inter-Bold.ttf */; };
 		9E24788629BB8FFE003AB605 /* DepartmentSegmentedControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E24788529BB8FFE003AB605 /* DepartmentSegmentedControl.swift */; };
+		9E40A54529C8AB65002E7D4F /* CheckBox.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E40A54429C8AB65002E7D4F /* CheckBox.swift */; };
+		9E40A54729D75E9B002E7D4F /* CheckBoxControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E40A54629D75E9B002E7D4F /* CheckBoxControl.swift */; };
 		9E41A84529B4D55400EB60B9 /* APIManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E41A84429B4D55300EB60B9 /* APIManager.swift */; };
 		9E92BDE029BCBBAC0045F88E /* SearchBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E92BDDF29BCBBAC0045F88E /* SearchBar.swift */; };
 		9E92BDE229BDD6DC0045F88E /* SupportData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E92BDE129BDD6DC0045F88E /* SupportData.swift */; };
@@ -55,6 +58,7 @@
 /* Begin PBXFileReference section */
 		2EFDDAE566D207D5C520E3B1 /* Pods-kodeContactsApp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-kodeContactsApp.debug.xcconfig"; path = "Target Support Files/Pods-kodeContactsApp/Pods-kodeContactsApp.debug.xcconfig"; sourceTree = "<group>"; };
 		6DC899923867EBC5E76D64BC /* Pods-kodeContactsApp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-kodeContactsApp.release.xcconfig"; path = "Target Support Files/Pods-kodeContactsApp/Pods-kodeContactsApp.release.xcconfig"; sourceTree = "<group>"; };
+		9E12336F29DAF5DE00FF3E14 /* SortedBottomSheetViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SortedBottomSheetViewController.swift; sourceTree = "<group>"; };
 		9E12CE3C29AFB21F000771F8 /* kodeContactsApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = kodeContactsApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9E12CE9E29B23B94000771F8 /* kodeContactsAppTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = kodeContactsAppTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		9E12CE9F29B23B94000771F8 /* kodeContactsAppUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = kodeContactsAppUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -68,6 +72,8 @@
 		9E12CEBB29B24D4F000771F8 /* Inter-SemiBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Inter-SemiBold.ttf"; sourceTree = "<group>"; };
 		9E12CEBC29B24D4F000771F8 /* Inter-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Inter-Bold.ttf"; sourceTree = "<group>"; };
 		9E24788529BB8FFE003AB605 /* DepartmentSegmentedControl.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DepartmentSegmentedControl.swift; sourceTree = "<group>"; };
+		9E40A54429C8AB65002E7D4F /* CheckBox.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckBox.swift; sourceTree = "<group>"; };
+		9E40A54629D75E9B002E7D4F /* CheckBoxControl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckBoxControl.swift; sourceTree = "<group>"; };
 		9E41A84429B4D55300EB60B9 /* APIManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIManager.swift; sourceTree = "<group>"; };
 		9E92BDDF29BCBBAC0045F88E /* SearchBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchBar.swift; sourceTree = "<group>"; };
 		9E92BDE129BDD6DC0045F88E /* SupportData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SupportData.swift; sourceTree = "<group>"; };
@@ -195,6 +201,9 @@
 				9EFB85A5299BAC4500E2B6CA /* Assets.xcassets */,
 				9EFB85A7299BAC4500E2B6CA /* LaunchScreen.storyboard */,
 				9EFB85AA299BAC4500E2B6CA /* Info.plist */,
+				9E40A54429C8AB65002E7D4F /* CheckBox.swift */,
+				9E40A54629D75E9B002E7D4F /* CheckBoxControl.swift */,
+				9E12336F29DAF5DE00FF3E14 /* SortedBottomSheetViewController.swift */,
 			);
 			path = kodeContactsApp;
 			sourceTree = "<group>";
@@ -406,14 +415,17 @@
 			files = (
 				9E12CEB629B24C82000771F8 /* ExtensionUIButton.swift in Sources */,
 				9E41A84529B4D55400EB60B9 /* APIManager.swift in Sources */,
+				9E40A54729D75E9B002E7D4F /* CheckBoxControl.swift in Sources */,
 				9E92BDE029BCBBAC0045F88E /* SearchBar.swift in Sources */,
 				9E9FA8B629B8C90F0057EBB2 /* Error.swift in Sources */,
+				9E12337029DAF5DE00FF3E14 /* SortedBottomSheetViewController.swift in Sources */,
 				9E12CEA529B23BD0000771F8 /* EmployeeInfoViewController.swift in Sources */,
 				9EFB85A1299BAC4100E2B6CA /* ViewController.swift in Sources */,
 				9E9FA8BA29B93B1E0057EBB2 /* Сonstants.swift in Sources */,
 				9EFB859D299BAC4100E2B6CA /* AppDelegate.swift in Sources */,
 				9E92BDE229BDD6DC0045F88E /* SupportData.swift in Sources */,
 				9E9FA8B429B8C77C0057EBB2 /* ErrorView.swift in Sources */,
+				9E40A54529C8AB65002E7D4F /* CheckBox.swift in Sources */,
 				9E12CEB829B24C98000771F8 /* BlurEffectView.swift in Sources */,
 				9EFB859F299BAC4100E2B6CA /* SceneDelegate.swift in Sources */,
 				9E24788629BB8FFE003AB605 /* DepartmentSegmentedControl.swift in Sources */,

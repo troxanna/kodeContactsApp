@@ -355,7 +355,8 @@ extension EmployeeInfoViewController {
     }
     
     private func callPhoneNumber() {
-        if let url = URL(string: "TEL://+\(removeNumberFormat(number: numberPhone.title(for: .normal)!))") {
+        if let number = numberPhone.title(for: .normal),
+            let url = URL(string: "tel://+\(removeNumberFormat(number: number))") {
             if (UIApplication.shared.canOpenURL(url)) {
                 UIApplication.shared.open(url, options: [:], completionHandler: nil)
             }
