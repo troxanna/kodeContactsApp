@@ -9,6 +9,8 @@ import UIKit
 
 class SortedBottomSheetViewController: UIViewController {
 
+    weak var delegate: SortedBottomSheetViewControllerDelegate?
+    
     private let checkBoxControl: CheckBoxControl = {
         let view = CheckBoxControl()
         return view
@@ -118,9 +120,10 @@ private extension SortedBottomSheetViewController {
         UIView.animate(withDuration: 0.4) {
             self.dimmedView.alpha = 0
         } completion: { _ in
-            self.dismiss(animated: false)
+            self.dismiss(animated: false, completion: {
+                self.delegate?.sortedTableView(by: self.checkBoxControl.getActiveSortedType())
+            })
         }
-        // вызвать функцию фильтрации ViewController для соответствующего SortedType
     }
 }
 
