@@ -17,6 +17,10 @@ protocol DepartmentSegmentedControlDelegate: AnyObject {
     func buttonSegmentPressed(department: String)
 }
 
+protocol SortedBottomSheetViewControllerDelegate: AnyObject {
+    func sortedTableView(by sortedType: SortedType)
+}
+
 class ViewController: UIViewController, SkeletonTableViewDataSource {
     
     //MARK: Private properties
@@ -273,7 +277,23 @@ extension ViewController: UISearchBarDelegate {
     private func didTapSortButton() {
         //delegate?
         let vc = SortedBottomSheetViewController()
+        vc.delegate = self
         vc.modalPresentationStyle = .overCurrentContext
         self.present(vc, animated: false)
+    }
+}
+
+//MARK: SortedBottomSheetViewControllerDelegate
+extension ViewController: SortedBottomSheetViewControllerDelegate {
+    func sortedTableView(by sortedType: SortedType) {
+        if sortedType == SortedType.birthday {
+//            filteredEmployees = employees.sorted(by: <#T##(User, User) throws -> Bool#>)
+        }
+        else if sortedType == SortedType.alphabetically {
+            filteredEmployees = employees.sorted {
+                $0.firstName < $1.firstName
+            }
+        }
+        tableView.reloadData()
     }
 }
