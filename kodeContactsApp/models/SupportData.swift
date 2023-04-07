@@ -8,7 +8,7 @@
 import Foundation
 
 enum Icons: String {
-    case star, phone, avatarURL, arrowBack, search, sort, clear
+    case star, phone, avatarURL, arrowBack, search, sortActive, sortInactive, clear, checkBoxActive, checkBoxInactive
 }
 
 enum SearchTextFieldData: String {

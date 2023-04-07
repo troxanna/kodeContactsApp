@@ -12,7 +12,7 @@ class CheckBoxControl: UIView {
     private let buttonAlpha: CheckBox = {
         let button = CheckBox(title: SortedType.alphabetically.rawValue)
         button.addTarget(self, action: #selector(buttonClickedSelected), for: .touchUpInside)
-        button.isChecked = true
+        button.isChecked = false
         return button
     }()
     
@@ -76,5 +76,15 @@ extension CheckBoxControl {
             return SortedType.alphabetically
         }
         return SortedType.birthday
+    }
+    
+    func setActiveSortedType(sortedType: SortedType) {
+        if sortedType == SortedType.alphabetically {
+            buttonAlpha.isChecked = true
+            buttonBirthday.isChecked = false
+        } else if sortedType == SortedType.birthday {
+            buttonBirthday.isChecked = true
+            buttonAlpha.isChecked = false
+        }
     }
 }

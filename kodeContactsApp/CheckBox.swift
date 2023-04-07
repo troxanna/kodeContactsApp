@@ -9,8 +9,8 @@ import UIKit
 
 class CheckBox: UIButton {
     
-    private let checkedImage = UIImage(named: "checkBoxActive")! as UIImage
-    private let uncheckedImage = UIImage(named: "checkBoxInactive")! as UIImage
+    private let checkedImage = UIImage(named: Icons.checkBoxActive.rawValue)! as UIImage
+    private let uncheckedImage = UIImage(named: Icons.checkBoxInactive.rawValue)! as UIImage
         
     var isChecked: Bool = false {
         didSet {

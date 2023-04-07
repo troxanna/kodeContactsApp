@@ -9,9 +9,8 @@ import UIKit
 import SkeletonView
 
 class EmployeeTableViewCell: UITableViewCell {
-    
-    //MARK: Private properties
-    static let identifier = "cell"
+    //MARK: Properties
+    static let identifier = "EmployeeCell"
     
     let mainTitleLabel: UILabel = {
         let label = UILabel()
@@ -41,15 +40,22 @@ class EmployeeTableViewCell: UITableViewCell {
     
     let avatarImage: UIImageView = {
         let image = UIImageView()
+        image.layer.cornerRadius = 36
+        image.clipsToBounds = true
         return image
     }()
     
-    
+    let userAgeLabel: UILabel = {
+        let label = UILabel()
+        label.textColor = UIColor(red: 85/255, green: 85/255, blue: 92/255, alpha: 1)
+        label.font = UIFont(name: "Inter-Regular", size: 15) ?? UIFont.systemFont(ofSize: 15, weight: .regular)
+        label.isHidden = true
+        return label
+    }()
     
     //MARK: Init
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
-        //разобраться с обновлением image при изменении ячейки
         
         createEmployeeCell()
         configurationSkeletonShowForCell()
@@ -62,20 +68,15 @@ class EmployeeTableViewCell: UITableViewCell {
     //MARK: Ovveride
     override func awakeFromNib() {
         super.awakeFromNib()
-        //не работает
-        
+    }
+    
+    override func prepareForReuse() {
+        super.prepareForReuse()
         avatarImage.image = nil
-        
-        avatarImage.layer.cornerRadius = avatarImage.bounds.height / 2
-        avatarImage.layer.masksToBounds = true
-//        avatarImage.clipsToBounds = true
-        avatarImage.contentMode = .scaleAspectFit
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
-
-        // Configure the view for the selected state
     }
 
 }
@@ -101,6 +102,7 @@ extension EmployeeTableViewCell {
         })
         
         configurationConstraints()
+        
     }
     
     private func configurationConstraints() {
@@ -124,6 +126,7 @@ extension EmployeeTableViewCell {
         contentView.addSubview(avatarImage)
         contentView.addSubview(mainTitleLabel)
         contentView.addSubview(descriptionLabel)
+        contentView.addSubview(userAgeLabel)
 
         avatarImage.snp.makeConstraints({ make in
             make.leading.equalTo(contentView.snp.leading).offset(16)
@@ -140,6 +143,11 @@ extension EmployeeTableViewCell {
             make.leading.equalTo(mainTitleLabel.snp.leading)
             make.top.equalTo(mainTitleLabel.snp.bottom).offset(4)
             make.trailing.equalTo(mainTitleLabel.snp.trailing).offset(16)
+        })
+        
+        userAgeLabel.snp.makeConstraints({ make in
+            make.centerY.equalTo(contentView.snp.centerY)
+            make.right.equalTo(contentView.snp.right).inset(16)
         })
     }
     
@@ -163,9 +171,12 @@ extension EmployeeTableViewCell {
 extension EmployeeTableViewCell {
     func fullDataCell(data: User) {
         let userTag = data.userTag.lowercased()
+        let formatter = DateFormatter()
+        
         titleLabel.text = "\(data.firstName) \(data.lastName)"
         descriptionLabel.text = data.position
         userTagLabel.text = userTag
+        userAgeLabel.text = formatter.getDateString(dateFormat: "d MMM", date: data.birthday)
         fetchAvatarImage(urlString: data.avatarURL)
     }
     

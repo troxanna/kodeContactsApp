@@ -25,7 +25,7 @@ private extension SearchBar {
         
         self.returnKeyType = .default
         
-        setRightImage(imageName: Icons.sort.rawValue, offset: UIOffset(horizontal: -8, vertical: 0))
+        setRightImage(imageName: Icons.sortInactive.rawValue, offset: UIOffset(horizontal: -8, vertical: 0))
         setLeftImage(imageName: Icons.search.rawValue, offset: UIOffset(horizontal: 8, vertical: 0))
         setClearImage(imageName: Icons.clear.rawValue, offset: UIOffset(horizontal: -8, vertical: 0))
         
@@ -85,5 +85,12 @@ private extension SearchBar {
         ]
         UIBarButtonItem.appearance(whenContainedInInstancesOf: [UISearchBar.self]).setTitleTextAttributes(attributes, for: .normal)
         UIBarButtonItem.appearance(whenContainedInInstancesOf: [UISearchBar.self]).title = SearchTextFieldData.cancelButtonTitle.rawValue
+    }
+}
+
+//MARK: public functions
+extension SearchBar {
+    func setSortedIcon(for state: Icons) {
+        setImage(imageName: state.rawValue, offset: UIOffset(horizontal: -8, vertical: 0), type: .bookmark)
     }
 }

@@ -34,6 +34,8 @@ class EmployeeInfoViewController: UIViewController  {
     
     private let avatarImage:UIImageView = {
         let image = UIImageView()
+        image.layer.cornerRadius = 52
+        image.clipsToBounds = true
         return image
     }()
 
@@ -242,24 +244,16 @@ extension EmployeeInfoViewController {
 extension EmployeeInfoViewController {
     private func fullData() {
         let tmpYear = getUserAge(from: person.birthday)
+        let formatter = DateFormatter()
         
         nameLabel.text = "\(person.firstName) \(person.lastName)"
         userTag.text = person.userTag.lowercased()
         position.text = person.position
-        dateBirthDay.text = ConvertDateBirthDay()
+        dateBirthDay.text = formatter.getDateString(dateFormat: "d MMMM y", date: person.birthday)
         age.text = "\(tmpYear.0) \(tmpYear.1) "
         numberPhone.setTitle(formatPhoneNumber(number: person.phone), for: .normal)
     }
-    
-    private func ConvertDateBirthDay() -> String {
-        let formatter = DateFormatter()
-        formatter.dateFormat = "yyyy-MM-dd"
-        let dateString = formatter.date(from: person.birthday)
-        formatter.dateFormat = "d MMMM y"
-        let date = formatter.string(from: dateString!)
-        return date
-    }
-    
+
     private func getUserAge(from: String) -> (Int, String) {
         let formatter = DateFormatter()
         formatter.dateFormat = "yyyy-MM-dd"

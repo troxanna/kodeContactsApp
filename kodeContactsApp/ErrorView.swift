@@ -46,9 +46,6 @@ class ErrorView: UIView {
         super.init(frame: frame)
         configurationErrorView(repeatRequest: errorDescription.repeatRequest)
         contentConfigurationErrorView(errorDescription: errorDescription)
-        //self.navigationController?.navigationBar.isHidden = true
-        //let errorView = ErrorView(frame: .zero, errorDescription: Error(title: "Мы никого не нашли", message: "Попробуй скорректировать запрос", imageName: "search", repeatRequest: false))
-        //let errorView = ErrorView(frame: .zero, errorDescription: Error(title: "Какой-то сверхразум все сломал", message: "Постараемся быстро починить", imageName: "flyingSaucer", repeatRequest: true))
     }
     
     required init?(coder: NSCoder) {

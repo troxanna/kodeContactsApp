@@ -24,8 +24,11 @@ protocol SortedBottomSheetViewControllerDelegate: AnyObject {
 class ViewController: UIViewController, SkeletonTableViewDataSource {
     
     //MARK: Private properties
+    private var sortedType = SortedType.alphabetically
+    private var errorView: ErrorView?
+    
     private var tableView: UITableView = {
-        let tableView = UITableView()
+        let tableView = UITableView(frame: .zero, style: .plain)
         return tableView
     }()
     
@@ -40,8 +43,9 @@ class ViewController: UIViewController, SkeletonTableViewDataSource {
         return searchBar
     }()
 
-    private var employees: [User] = []
-    private var filteredEmployees: [User] = []
+    private var employees: [[User]] = [[], []]
+    private var filteredEmployees: [[User]] = [[], []]
+    private var sortedEmployees: [[User]] = [[], []]
 
     //MARK: Override functions
     override func viewDidLoad() {
@@ -65,7 +69,7 @@ extension ViewController: UITableViewDelegate {
         let cell: EmployeeTableViewCell? = tableView.cellForRow(at: indexPath) as? EmployeeTableViewCell
         
         let viewController = EmployeeInfoViewController()
-        viewController.sendData(person: filteredEmployees[indexPath.row])
+        viewController.sendData(person: sortedEmployees[indexPath.section][indexPath.row])
         let image = cell?.getAvatarImage()
         viewController.sendImage(image: image)
         navigationController?.pushViewController(viewController, animated: true)
@@ -78,18 +82,34 @@ extension ViewController: UITableViewDelegate {
 extension ViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         //employeesData.count == 0 -> Другой экран
-        return filteredEmployees.count
+        if section == 0 && sortedEmployees[1].count != 0 {
+            return sortedEmployees[section].count + 1
+        }
+        return sortedEmployees[section].count
     }
     
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return 2
+    }
+
     func collectionSkeletonView(_ skeletonView: UITableView, cellIdentifierForRowAt indexPath: IndexPath) -> ReusableCellIdentifier {
         return EmployeeTableViewCell.identifier
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        if indexPath.section == 0 && indexPath.row == sortedEmployees[indexPath.section].count && sortedEmployees[1].count != 0 {
+            return tableView.dequeueReusableCell(withIdentifier: YearTableViewCell.identifier) as! YearTableViewCell
+        }
+        
         let cell = tableView.dequeueReusableCell(withIdentifier: EmployeeTableViewCell.identifier) as! EmployeeTableViewCell
-        let employee = filteredEmployees[indexPath.row]
+        let employee = sortedEmployees[indexPath.section][indexPath.row]
         
         cell.fullDataCell(data: employee)
+        if sortedType == SortedType.birthday {
+            cell.userAgeLabel.isHidden = false
+        } else {
+            cell.userAgeLabel.isHidden = true
+        }
         cell.configurationSkeletonHideForCell()
         
         return cell
@@ -102,6 +122,8 @@ extension ViewController {
         tableView.rowHeight = 80
         tableView.estimatedRowHeight = 80
         tableView.separatorStyle = .none
+        tableView.backgroundColor = .clear
+        tableView.tableHeaderView = UIView(frame: CGRect(origin: CGPoint(x: 0, y: 0), size: CGSize(width: view.frame.width, height: 16)))
     }
     
     private func contentConfigurationView() {
@@ -114,7 +136,8 @@ extension ViewController {
 
         tableView.snp.makeConstraints({ make in
             make.right.left.bottom.equalToSuperview()
-            make.top.equalTo(departmentSegmentedControll.snp.bottom).offset(16)
+            //offset 16
+            make.top.equalTo(departmentSegmentedControll.snp.bottom)
 
         })
         departmentSegmentedControll.snp.makeConstraints({ make in
@@ -131,6 +154,7 @@ extension ViewController {
         tableView.dataSource = self
         tableView.delegate = self
         tableView.register(EmployeeTableViewCell.self, forCellReuseIdentifier: EmployeeTableViewCell.identifier)
+        tableView.register(YearTableViewCell.self, forCellReuseIdentifier: YearTableViewCell.identifier)
         
         self.skeletonShow()
         self.updateDataTableView()
@@ -142,8 +166,10 @@ extension ViewController {
                 let data = try users()
                 DispatchQueue.main.async {
                     guard let self = self else { return }
-                    self.employees = data
-                    self.filteredEmployees = data
+                    self.employees[0] = data
+                    self.sortedEmployees[0] = data
+                    self.filteredEmployees[0] = data
+                    self.sortedByAlphabetically()
                     self.tableView.reloadData()
                     self.skeletonHide()
                 }
@@ -178,23 +204,24 @@ extension ViewController {
 //MARK: Handler error
 extension ViewController {
     private func showError(screenError: ScreenError) {
-        self.tableView.removeFromSuperview()
-        let errorView = screenError.errorView
-        errorView.delegate = self
-        self.view.addSubview(errorView)
+        errorView?.removeFromSuperview()
+        errorView = screenError.errorView
+        errorView!.delegate = self
+        self.view.addSubview(errorView!)
         
         switch screenError {
         case .criticalError:
-            errorView.snp.makeConstraints({ make in
+            errorView!.snp.makeConstraints({ make in
                 make.edges.equalToSuperview()
             })
             navigationController?.isNavigationBarHidden = true
             departmentSegmentedControll.removeFromSuperview()
         default:
-            errorView.snp.makeConstraints({ make in
+            errorView!.snp.makeConstraints({ make in
                 make.right.left.bottom.equalToSuperview()
                 make.top.equalTo(departmentSegmentedControll.snp.bottom)
             })
+            tableView.isHidden = true
         }
         self.skeletonHide()
     }
@@ -215,7 +242,8 @@ extension ViewController: DepartmentSegmentedControlDelegate {
     func buttonSegmentPressed(department: String) {
         do {
             try filteredEmployees(for: department)
-            createTableView()
+            errorView?.removeFromSuperview()
+            tableView.isHidden = false
             tableView.reloadData()
         }
         catch AppError.searchError {
@@ -228,11 +256,16 @@ extension ViewController: DepartmentSegmentedControlDelegate {
     
     func filteredEmployees(for department: String) throws {
         if department == Departaments.all.value {
-            filteredEmployees = employees
+            filteredEmployees[0] = employees[0]
         } else {
-            filteredEmployees = employees.filter { Departaments(rawValue: $0.department)?.value == department }
+            filteredEmployees[0] = employees[0].filter { Departaments(rawValue: $0.department)?.value == department }
         }
-        if filteredEmployees.isEmpty {
+        if sortedType == SortedType.birthday {
+            sortedByBirthday()
+        } else if sortedType == SortedType.alphabetically {
+            sortedByAlphabetically()
+        }
+        if filteredEmployees[0].isEmpty && filteredEmployees[1].isEmpty {
             throw AppError.searchError
         }
     }
@@ -276,7 +309,7 @@ extension ViewController: UISearchBarDelegate {
     
     private func didTapSortButton() {
         //delegate?
-        let vc = SortedBottomSheetViewController()
+        let vc = SortedBottomSheetViewController(currentSortedType: sortedType)
         vc.delegate = self
         vc.modalPresentationStyle = .overCurrentContext
         self.present(vc, animated: false)
@@ -285,15 +318,42 @@ extension ViewController: UISearchBarDelegate {
 
 //MARK: SortedBottomSheetViewControllerDelegate
 extension ViewController: SortedBottomSheetViewControllerDelegate {
-    func sortedTableView(by sortedType: SortedType) {
-        if sortedType == SortedType.birthday {
-//            filteredEmployees = employees.sorted(by: <#T##(User, User) throws -> Bool#>)
+    func sortedTableView(by selectedSortedType: SortedType) {
+        
+        if selectedSortedType == SortedType.birthday && sortedType != SortedType.birthday {
+            sortedByBirthday()
+            searchBar.setSortedIcon(for: Icons.sortActive)
         }
-        else if sortedType == SortedType.alphabetically {
-            filteredEmployees = employees.sorted {
-                $0.firstName < $1.firstName
-            }
+        else if selectedSortedType == SortedType.alphabetically && sortedType != SortedType.alphabetically {
+            sortedByAlphabetically()
+            searchBar.setSortedIcon(for: Icons.sortInactive)
         }
+        sortedType = selectedSortedType
         tableView.reloadData()
     }
+    
+    private func sortedByBirthday() {
+        let dateFormatter = DateFormatter()
+        let currentDate = Date()
+        
+        //Сортировка по дате рождения
+        filteredEmployees[0] = filteredEmployees[0].sorted {
+            dateFormatter.getMonth(date: $0.birthday) < dateFormatter.getMonth(date: $1.birthday)
+        }
+        filteredEmployees[0] = filteredEmployees[0].sorted {
+            dateFormatter.getDay(date: $0.birthday) < dateFormatter.getDay(date: $1.birthday) && dateFormatter.getMonth(date: $0.birthday) == dateFormatter.getMonth(date: $1.birthday)
+        }
+        
+        //Распределение пользователей по разделам таблицы в зависимости от даты рождения (текущий год/следующий год)
+        sortedEmployees[0] = filteredEmployees[0].filter { dateFormatter.getMonth(date: $0.birthday) <= 12 && dateFormatter.getMonth(date: $0.birthday) > currentDate.monthInt || (dateFormatter.getMonth(date: $0.birthday) == currentDate.monthInt && dateFormatter.getDay(date: $0.birthday) >= currentDate.dayInt)}
+        sortedEmployees[1] = filteredEmployees[0].filter {!(dateFormatter.getMonth(date: $0.birthday) <= 12 && dateFormatter.getMonth(date: $0.birthday) > currentDate.monthInt || (dateFormatter.getMonth(date: $0.birthday) == currentDate.monthInt && dateFormatter.getDay(date: $0.birthday) >= currentDate.dayInt))}
+    }
+    
+    private func sortedByAlphabetically() {
+        sortedEmployees[0] = filteredEmployees[0].sorted {
+            $0.firstName < $1.firstName
+        }
+        sortedEmployees[1] = []
+    }
+    
 }
