@@ -82,6 +82,15 @@ class SortedBottomSheetViewController: UIViewController {
         animateShowDimmedView()
         animatePresentContainer()
     }
+    
+    init(currentSortedType: SortedType) {
+        super.init(nibName: nil, bundle: nil)
+        checkBoxControl.setActiveSortedType(sortedType: currentSortedType)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
 }
 
 //MARK: override viewDidLoad
