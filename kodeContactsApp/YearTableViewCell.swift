@@ -41,7 +41,7 @@ class YearTableViewCell: UITableViewCell {
 
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
-
+//        self.isSelected = false
         // Configure the view for the selected state
     }
     
@@ -50,6 +50,7 @@ class YearTableViewCell: UITableViewCell {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         
         setup()
+        self.selectionStyle = .none
     }
     
     required init?(coder: NSCoder) {

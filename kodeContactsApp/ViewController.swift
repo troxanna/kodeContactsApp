@@ -40,12 +40,14 @@ class ViewController: UIViewController, SkeletonTableViewDataSource {
     
     private var searchBar: SearchBar = {
         let searchBar = SearchBar()
+        searchBar.isUserInteractionDisabledWhenSkeletonIsActive = true
         return searchBar
     }()
 
     private var employees: [[User]] = [[], []]
     private var filteredEmployees: [[User]] = [[], []]
     private var sortedEmployees: [[User]] = [[], []]
+    private var searchEmployees: [[User]] = [[], []]
 
     //MARK: Override functions
     override func viewDidLoad() {
@@ -66,8 +68,10 @@ class ViewController: UIViewController, SkeletonTableViewDataSource {
 //MARK: UITableViewDelegate
 extension ViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        if indexPath.section == 0 && indexPath.row == sortedEmployees[indexPath.section].count && sortedEmployees[1].count != 0 {
+            return
+        }
         let cell: EmployeeTableViewCell? = tableView.cellForRow(at: indexPath) as? EmployeeTableViewCell
-        
         let viewController = EmployeeInfoViewController()
         viewController.sendData(person: sortedEmployees[indexPath.section][indexPath.row])
         let image = cell?.getAvatarImage()
@@ -124,6 +128,7 @@ extension ViewController {
         tableView.separatorStyle = .none
         tableView.backgroundColor = .clear
         tableView.tableHeaderView = UIView(frame: CGRect(origin: CGPoint(x: 0, y: 0), size: CGSize(width: view.frame.width, height: 16)))
+//        tableView.refreshControl = refreshControll
     }
     
     private func contentConfigurationView() {
@@ -169,7 +174,7 @@ extension ViewController {
                     self.employees[0] = data
                     self.sortedEmployees[0] = data
                     self.filteredEmployees[0] = data
-                    self.sortedByAlphabetically()
+                    self.handlerFilteredEmployees(for: self.departmentSegmentedControll.currentActiveSegment)
                     self.tableView.reloadData()
                     self.skeletonHide()
                 }
@@ -240,6 +245,22 @@ extension ViewController: ErrorViewDelegate {
 //MARK: DepartmentSegmentedControlDelegate
 extension ViewController: DepartmentSegmentedControlDelegate {
     func buttonSegmentPressed(department: String) {
+        handlerFilteredEmployees(for: department)
+        if let searchText = searchBar.searchTextField.text {
+            if searchText != "" {
+                do {
+                    try handlerSearch(searchText: searchText)
+                    errorView?.removeFromSuperview()
+                    tableView.isHidden = false
+                    tableView.reloadData()
+                } catch {
+                    showError(screenError: .searchError)
+                }
+            }
+        }
+    }
+    
+    func handlerFilteredEmployees(for department: String) {
         do {
             try filteredEmployees(for: department)
             errorView?.removeFromSuperview()
@@ -261,9 +282,9 @@ extension ViewController: DepartmentSegmentedControlDelegate {
             filteredEmployees[0] = employees[0].filter { Departaments(rawValue: $0.department)?.value == department }
         }
         if sortedType == SortedType.birthday {
-            sortedByBirthday()
+            sortedByBirthday(by: filteredEmployees)
         } else if sortedType == SortedType.alphabetically {
-            sortedByAlphabetically()
+            sortedByAlphabetically(by: filteredEmployees)
         }
         if filteredEmployees[0].isEmpty && filteredEmployees[1].isEmpty {
             throw AppError.searchError
@@ -278,13 +299,26 @@ extension ViewController: UISearchBarDelegate {
     }
     
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
-        print(searchText)
+        if (searchText == "") {
+            handlerFilteredEmployees(for: departmentSegmentedControll.currentActiveSegment)
+        } else {
+            do {
+                try handlerSearch(searchText: searchText)
+                errorView?.removeFromSuperview()
+                tableView.isHidden = false
+                tableView.reloadData()
+            } catch {
+                showError(screenError: .searchError)
+            }
+        }
     }
 
     func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
         updateSearchBarEndEditing()
+        handlerFilteredEmployees(for: departmentSegmentedControll.currentActiveSegment)
         searchBar.text = ""
     }
+    
     
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         updateSearchBarEndEditing()
@@ -308,11 +342,46 @@ extension ViewController: UISearchBarDelegate {
     }
     
     private func didTapSortButton() {
-        //delegate?
         let vc = SortedBottomSheetViewController(currentSortedType: sortedType)
         vc.delegate = self
         vc.modalPresentationStyle = .overCurrentContext
         self.present(vc, animated: false)
+    }
+    
+    private func handlerSearch(searchText: String) throws {
+        if filteredEmployees[0].isEmpty && filteredEmployees[1].isEmpty {
+            throw AppError.emptyDataError
+        }
+        logicSearch(for: 0, searchText: searchText)
+        logicSearch(for: 1, searchText: searchText)
+        print(searchEmployees[0])
+        
+        if searchEmployees[0].isEmpty && searchEmployees[1].isEmpty {
+            throw AppError.emptyDataError
+        }
+        
+        if sortedType == SortedType.birthday {
+            sortedByBirthday(by: searchEmployees)
+        } else if sortedType == SortedType.alphabetically {
+            sortedByAlphabetically(by: searchEmployees)
+        }
+    }
+    
+    private func logicSearch(for index: Int, searchText: String) {
+        for item in filteredEmployees[index] {
+            if item.firstName.contains(searchText) || item.lastName.contains(searchText) || item.userTag.lowercased().contains(searchText) {
+                if searchEmployees[index].contains(item) {
+                    continue
+                }
+                searchEmployees[index].append(item)
+            } else {
+                if searchEmployees[index].contains(item) {
+                    print(item.id)
+                    let removeIndex = searchEmployees[index].firstIndex(of: item)
+                    searchEmployees[index].remove(at: removeIndex!)
+                }
+            }
+        }
     }
 }
 
@@ -321,39 +390,39 @@ extension ViewController: SortedBottomSheetViewControllerDelegate {
     func sortedTableView(by selectedSortedType: SortedType) {
         
         if selectedSortedType == SortedType.birthday && sortedType != SortedType.birthday {
-            sortedByBirthday()
+            sortedByBirthday(by: filteredEmployees)
             searchBar.setSortedIcon(for: Icons.sortActive)
         }
         else if selectedSortedType == SortedType.alphabetically && sortedType != SortedType.alphabetically {
-            sortedByAlphabetically()
+            sortedByAlphabetically(by: filteredEmployees)
             searchBar.setSortedIcon(for: Icons.sortInactive)
         }
         sortedType = selectedSortedType
         tableView.reloadData()
     }
     
-    private func sortedByBirthday() {
+    private func sortedByBirthday(by employeesInput: [[User]]) {
         let dateFormatter = DateFormatter()
         let currentDate = Date()
+        var tmpEmployees = employeesInput
         
         //Сортировка по дате рождения
-        filteredEmployees[0] = filteredEmployees[0].sorted {
+        tmpEmployees[0] = tmpEmployees[0].sorted {
             dateFormatter.getMonth(date: $0.birthday) < dateFormatter.getMonth(date: $1.birthday)
         }
-        filteredEmployees[0] = filteredEmployees[0].sorted {
+        tmpEmployees[0] = tmpEmployees[0].sorted {
             dateFormatter.getDay(date: $0.birthday) < dateFormatter.getDay(date: $1.birthday) && dateFormatter.getMonth(date: $0.birthday) == dateFormatter.getMonth(date: $1.birthday)
         }
         
         //Распределение пользователей по разделам таблицы в зависимости от даты рождения (текущий год/следующий год)
-        sortedEmployees[0] = filteredEmployees[0].filter { dateFormatter.getMonth(date: $0.birthday) <= 12 && dateFormatter.getMonth(date: $0.birthday) > currentDate.monthInt || (dateFormatter.getMonth(date: $0.birthday) == currentDate.monthInt && dateFormatter.getDay(date: $0.birthday) >= currentDate.dayInt)}
-        sortedEmployees[1] = filteredEmployees[0].filter {!(dateFormatter.getMonth(date: $0.birthday) <= 12 && dateFormatter.getMonth(date: $0.birthday) > currentDate.monthInt || (dateFormatter.getMonth(date: $0.birthday) == currentDate.monthInt && dateFormatter.getDay(date: $0.birthday) >= currentDate.dayInt))}
+        sortedEmployees[0] = tmpEmployees[0].filter { dateFormatter.getMonth(date: $0.birthday) <= 12 && dateFormatter.getMonth(date: $0.birthday) > currentDate.monthInt || (dateFormatter.getMonth(date: $0.birthday) == currentDate.monthInt && dateFormatter.getDay(date: $0.birthday) >= currentDate.dayInt)}
+        sortedEmployees[1] = tmpEmployees[0].filter {!(dateFormatter.getMonth(date: $0.birthday) <= 12 && dateFormatter.getMonth(date: $0.birthday) > currentDate.monthInt || (dateFormatter.getMonth(date: $0.birthday) == currentDate.monthInt && dateFormatter.getDay(date: $0.birthday) >= currentDate.dayInt))}
     }
     
-    private func sortedByAlphabetically() {
-        sortedEmployees[0] = filteredEmployees[0].sorted {
+    private func sortedByAlphabetically(by employeesInput: [[User]]) {
+        sortedEmployees[0] = employeesInput[0].sorted {
             $0.firstName < $1.firstName
         }
         sortedEmployees[1] = []
     }
-    
 }

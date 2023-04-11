@@ -70,7 +70,8 @@ struct Users: Codable {
 }
 
 // MARK: - User
-struct User: Codable {
+//Equatable
+struct User: Codable, Equatable {
     let id: String
     let firstName, lastName, department: String
     let position, birthday, phone: String
@@ -80,6 +81,10 @@ struct User: Codable {
         case id
         case avatarURL = "avatarUrl"
         case firstName, lastName, userTag, department, position, birthday, phone
+    }
+    
+    static func ==(lhs: User, rhs: User) -> Bool {
+        return lhs.id == rhs.id
     }
 }
 
