@@ -62,6 +62,9 @@ class ViewController: UIViewController, SkeletonTableViewDataSource {
         super.viewDidAppear(animated)
         navigationItem.titleView = searchBar
         searchBar.delegate = self
+        
+        tableView.refreshControl = UIRefreshControl()
+        tableView.refreshControl?.addTarget(self, action: #selector(refresh), for: .valueChanged)
     }
 }
 
@@ -128,7 +131,6 @@ extension ViewController {
         tableView.separatorStyle = .none
         tableView.backgroundColor = .clear
         tableView.tableHeaderView = UIView(frame: CGRect(origin: CGPoint(x: 0, y: 0), size: CGSize(width: view.frame.width, height: 16)))
-//        tableView.refreshControl = refreshControll
     }
     
     private func contentConfigurationView() {
@@ -175,6 +177,13 @@ extension ViewController {
                     self.sortedEmployees[0] = data
                     self.filteredEmployees[0] = data
                     self.handlerFilteredEmployees(for: self.departmentSegmentedControll.currentActiveSegment)
+                    self.searchEmployees[0] = []
+                    self.searchEmployees[1] = []
+                    if let searchText = self.searchBar.searchTextField.text {
+                        if searchText != "" {
+                            self.handlerSearch(searchText: searchText)
+                        }
+                    }
                     self.tableView.reloadData()
                     self.skeletonHide()
                 }
@@ -248,14 +257,7 @@ extension ViewController: DepartmentSegmentedControlDelegate {
         handlerFilteredEmployees(for: department)
         if let searchText = searchBar.searchTextField.text {
             if searchText != "" {
-                do {
-                    try handlerSearch(searchText: searchText)
-                    errorView?.removeFromSuperview()
-                    tableView.isHidden = false
-                    tableView.reloadData()
-                } catch {
-                    showError(screenError: .searchError)
-                }
+                handlerSearch(searchText: searchText)
             }
         }
     }
@@ -302,14 +304,7 @@ extension ViewController: UISearchBarDelegate {
         if (searchText == "") {
             handlerFilteredEmployees(for: departmentSegmentedControll.currentActiveSegment)
         } else {
-            do {
-                try handlerSearch(searchText: searchText)
-                errorView?.removeFromSuperview()
-                tableView.isHidden = false
-                tableView.reloadData()
-            } catch {
-                showError(screenError: .searchError)
-            }
+            handlerSearch(searchText: searchText)
         }
     }
 
@@ -321,7 +316,13 @@ extension ViewController: UISearchBarDelegate {
     
     
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+        if let searchText = self.searchBar.searchTextField.text {
+            if searchText != "" {
+                self.handlerSearch(searchText: searchText)
+            }
+        }
         updateSearchBarEndEditing()
+        
     }
     
     func searchBarBookmarkButtonClicked(_ searchBar: UISearchBar) {
@@ -348,8 +349,21 @@ extension ViewController: UISearchBarDelegate {
         self.present(vc, animated: false)
     }
     
-    private func handlerSearch(searchText: String) throws {
+    private func handlerSearch(searchText: String) {
+        do {
+            try searchEmployees(searchText: searchText)
+            errorView?.removeFromSuperview()
+            tableView.isHidden = false
+            tableView.reloadData()
+        } catch {
+            showError(screenError: .searchError)
+        }
+    }
+    
+    private func searchEmployees(searchText: String) throws {
         if filteredEmployees[0].isEmpty && filteredEmployees[1].isEmpty {
+//            searchEmployees[0] = []
+//            searchEmployees[1] = []
             throw AppError.emptyDataError
         }
         logicSearch(for: 0, searchText: searchText)
@@ -424,5 +438,16 @@ extension ViewController: SortedBottomSheetViewControllerDelegate {
             $0.firstName < $1.firstName
         }
         sortedEmployees[1] = []
+    }
+}
+
+//MARK: Refresh Controll
+extension ViewController {
+    @objc private func refresh() {
+        searchBar.endEditing(true)
+        updateDataTableView()
+        DispatchQueue.main.async {
+            self.tableView.refreshControl?.endRefreshing()
+        }
     }
 }
