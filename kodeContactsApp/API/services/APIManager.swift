@@ -55,11 +55,7 @@ class APIManager {
     
     
     func getUsers(completion: @escaping (_: () throws -> [User]) -> ())  {
-        var request = ApiType.getUsersError.request
-        if headerPreferError == false {
-            request = ApiType.getUsers.request
-        }
-        
+        var request = ApiType.getUsers.request
         URLSession.shared.dataTask(with: request) { data, response, error in
             completion({
                 if error != nil {

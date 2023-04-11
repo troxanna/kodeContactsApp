@@ -48,6 +48,12 @@ class DepartmentSegmentedControl: UIView, UIScrollViewDelegate {
     
     private var segmentButtons: [UIButton] = []
     private var segmentViews: [UIView] = []
+    private var activeSegment: String = Departaments.all.value
+    var currentActiveSegment: String {
+        get {
+            return activeSegment
+        }
+    }
 
     
     var selectedSegmentIndex: Int = 0 {
@@ -177,6 +183,7 @@ extension DepartmentSegmentedControl {
         }
         if let department = sender.currentTitle {
             self.delegate?.buttonSegmentPressed(department: department)
+            activeSegment = department
         }
     }
 }
