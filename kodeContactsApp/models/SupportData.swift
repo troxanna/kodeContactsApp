@@ -24,3 +24,8 @@ enum SortedType: String {
 //enum Fonts {
 //    
 //}
+
+enum AnimationType: String {
+    case fill
+    case spinner
+}
