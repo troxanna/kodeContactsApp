@@ -27,6 +27,10 @@ class ViewController: UIViewController, SkeletonTableViewDataSource {
     private var sortedType = SortedType.alphabetically
     private var errorView: ErrorView?
     
+    private var refreshLoadingView: UIView!
+    private var refreshView: CircularProgressView!
+    private var isRefreshAnimating = false
+    
     private var tableView: UITableView = {
         let tableView = UITableView(frame: .zero, style: .plain)
         return tableView
@@ -56,16 +60,23 @@ class ViewController: UIViewController, SkeletonTableViewDataSource {
         contentConfigurationView()
         createTableView()
         setupTableView()
+        setupRefreshControl()
+        
     }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         navigationItem.titleView = searchBar
         searchBar.delegate = self
-        
-        tableView.refreshControl = UIRefreshControl()
-        tableView.refreshControl?.addTarget(self, action: #selector(refresh), for: .valueChanged)
+//        setupRefreshControl()
     }
+    
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        
+        refreshView.animationCircular()
+    }
+    
 }
 
 //MARK: UITableViewDelegate
@@ -443,11 +454,84 @@ extension ViewController: SortedBottomSheetViewControllerDelegate {
 
 //MARK: Refresh Controll
 extension ViewController {
-    @objc private func refresh() {
-        searchBar.endEditing(true)
-        updateDataTableView()
-        DispatchQueue.main.async {
+    
+    private func setupRefreshControl() {
+        tableView.refreshControl = UIRefreshControl()
+        tableView.refreshControl!.tintColor = .clear
+        
+        refreshView = CircularProgressView()
+        refreshView.frame = tableView.refreshControl!.bounds
+        
+        refreshLoadingView = UIView(frame: tableView.refreshControl!.bounds)
+        refreshLoadingView.backgroundColor = .clear
+        refreshLoadingView.clipsToBounds = true
+
+        refreshLoadingView.addSubview(refreshView)
+        refreshView.snp.makeConstraints({ make in
+            make.center.equalTo(refreshLoadingView.snp.center)
+        })
+
+        tableView.refreshControl!.addSubview(self.refreshLoadingView)
+    }
+
+    
+    private func refresh() {
+        tableView.refreshControl?.beginRefreshing()
+        DispatchQueue.main.asyncAfter(deadline: .now() + 2.5) {
+            self.searchBar.endEditing(true)
+            self.updateDataTableView()
+            self.refreshView.stopAnimation(for: AnimationType.spinner.rawValue)
             self.tableView.refreshControl?.endRefreshing()
         }
     }
+    
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        var refreshBounds = tableView.refreshControl!.bounds
+        let pullDistance = max(0.0, -tableView.refreshControl!.frame.origin.y)
+        if pullDistance == 0.0 {
+            self.isRefreshAnimating = false
+        }
+
+        let midX = self.tableView.frame.size.width / 2.0
+        
+        let refreshViewHeight = self.refreshView.bounds.size.height
+        let refreshViewHeightHalf = refreshViewHeight / 2.0
+        
+        let refreshViewWidth = self.refreshView.bounds.size.width
+        let refreshViewWidthHalf = refreshViewWidth / 2.0
+        
+        let pullRatio = min(max(pullDistance, 0.0), 100.0) / 100.0
+        
+        let refreshViewY = pullDistance / 2.0 - refreshViewHeightHalf
+        
+        let refreshViewX = (midX - refreshViewWidth - refreshViewWidthHalf) + (refreshViewWidth * pullRatio)
+
+        var refreshViewFrame = self.refreshView.frame
+        refreshViewFrame.origin.x = refreshViewX
+        refreshViewFrame.origin.y = refreshViewY;
+        
+        self.refreshView.frame = refreshViewFrame;
+        
+        refreshBounds.size.height = pullDistance;
+        
+        self.refreshLoadingView.frame = refreshBounds;
+        
+        if (self.isRefreshAnimating == false) {
+            refreshView.setProgress(to: Float(pullRatio))
+            isRefreshAnimating = false
+        }
+    }
+    
+    func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
+        let pullDistance = max(0.0, -tableView.refreshControl!.frame.origin.y)
+        let pullRatio = min(max(pullDistance, 0.0), 100.0) / 100.0
+        if pullRatio == 1.0 {
+            refreshView.basicAnimation()
+            refresh()
+            isRefreshAnimating = true
+        }
+    }
+    
+    
 }
+
