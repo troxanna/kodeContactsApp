@@ -15,7 +15,7 @@ class DepartmentSegmentedControl: UIView, UIScrollViewDelegate {
     private let contentView: UIView = {
         let view = UIView()
         view.translatesAutoresizingMaskIntoConstraints = false
-        view.backgroundColor = .white
+        view.backgroundColor = UIColor(named: Color.white.rawValue)
         return view
     }()
     
@@ -23,7 +23,7 @@ class DepartmentSegmentedControl: UIView, UIScrollViewDelegate {
         let scroll = UIScrollView()
         scroll.translatesAutoresizingMaskIntoConstraints = false
         scroll.showsHorizontalScrollIndicator = false
-        scroll.backgroundColor = .white
+        scroll.backgroundColor = UIColor(named: Color.white.rawValue)
         return scroll
     }()
     
@@ -36,13 +36,13 @@ class DepartmentSegmentedControl: UIView, UIScrollViewDelegate {
     
     private let line: UILabel = {
         let label = UILabel()
-        label.backgroundColor = UIColor(red: 195/255, green: 195/255, blue: 198/255, alpha: 1)
+        label.backgroundColor = UIColor(named: Color.silverSand.rawValue)
         return label
     }()
     
     private let activeLine: UILabel = {
         let label = UILabel()
-        label.backgroundColor = UIColor(red: 101/255, green: 52/255, blue: 255/255, alpha: 1)
+        label.backgroundColor = UIColor(named: Color.hanPurple.rawValue)
         return label
     }()
     
@@ -101,9 +101,9 @@ extension DepartmentSegmentedControl {
         segmentButtons.append(UIButton())
         guard let buttonSegment = segmentButtons.last else { return nil }
         buttonSegment.setTitle(item, for: .normal)
-        buttonSegment.backgroundColor = .white
-        buttonSegment.titleLabel?.font = UIFont(name: "Inter-Medium", size: 15) ?? UIFont.systemFont(ofSize: 15, weight: .medium)
-        buttonSegment.setTitleColor(UIColor(red: 151/255, green: 151/255, blue: 155/255, alpha: 1), for: .normal)
+        buttonSegment.backgroundColor = UIColor(named: Color.white.rawValue)
+        buttonSegment.titleLabel?.font = UIFont(name: Font.interMedium.rawValue, size: 15) ?? UIFont.systemFont(ofSize: 15, weight: .medium)
+        buttonSegment.setTitleColor(UIColor(named: Color.spanishGray.rawValue), for: .normal)
         return buttonSegment
     }
     
@@ -170,9 +170,9 @@ extension DepartmentSegmentedControl {
         activeLine.removeFromSuperview()
         
         for button in segmentButtons {
-            button.setTitleColor(UIColor(red: 151/255, green: 151/255, blue: 155/255, alpha: 1), for: .normal)
+            button.setTitleColor(UIColor(named: Color.spanishGray.rawValue), for: .normal)
         }
-        sender.setTitleColor(UIColor(red: 5/255, green: 5/255, blue: 16/255, alpha: 1), for: .normal)
+        sender.setTitleColor(UIColor(named: Color.richBlack.rawValue), for: .normal)
         makeConstraintsActiveLineForBotton(sender: sender)
     }
     

@@ -33,8 +33,8 @@ class CheckBox: UIButton {
     
     private func setup(title: String) {
         self.setTitle(title, for: .normal)
-        self.setTitleColor(UIColor(red: 5/255, green: 5/255, blue: 16/255, alpha: 1), for: .normal)
-        self.titleLabel?.font = UIFont(name: "Inter-Medium", size: 16) ?? UIFont.systemFont(ofSize: 16, weight: .medium)
+        self.setTitleColor(UIColor(named: Color.richBlack.rawValue), for: .normal)
+        self.titleLabel?.font = UIFont(name: Font.interMedium.rawValue, size: 16) ?? UIFont.systemFont(ofSize: 16, weight: .medium)
         self.setTitleInsets(imageTitlePadding: 14)
     }
 }

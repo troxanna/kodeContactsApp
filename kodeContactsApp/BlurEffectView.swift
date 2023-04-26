@@ -15,7 +15,7 @@ class BlurEffectView: UIVisualEffectView {
     override func didMoveToSuperview() {
         guard let superview = superview else { return }
         backgroundColor = UIColor(red: 0/255, green: 0/255, blue: 0/255, alpha: 0.6)
-        frame = superview.bounds //Or setup constraints instead
+        frame = superview.bounds 
         setupBlur()
     }
     

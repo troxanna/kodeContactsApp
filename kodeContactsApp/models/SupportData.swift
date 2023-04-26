@@ -21,11 +21,28 @@ enum SortedType: String {
     case birthday = "По дню рождения"
 }
 
-//enum Fonts {
-//    
-//}
+enum Font: String {
+    case interMedium = "Inter-Medium"
+    case interBold = "Inter-Bold"
+    case interRegular = "Inter-Regular"
+    case interSemiBold = "Inter-SemiBold"
+}
 
 enum AnimationType: String {
     case fill
     case spinner
+}
+
+enum Color: String {
+    case hanPurple
+    case cultured
+    case spanishGray
+    case richBlack
+    case white
+    case davysGrey
+    case silverSand
+    case antiFlashWhite
+    case lotion
+    case darkCharcoal
+    case black
 }

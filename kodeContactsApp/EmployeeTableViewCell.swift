@@ -12,46 +12,56 @@ class EmployeeTableViewCell: UITableViewCell {
     //MARK: Properties
     static let identifier = "EmployeeCell"
     
-    let mainTitleLabel: UILabel = {
+    private let mainTitleLabel: UILabel = {
         let label = UILabel()
         return label
     }()
 
-    let titleLabel: UILabel = {
+    private let titleLabel: UILabel = {
         let label = UILabel()
-        label.textColor = UIColor(red: 5/255, green: 5/255, blue: 6/255, alpha: 1)
-        label.font = UIFont(name: "Inter-Medium", size: 16) ?? UIFont.systemFont(ofSize: 16, weight: .medium)
+        label.textColor = UIColor(named: Color.richBlack.rawValue)
+        label.font = UIFont(name: Font.interMedium.rawValue, size: 16) ?? UIFont.systemFont(ofSize: 16, weight: .medium)
         return label
     }()
     
-    let descriptionLabel: UILabel = {
+    private let descriptionLabel: UILabel = {
         let label = UILabel()
-        label.textColor = UIColor(red: 85/255, green: 85/255, blue: 92/255, alpha: 1)
-        label.font = UIFont(name: "Inter-Regular", size: 13) ?? UIFont.systemFont(ofSize: 13, weight: .regular)
+        label.textColor = UIColor(named: Color.davysGrey.rawValue)
+        label.font = UIFont(name: Font.interRegular.rawValue, size: 13) ?? UIFont.systemFont(ofSize: 13, weight: .regular)
         return label
     }()
     
-    let userTagLabel: UILabel = {
+    private let userTagLabel: UILabel = {
         let label = UILabel()
-        label.textColor = UIColor(red: 151/255, green: 151/255, blue: 155/255, alpha: 1)
-        label.font = UIFont(name: "Inter-Medium", size: 14) ?? UIFont.systemFont(ofSize: 14, weight: .medium)
+        label.textColor = UIColor(named: Color.spanishGray.rawValue)
+        label.font = UIFont(name: Font.interMedium.rawValue, size: 14) ?? UIFont.systemFont(ofSize: 14, weight: .medium)
         return label
     }()
     
-    let avatarImage: UIImageView = {
+    private let avatarImageView: UIImageView = {
         let image = UIImageView()
         image.layer.cornerRadius = 36
         image.clipsToBounds = true
         return image
     }()
     
-    let userAgeLabel: UILabel = {
+    private let userAgeLabel: UILabel = {
         let label = UILabel()
-        label.textColor = UIColor(red: 85/255, green: 85/255, blue: 92/255, alpha: 1)
-        label.font = UIFont(name: "Inter-Regular", size: 15) ?? UIFont.systemFont(ofSize: 15, weight: .regular)
+        label.textColor = UIColor(named: Color.davysGrey.rawValue)
+        label.font = UIFont(name: Font.interRegular.rawValue, size: 15) ?? UIFont.systemFont(ofSize: 15, weight: .regular)
         label.isHidden = true
         return label
     }()
+    
+    var userAgeIsHidden: Bool = true {
+        didSet {
+            userAgeLabel.isHidden = userAgeIsHidden
+        }
+    }
+    
+    var avatarImage: UIImage {
+        return avatarImageView.image ?? UIImage(named: User.CodingKeys.avatarURL.rawValue)!
+    }
     
     //MARK: Init
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
@@ -72,7 +82,7 @@ class EmployeeTableViewCell: UITableViewCell {
     
     override func prepareForReuse() {
         super.prepareForReuse()
-        avatarImage.image = nil
+        avatarImageView.image = nil
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
@@ -85,7 +95,7 @@ class EmployeeTableViewCell: UITableViewCell {
 extension EmployeeTableViewCell {
     private func createEmployeeCell() {
         
-        avatarImage.snp.makeConstraints({ make in
+        avatarImageView.snp.makeConstraints({ make in
             make.size.equalTo(CGSize(width: 72, height: 72))
         })
         
@@ -106,7 +116,7 @@ extension EmployeeTableViewCell {
     }
     
     private func configurationConstraints() {
-        contentView.backgroundColor = .white
+        contentView.backgroundColor = UIColor(named: Color.white.rawValue)
 
         mainTitleLabel.addSubview(titleLabel)
         mainTitleLabel.addSubview(userTagLabel)
@@ -123,12 +133,12 @@ extension EmployeeTableViewCell {
             make.bottom.equalTo(mainTitleLabel.snp.bottom)
         })
 
-        contentView.addSubview(avatarImage)
+        contentView.addSubview(avatarImageView)
         contentView.addSubview(mainTitleLabel)
         contentView.addSubview(descriptionLabel)
         contentView.addSubview(userAgeLabel)
 
-        avatarImage.snp.makeConstraints({ make in
+        avatarImageView.snp.makeConstraints({ make in
             make.leading.equalTo(contentView.snp.leading).offset(16)
             make.centerY.equalTo(contentView)
         })
@@ -136,7 +146,7 @@ extension EmployeeTableViewCell {
         mainTitleLabel.snp.makeConstraints({ make in
             make.trailing.equalTo(contentView.snp.trailing).offset(16)
             make.top.equalTo(contentView.snp.top).offset(22)
-            make.leading.equalTo(avatarImage.snp.trailing).offset(16)
+            make.leading.equalTo(avatarImageView.snp.trailing).offset(16)
         })
         
         descriptionLabel.snp.makeConstraints({ make in
@@ -156,12 +166,12 @@ extension EmployeeTableViewCell {
             guard let imageUrl = URL(string: urlString),
                   let imageData = try? Data(contentsOf: imageUrl) else {
                       DispatchQueue.main.async {
-                          self.avatarImage.image = UIImage(named: User.CodingKeys.avatarURL.rawValue)
+                          self.avatarImageView.image = UIImage(named: User.CodingKeys.avatarURL.rawValue)
                       }
                       return
             }
             DispatchQueue.main.async {
-                self.avatarImage.image = UIImage(data: imageData)
+                self.avatarImageView.image = UIImage(data: imageData)
             }
         }
     }
@@ -179,10 +189,7 @@ extension EmployeeTableViewCell {
         userAgeLabel.text = formatter.getDateString(dateFormat: "d MMM", date: data.birthday)
         fetchAvatarImage(urlString: data.avatarURL)
     }
-    
-    func getAvatarImage() -> UIImage? {
-        return avatarImage.image
-    }
+
 }
 
 //MARK: Skeleton for cell
@@ -190,7 +197,7 @@ extension EmployeeTableViewCell {
     func configurationSkeletonShowForCell() {
         self.isSkeletonable = true
         contentView.isSkeletonable = true
-        avatarImage.isSkeletonable = true
+        avatarImageView.isSkeletonable = true
         mainTitleLabel.isSkeletonable = true
         descriptionLabel.isSkeletonable = true
         
@@ -198,7 +205,7 @@ extension EmployeeTableViewCell {
         mainTitleLabel.skeletonTextLineHeight = .fixed(16)
 
         mainTitleLabel.linesCornerRadius = 8
-        avatarImage.skeletonCornerRadius = 35
+        avatarImageView.skeletonCornerRadius = 35
         descriptionLabel.linesCornerRadius = 6
                 
         mainTitleLabel.skeletonPaddingInsets.right = 80

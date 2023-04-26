@@ -7,8 +7,12 @@
 
 import UIKit
 
-class SortedBottomSheetViewController: UIViewController {
+protocol CheckBoxControlDelegate: AnyObject {
+    func animateDismissView(isNeededSorting: Bool)
+}
 
+class SortedBottomSheetViewController: UIViewController, CheckBoxControlDelegate {
+    
     weak var delegate: SortedBottomSheetViewControllerDelegate?
     
     private let checkBoxControl: CheckBoxControl = {
@@ -23,7 +27,7 @@ class SortedBottomSheetViewController: UIViewController {
     
     private let line: UILabel = {
         let label = UILabel()
-        label.backgroundColor = UIColor(red: 195/255, green: 195/255, blue: 198/255, alpha: 1)
+        label.backgroundColor = UIColor(named: Color.silverSand.rawValue)
         label.layer.masksToBounds = true
         label.layer.cornerRadius = 2
         return label
@@ -31,8 +35,8 @@ class SortedBottomSheetViewController: UIViewController {
     
     private let titleLabel: UILabel = {
         let label = UILabel()
-        label.font = UIFont(name: "Inter-SemiBold", size: 20) ?? UIFont.systemFont(ofSize: 20, weight: .semibold)
-        label.textColor = UIColor(red: 5/255, green: 5/255, blue: 16/255, alpha: 1)
+        label.font = UIFont(name: Font.interSemiBold.rawValue, size: 20) ?? UIFont.systemFont(ofSize: 20, weight: .semibold)
+        label.textColor = UIColor(named: Color.richBlack.rawValue)
         label.text = "Сортировка"
         return label
     }()
@@ -46,7 +50,7 @@ class SortedBottomSheetViewController: UIViewController {
     
     lazy private var containerView: UIView = {
         let view = UIView()
-        view.backgroundColor = .white
+        view.backgroundColor = UIColor(named: Color.white.rawValue)
         view.layer.cornerRadius = 20
         view.clipsToBounds = true
         return view
@@ -57,7 +61,8 @@ class SortedBottomSheetViewController: UIViewController {
     
     lazy private var dimmedView: UIView = {
         let view = UIView()
-        view.backgroundColor = UIColor(red: 5/255, green: 5/255, blue: 16/255, alpha: maxDimmedAlpha)
+        view.backgroundColor = UIColor(named: Color.richBlack.rawValue)
+        view.alpha = maxDimmedAlpha
         return view
     }()
     
@@ -75,6 +80,7 @@ class SortedBottomSheetViewController: UIViewController {
         setupConstraints()
         configurationContent()
         setupPanGesture()
+        checkBoxControl.delegate = self
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -93,7 +99,28 @@ class SortedBottomSheetViewController: UIViewController {
     }
 }
 
-//MARK: override viewDidLoad
+//MARK: CheckBoxControlDelegate
+extension SortedBottomSheetViewController {
+    func animateDismissView(isNeededSorting: Bool) {
+        UIView.animate(withDuration: 0.3) {
+            self.containerViewBottomConstraint?.constant = self.maximumContainerHeight
+            self.view.layoutIfNeeded()
+        }
+        
+        dimmedView.alpha = maxDimmedAlpha
+        UIView.animate(withDuration: 0.4) {
+            self.dimmedView.alpha = 0
+        } completion: { _ in
+            if isNeededSorting == false {
+                self.dismiss(animated: false)
+            } else {
+                self.dismiss(animated: false, completion: {
+                    self.delegate?.sortedTableView(by: self.checkBoxControl.getActiveSortedType())
+                })
+            }
+        }
+    }
+}
 
 //MARK: animate functions
 private extension SortedBottomSheetViewController {
@@ -116,22 +143,6 @@ private extension SortedBottomSheetViewController {
         dimmedView.alpha = 0
         UIView.animate(withDuration: 0.4) {
             self.dimmedView.alpha = self.maxDimmedAlpha
-        }
-    }
-    
-    func animateDismissView() {
-        UIView.animate(withDuration: 0.3) {
-            self.containerViewBottomConstraint?.constant = self.maximumContainerHeight
-            self.view.layoutIfNeeded()
-        }
-        
-        dimmedView.alpha = maxDimmedAlpha
-        UIView.animate(withDuration: 0.4) {
-            self.dimmedView.alpha = 0
-        } completion: { _ in
-            self.dismiss(animated: false, completion: {
-                self.delegate?.sortedTableView(by: self.checkBoxControl.getActiveSortedType())
-            })
         }
     }
 }
@@ -239,7 +250,7 @@ private extension SortedBottomSheetViewController {
                 }
             case .ended:
                 if newHeight < dismissibleHeight {
-                    self.animateDismissView()
+                    self.animateDismissView(isNeededSorting: false)
                 }
                 else if newHeight < defaultHeight {
                     animateContainerHeight(defaultHeight)
@@ -262,10 +273,10 @@ private extension SortedBottomSheetViewController {
     }
     
     @objc func backAction() {
-        animateDismissView()
+        animateDismissView(isNeededSorting: false)
     }
     
     @objc func didDimmedViewTap() {
-        animateDismissView()
+        animateDismissView(isNeededSorting: false)
     }
 }

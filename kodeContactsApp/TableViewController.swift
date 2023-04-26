@@ -21,7 +21,7 @@ protocol SortedBottomSheetViewControllerDelegate: AnyObject {
     func sortedTableView(by sortedType: SortedType)
 }
 
-class ViewController: UIViewController, SkeletonTableViewDataSource {
+class TableViewController: UIViewController, SkeletonTableViewDataSource {
     
     //MARK: Private properties
     private var sortedType = SortedType.alphabetically
@@ -56,40 +56,38 @@ class ViewController: UIViewController, SkeletonTableViewDataSource {
     //MARK: Override functions
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+
         contentConfigurationView()
         createTableView()
         setupTableView()
         setupRefreshControl()
-        
     }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        navigationItem.titleView = searchBar
-        searchBar.delegate = self
-//        setupRefreshControl()
+        
+        setupNavigationBar()
     }
     
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
-        
         refreshView.animationCircular()
     }
-    
 }
 
 //MARK: UITableViewDelegate
-extension ViewController: UITableViewDelegate {
+extension TableViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if indexPath.section == 0 && indexPath.row == sortedEmployees[indexPath.section].count && sortedEmployees[1].count != 0 {
             return
         }
-        let cell: EmployeeTableViewCell? = tableView.cellForRow(at: indexPath) as? EmployeeTableViewCell
+        guard let cell = tableView.cellForRow(at: indexPath) as? EmployeeTableViewCell else {
+            return
+        }
+        
         let viewController = EmployeeInfoViewController()
         viewController.sendData(person: sortedEmployees[indexPath.section][indexPath.row])
-        let image = cell?.getAvatarImage()
-        viewController.sendImage(image: image)
+        viewController.sendImage(image: cell.avatarImage)
         navigationController?.pushViewController(viewController, animated: true)
         
         updateSearchBarEndEditing()
@@ -97,9 +95,8 @@ extension ViewController: UITableViewDelegate {
 }
 
 //MARK: UITableViewDataSource
-extension ViewController: UITableViewDataSource {
+extension TableViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        //employeesData.count == 0 -> Другой экран
         if section == 0 && sortedEmployees[1].count != 0 {
             return sortedEmployees[section].count + 1
         }
@@ -124,9 +121,9 @@ extension ViewController: UITableViewDataSource {
         
         cell.fullDataCell(data: employee)
         if sortedType == SortedType.birthday {
-            cell.userAgeLabel.isHidden = false
+            cell.userAgeIsHidden = false
         } else {
-            cell.userAgeLabel.isHidden = true
+            cell.userAgeIsHidden = true
         }
         cell.configurationSkeletonHideForCell()
         
@@ -135,8 +132,8 @@ extension ViewController: UITableViewDataSource {
 }
 
 //MARK: Private functions
-extension ViewController {
-    private func contentConfigurationTableView() {
+private extension TableViewController {
+    func contentConfigurationTableView() {
         tableView.rowHeight = 80
         tableView.estimatedRowHeight = 80
         tableView.separatorStyle = .none
@@ -144,11 +141,11 @@ extension ViewController {
         tableView.tableHeaderView = UIView(frame: CGRect(origin: CGPoint(x: 0, y: 0), size: CGSize(width: view.frame.width, height: 16)))
     }
     
-    private func contentConfigurationView() {
-        view.backgroundColor = UIColor(red: 255/255, green: 255/255, blue: 255/255, alpha: 1)
+    func contentConfigurationView() {
+        view.backgroundColor = UIColor(named: Color.white.rawValue)
     }
 
-    private func createTableView() {
+    func createTableView() {
         view.addSubview(tableView)
         view.addSubview(departmentSegmentedControll)
 
@@ -166,7 +163,7 @@ extension ViewController {
         departmentSegmentedControll.delegate = self
     }
     
-    private func setupTableView() {
+    func setupTableView() {
         contentConfigurationTableView()
         
         tableView.dataSource = self
@@ -174,11 +171,11 @@ extension ViewController {
         tableView.register(EmployeeTableViewCell.self, forCellReuseIdentifier: EmployeeTableViewCell.identifier)
         tableView.register(YearTableViewCell.self, forCellReuseIdentifier: YearTableViewCell.identifier)
         
-        self.skeletonShow()
-        self.updateDataTableView()
+        skeletonShow()
+        updateDataTableView()
     }
     
-    private func updateDataTableView() {
+    func updateDataTableView() {
         APIManager.shared.getUsers { [weak self] users in
             do {
                 let data = try users()
@@ -211,13 +208,20 @@ extension ViewController {
             }
         }
     }
+    
+    func setupNavigationBar() {
+        navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
+        navigationController?.navigationBar.shadowImage = UIImage()
+        navigationItem.titleView = searchBar
+        searchBar.delegate = self
+    }
 }
 
 //MARK: Skeleton for Table View
-extension ViewController {
+extension TableViewController {
     private func skeletonShow() {
         tableView.isSkeletonable = true
-        tableView.showAnimatedGradientSkeleton(usingGradient: SkeletonGradient.init(baseColor: UIColor(red: 243/255, green: 243/255, blue: 246/255, alpha: 1), secondaryColor: UIColor(red: 250/255, green: 250/255, blue: 250/255, alpha: 1)), animation: nil, transition: .crossDissolve(0.5))
+        tableView.showAnimatedGradientSkeleton(usingGradient: SkeletonGradient.init(baseColor: UIColor(named: Color.antiFlashWhite.rawValue)!, secondaryColor: UIColor(named: Color.lotion.rawValue)!), animation: nil, transition: .crossDissolve(0.5))
     }
     
     private func skeletonHide() {
@@ -227,7 +231,7 @@ extension ViewController {
 }
 
 //MARK: Handler error
-extension ViewController {
+extension TableViewController {
     private func showError(screenError: ScreenError) {
         errorView?.removeFromSuperview()
         errorView = screenError.errorView
@@ -253,9 +257,8 @@ extension ViewController {
 }
 
 //MARK: ErrorViewDelegate
-extension ViewController: ErrorViewDelegate {
+extension TableViewController: ErrorViewDelegate {
     func buttonRepeatRequestPressed() {
-        headerPreferError = false
         navigationController?.isNavigationBarHidden = false
         createTableView()
         updateDataTableView()
@@ -263,7 +266,7 @@ extension ViewController: ErrorViewDelegate {
 }
 
 //MARK: DepartmentSegmentedControlDelegate
-extension ViewController: DepartmentSegmentedControlDelegate {
+extension TableViewController: DepartmentSegmentedControlDelegate {
     func buttonSegmentPressed(department: String) {
         handlerFilteredEmployees(for: department)
         if let searchText = searchBar.searchTextField.text {
@@ -306,7 +309,7 @@ extension ViewController: DepartmentSegmentedControlDelegate {
 }
 
 //MARK: UISearchBarDelegate
-extension ViewController: UISearchBarDelegate {
+extension TableViewController: UISearchBarDelegate {
     func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {
         updateSearchBarForBeginEditing()
     }
@@ -333,7 +336,6 @@ extension ViewController: UISearchBarDelegate {
             }
         }
         updateSearchBarEndEditing()
-        
     }
     
     func searchBarBookmarkButtonClicked(_ searchBar: UISearchBar) {
@@ -373,8 +375,6 @@ extension ViewController: UISearchBarDelegate {
     
     private func searchEmployees(searchText: String) throws {
         if filteredEmployees[0].isEmpty && filteredEmployees[1].isEmpty {
-//            searchEmployees[0] = []
-//            searchEmployees[1] = []
             throw AppError.emptyDataError
         }
         logicSearch(for: 0, searchText: searchText)
@@ -411,7 +411,7 @@ extension ViewController: UISearchBarDelegate {
 }
 
 //MARK: SortedBottomSheetViewControllerDelegate
-extension ViewController: SortedBottomSheetViewControllerDelegate {
+extension TableViewController: SortedBottomSheetViewControllerDelegate {
     func sortedTableView(by selectedSortedType: SortedType) {
         
         if selectedSortedType == SortedType.birthday && sortedType != SortedType.birthday {
@@ -453,8 +453,7 @@ extension ViewController: SortedBottomSheetViewControllerDelegate {
 }
 
 //MARK: Refresh Controll
-extension ViewController {
-    
+extension TableViewController {
     private func setupRefreshControl() {
         tableView.refreshControl = UIRefreshControl()
         tableView.refreshControl!.tintColor = .clear
@@ -481,6 +480,7 @@ extension ViewController {
             self.searchBar.endEditing(true)
             self.updateDataTableView()
             self.refreshView.stopAnimation(for: AnimationType.spinner.rawValue)
+            self.refreshView.stopAnimation(for: AnimationType.fill.rawValue)
             self.tableView.refreshControl?.endRefreshing()
         }
     }
@@ -531,7 +531,5 @@ extension ViewController {
             isRefreshAnimating = true
         }
     }
-    
-    
 }
 

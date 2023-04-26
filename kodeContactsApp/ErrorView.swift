@@ -14,23 +14,23 @@ class ErrorView: UIView {
     
     private let titleErrorLabel: UILabel = {
         let label = UILabel()
-        label.textColor = UIColor(red: 5/255, green: 5/255, blue: 16/255, alpha: 1)
-        label.font = UIFont(name: "Inter-SemiBold", size: 17) ?? UIFont.systemFont(ofSize: 17, weight: .semibold)
+        label.textColor = UIColor(named: Color.richBlack.rawValue)
+        label.font = UIFont(name: Font.interSemiBold.rawValue, size: 17) ?? UIFont.systemFont(ofSize: 17, weight: .semibold)
         return label
     }()
     
     private let messageErrorLabel: UILabel = {
         let label = UILabel()
-        label.textColor = UIColor(red: 151/255, green: 151/255, blue: 155/255, alpha: 1)
-        label.font = UIFont(name: "Inter-Regular", size: 16) ?? UIFont.systemFont(ofSize: 16, weight: .regular)
+        label.textColor = UIColor(named: Color.spanishGray.rawValue)
+        label.font = UIFont(name: Font.interRegular.rawValue, size: 16) ?? UIFont.systemFont(ofSize: 16, weight: .regular)
         return label
     }()
     
     private let buttonRepeatRequest: UIButton = {
         let button = UIButton()
-        button.backgroundColor = .white
-        button.setTitleColor(UIColor(red: 101/255, green: 52/255, blue: 255/255, alpha: 1), for: .normal)
-        button.titleLabel?.font = UIFont(name: "Inter-SemiBold", size: 16) ?? UIFont.systemFont(ofSize: 16, weight: .semibold)
+        button.backgroundColor = UIColor(named: Color.white.rawValue)
+        button.setTitleColor(UIColor(named: Color.hanPurple.rawValue), for: .normal)
+        button.titleLabel?.font = UIFont(name: Font.interSemiBold.rawValue, size: 16) ?? UIFont.systemFont(ofSize: 16, weight: .semibold)
         
         button.addTarget(self, action: #selector(buttonRepeatRequestPressed), for: .touchUpInside)
         return button

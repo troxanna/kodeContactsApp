@@ -15,7 +15,7 @@ class CircularProgressView: UIView {
     override init(frame: CGRect) {
         super.init(frame: .zero)
         
-        self.backgroundColor = .white
+        self.backgroundColor = UIColor(named: Color.white.rawValue)
         self.layer.cornerRadius = 10
         self.clipsToBounds = true
         
@@ -41,7 +41,7 @@ extension CircularProgressView {
         
         trackLayer.path = circularPath.cgPath
         trackLayer.fillColor = .none
-        trackLayer.strokeColor = UIColor(red: 247/255, green: 247/255, blue: 248/255, alpha: 1).cgColor
+        trackLayer.strokeColor = UIColor(named: Color.cultured.rawValue)?.cgColor
         trackLayer.lineWidth = 2
         trackLayer.strokeEnd = 1
         layer.addSublayer(trackLayer)
@@ -51,7 +51,7 @@ extension CircularProgressView {
         progressLayer.fillColor = .none
         progressLayer.strokeEnd = 0
         progressLayer.lineCap = .round
-        progressLayer.strokeColor = UIColor(red: 101/255, green: 52/255, blue: 255/255, alpha: 1).cgColor
+        progressLayer.strokeColor = UIColor(named: Color.hanPurple.rawValue)?.cgColor
         layer.addSublayer(progressLayer)
     }
     

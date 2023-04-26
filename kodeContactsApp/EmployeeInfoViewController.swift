@@ -8,27 +8,32 @@
 import UIKit
 import SnapKit
 
-class EmployeeInfoViewController: UIViewController  {
+protocol DataSendable {
+    func sendData(person: User)
+    func sendImage(image: UIImage)
+}
+
+class EmployeeInfoViewController: UIViewController, DataSendable  {
     //MARK: Private properties
     private var person: User!
     private let nameLabel: UILabel = {
         let label = UILabel()
-        label.font = UIFont(name: "Inter-Bold", size: 24) ?? UIFont.systemFont(ofSize: 24, weight: .bold)
-        label.textColor = UIColor(red: 5/255, green: 5/255, blue: 16/255, alpha: 1)
+        label.font = UIFont(name: Font.interBold.rawValue, size: 24) ?? UIFont.systemFont(ofSize: 24, weight: .bold)
+        label.textColor = UIColor(named: Color.richBlack.rawValue)
         return label
     }()
     
     private let userTag: UILabel = {
         let label = UILabel()
-        label.font = UIFont(name: "Inter-Regular", size: 17) ?? UIFont.systemFont(ofSize: 17, weight: .regular)
-        label.textColor = UIColor(red: 151/255, green: 151/255, blue: 155/255, alpha: 1)
+        label.font = UIFont(name: Font.interRegular.rawValue, size: 17) ?? UIFont.systemFont(ofSize: 17, weight: .regular)
+        label.textColor = UIColor(named: Color.spanishGray.rawValue)
         return label
     }()
     
     private let position: UILabel = {
         let label = UILabel()
-        label.font = UIFont(name: "Inter-Regular", size: 13) ?? UIFont.systemFont(ofSize: 13, weight: .regular)
-        label.textColor = UIColor(red: 85/255, green: 85/255, blue: 92/255, alpha: 1)
+        label.font = UIFont(name: Font.interRegular.rawValue, size: 13) ?? UIFont.systemFont(ofSize: 13, weight: .regular)
+        label.textColor = UIColor(named: Color.davysGrey.rawValue)
         return label
     }()
     
@@ -41,42 +46,42 @@ class EmployeeInfoViewController: UIViewController  {
 
     private let dateBirthDay: UILabel = {
         let label = UILabel()
-        label.font = UIFont(name: "Inter-Medium", size: 16) ?? UIFont.systemFont(ofSize: 16, weight: .medium)
-        label.textColor = UIColor(red: 5/255, green: 5/255, blue: 16/255, alpha: 1)
+        label.font = UIFont(name: Font.interMedium.rawValue, size: 16) ?? UIFont.systemFont(ofSize: 16, weight: .medium)
+        label.textColor = UIColor(named: Color.richBlack.rawValue)
         return label
     }()
     
     private let age: UILabel = {
         let label = UILabel()
-        label.font = UIFont(name: "Inter-Medium", size: 16) ?? UIFont.systemFont(ofSize: 16, weight: .medium)
-        label.textColor = UIColor(red: 151/255, green: 151/255, blue: 155/255, alpha: 1)
+        label.font = UIFont(name: Font.interMedium.rawValue, size: 16) ?? UIFont.systemFont(ofSize: 16, weight: .medium)
+        label.textColor = UIColor(named: Color.spanishGray.rawValue)
         return label
     }()
     
     private let numberPhone: UIButton = {
         let button = UIButton()
         button.setImage(UIImage(named: Icons.phone.rawValue), for: .normal)
-        button.backgroundColor = .white
-        button.titleLabel?.font = UIFont(name: "Inter-Medium", size: 16) ?? UIFont.systemFont(ofSize: 16, weight: .medium)
-        button.setTitleColor(UIColor(red: 5/255, green: 5/255, blue: 16/255, alpha: 1), for: .normal)
+        button.backgroundColor = UIColor(named: Color.white.rawValue)
+        button.titleLabel?.font = UIFont(name: Font.interMedium.rawValue, size: 16) ?? UIFont.systemFont(ofSize: 16, weight: .medium)
+        button.setTitleColor(UIColor(named: Color.richBlack.rawValue), for: .normal)
         return button
     }()
     
     private let employeeInfoView: UIView = {
         let view = UIView()
-        view.backgroundColor = UIColor(red: 247/255, green: 247/255, blue: 248/255, alpha: 1)
+        view.backgroundColor = UIColor(named: Color.cultured.rawValue)
         return view
     }()
     
     private let employeeDetailsInfoView: UIView = {
         let view = UIView()
-        view.backgroundColor = .white
+        view.backgroundColor = UIColor(named: Color.white.rawValue)
         return view
     }()
     
     private let line: UILabel = {
         let label = UILabel()
-        label.backgroundColor = UIColor(red: 247/255, green: 247/255, blue: 248/255, alpha: 1)
+        label.backgroundColor = UIColor(named: Color.cultured.rawValue)
         return label
     }()
     
@@ -96,21 +101,29 @@ class EmployeeInfoViewController: UIViewController  {
     //MARK: Override functions
     override func viewDidLoad() {
         super.viewDidLoad()
+        configurationGestureRecognizer()
         contentConfigurationNavigationBar()
         configurationEmployeeInfoView()
         configurationEmployeeDetailsInfoView()
         fullData()
     }
     
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-//        navigationItem.titleView = nil
-    }
-    
 }
 
 //MARK: Private functions
 extension EmployeeInfoViewController {
+    //MARK: UISwipeGestureRecognizer
+    @objc func handlerSwipe(sender: UISwipeGestureRecognizer) {
+        backAction()
+    }
+    
+    private func configurationGestureRecognizer() {
+        let swipeGestureRecognizer = UISwipeGestureRecognizer()
+        swipeGestureRecognizer.direction = .right
+        swipeGestureRecognizer.addTarget(self, action: #selector(self.handlerSwipe(sender:)))
+        view.addGestureRecognizer(swipeGestureRecognizer)
+    }
+    
     //MARK: NavigationBar
     private func contentConfigurationNavigationBar() {
         let backButtonItem = UIBarButtonItem(image: UIImage(named: Icons.arrowBack.rawValue), style: .done, target: nil, action: nil)
@@ -250,7 +263,7 @@ extension EmployeeInfoViewController {
         userTag.text = person.userTag.lowercased()
         position.text = person.position
         dateBirthDay.text = formatter.getDateString(dateFormat: "d MMMM y", date: person.birthday)
-        age.text = "\(tmpYear.0) \(tmpYear.1) "
+        age.text = "\(tmpYear.0) \(tmpYear.1)"
         numberPhone.setTitle(formatPhoneNumber(number: person.phone), for: .normal)
     }
 
@@ -263,19 +276,17 @@ extension EmployeeInfoViewController {
         
         if let someDate = date {
             let year = calendar.dateComponents([.year], from: someDate, to: currentDate).year ?? 0
-            if year < 10 {
-                if year < 5 {
-                    return (year, "года")
-                }
+            switch year {
+            case 5...20:
+                return (year, "лет")
+            case let year where year % 10 == 1:
+                return (year, "год")
+            case let year where year % 10 < 5 && year % 10 != 0:
+                return (year, "года")
+            default:
+                return (year, "лет")
             }
-            else {
-                if year % 10 < 5 {
-                    return (year, "года")
-                }
-            }
-            return (year, "лет")
         }
-        //Обработать исключение
         return (0, "")
     }
     
@@ -311,17 +322,15 @@ extension EmployeeInfoViewController {
     }
 }
 
-//MARK: Public functions
+//MARK: DataSendable
 extension EmployeeInfoViewController {
     func sendData(person: User) {
         self.person = person
     }
     
-    func sendImage(image: UIImage?) {
+    func sendImage(image: UIImage) {
         avatarImage.image = image
     }
-    
-    
 }
 
 //MARK: Action sheet
@@ -343,7 +352,7 @@ extension EmployeeInfoViewController {
     }
 
     private func contentConfigurationNumberPhoneAlert(actionSheet: UIAlertController) {
-        actionSheet.view.tintColor = UIColor(red: 50/255, green: 50/255, blue: 50/255, alpha: 1)
+        actionSheet.view.tintColor = UIColor(named: Color.darkCharcoal.rawValue)
         actionSheet.view.layer.cornerRadius = 13
 
     }

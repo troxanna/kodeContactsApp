@@ -7,7 +7,11 @@
 
 import UIKit
 
+
+
 class CheckBoxControl: UIView {
+    
+    weak var delegate: CheckBoxControlDelegate?
     
     private let buttonAlpha: CheckBox = {
         let button = CheckBox(title: SortedType.alphabetically.rawValue)
@@ -56,17 +60,6 @@ private extension CheckBoxControl {
             make.left.equalTo(self.snp.left)
         })
     }
-    
-    @objc func buttonClickedSelected(sender: CheckBox) {
-        if sender == buttonAlpha && buttonAlpha.isChecked == false {
-            buttonAlpha.isChecked = true
-            buttonBirthday.isChecked = false
-        }
-        else if sender == buttonBirthday && buttonBirthday.isChecked == false {
-            buttonBirthday.isChecked = true
-            buttonAlpha.isChecked = false
-        }
-    }
 }
 
 //MARK: public functions
@@ -86,5 +79,17 @@ extension CheckBoxControl {
             buttonBirthday.isChecked = true
             buttonAlpha.isChecked = false
         }
+    }
+    
+    @objc func buttonClickedSelected(sender: CheckBox) {
+        if sender == buttonAlpha && buttonAlpha.isChecked == false {
+            buttonAlpha.isChecked = true
+            buttonBirthday.isChecked = false
+        }
+        else if sender == buttonBirthday && buttonBirthday.isChecked == false {
+            buttonBirthday.isChecked = true
+            buttonAlpha.isChecked = false
+        }
+        delegate?.animateDismissView(isNeededSorting: true)
     }
 }

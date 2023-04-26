@@ -22,8 +22,9 @@ class SearchBar: UISearchBar {
 private extension SearchBar {
     func setup() {
         translatesAutoresizingMaskIntoConstraints = false
+        returnKeyType = .default
+        backgroundColor = UIColor(named: Color.white.rawValue)
         
-        self.returnKeyType = .default
         
         setRightImage(imageName: Icons.sortInactive.rawValue, offset: UIOffset(horizontal: -8, vertical: 0))
         setLeftImage(imageName: Icons.search.rawValue, offset: UIOffset(horizontal: 8, vertical: 0))
@@ -55,7 +56,7 @@ private extension SearchBar {
     }
     
     func configurationText(offset: UIOffset) {
-        searchTextField.backgroundColor = UIColor(red: 247/255, green: 247/255, blue: 248/255, alpha: 1)
+        searchTextField.backgroundColor = UIColor(named: Color.cultured.rawValue)
         searchTextField.layer.cornerRadius = 16
         searchTextField.clipsToBounds = true
         searchTextPositionAdjustment = offset
@@ -66,22 +67,22 @@ private extension SearchBar {
     
     func configurationPlaceholder() {
         let attributes: [NSAttributedString.Key: Any] = [
-            .foregroundColor: UIColor(red: 195/255, green: 195/255, blue: 198/255, alpha: 1),
-            .font: UIFont(name: "Inter-Medium", size: 15) ?? UIFont.systemFont(ofSize: 15, weight: .medium)
+            .foregroundColor: UIColor(named: Color.silverSand.rawValue),
+            .font: UIFont(name: Font.interMedium.rawValue, size: 15) ?? UIFont.systemFont(ofSize: 15, weight: .medium)
         ]
         searchTextField.attributedPlaceholder = NSAttributedString(string: SearchTextFieldData.placeholder.rawValue, attributes: attributes)
     }
     
     func configurationInputText() {
-        searchTextField.tintColor = UIColor(red: 101/255, green: 52/255, blue: 255/255, alpha: 1)
-        searchTextField.font = UIFont(name: "Inter-Medium", size: 15) ?? UIFont.systemFont(ofSize: 15, weight: .medium)
-        searchTextField.textColor = UIColor(red: 5/255, green: 5/255, blue: 16/255, alpha: 1)
+        searchTextField.tintColor = UIColor(named: Color.hanPurple.rawValue)
+        searchTextField.font = UIFont(name: Font.interMedium.rawValue, size: 15) ?? UIFont.systemFont(ofSize: 15, weight: .medium)
+        searchTextField.textColor = UIColor(named: Color.richBlack.rawValue)
     }
     
     func configurationCancelPutton() {
         let attributes:[NSAttributedString.Key: Any] = [
-            .foregroundColor: UIColor(red: 101/255, green: 52/255, blue: 255/255, alpha: 1),
-            .font: UIFont(name: "Inter-Semibold", size: 14) ?? UIFont.systemFont(ofSize: 14, weight: .semibold)
+            .foregroundColor: UIColor(named: Color.hanPurple.rawValue),
+            .font: UIFont(name: Font.interSemiBold.rawValue, size: 14) ?? UIFont.systemFont(ofSize: 14, weight: .semibold)
         ]
         UIBarButtonItem.appearance(whenContainedInInstancesOf: [UISearchBar.self]).setTitleTextAttributes(attributes, for: .normal)
         UIBarButtonItem.appearance(whenContainedInInstancesOf: [UISearchBar.self]).title = SearchTextFieldData.cancelButtonTitle.rawValue

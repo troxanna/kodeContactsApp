@@ -13,14 +13,14 @@ class YearTableViewCell: UITableViewCell {
     
     private let titleLabel: UILabel = {
         let label = UILabel()
-        label.textColor = UIColor(red: 195/255, green: 195/255, blue: 198/255, alpha: 1)
-        label.font = UIFont(name: "Inter-Medium", size: 15) ?? UIFont.systemFont(ofSize: 15, weight: .medium)
+        label.textColor = UIColor(named: Color.silverSand.rawValue)
+        label.font = UIFont(name: Font.interMedium.rawValue, size: 15) ?? UIFont.systemFont(ofSize: 15, weight: .medium)
         return label
     }()
     
     private let leftLine: UILabel = {
         let label = UILabel()
-        label.backgroundColor = UIColor(red: 195/255, green: 195/255, blue: 198/255, alpha: 1)
+        label.backgroundColor = UIColor(named: Color.silverSand.rawValue)
         label.layer.masksToBounds = true
         label.layer.cornerRadius = 0.5
         return label
@@ -28,7 +28,7 @@ class YearTableViewCell: UITableViewCell {
     
     private let rightLine: UILabel = {
         let label = UILabel()
-        label.backgroundColor = UIColor(red: 195/255, green: 195/255, blue: 198/255, alpha: 1)
+        label.backgroundColor = UIColor(named: Color.silverSand.rawValue)
         label.layer.masksToBounds = true
         label.layer.cornerRadius = 0.5
         return label
@@ -41,8 +41,6 @@ class YearTableViewCell: UITableViewCell {
 
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
-//        self.isSelected = false
-        // Configure the view for the selected state
     }
     
     //MARK: Init

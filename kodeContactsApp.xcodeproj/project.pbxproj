@@ -28,11 +28,10 @@
 		9E92BDE229BDD6DC0045F88E /* SupportData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E92BDE129BDD6DC0045F88E /* SupportData.swift */; };
 		9E9FA8B429B8C77C0057EBB2 /* ErrorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E9FA8B329B8C77C0057EBB2 /* ErrorView.swift */; };
 		9E9FA8B629B8C90F0057EBB2 /* Error.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E9FA8B529B8C90F0057EBB2 /* Error.swift */; };
-		9E9FA8BA29B93B1E0057EBB2 /* Сonstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E9FA8B929B93B1E0057EBB2 /* Сonstants.swift */; };
 		9EE4C17C29E70D40004153BA /* CircularProgressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EE4C17B29E70D40004153BA /* CircularProgressView.swift */; };
 		9EFB859D299BAC4100E2B6CA /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EFB859C299BAC4100E2B6CA /* AppDelegate.swift */; };
 		9EFB859F299BAC4100E2B6CA /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EFB859E299BAC4100E2B6CA /* SceneDelegate.swift */; };
-		9EFB85A1299BAC4100E2B6CA /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EFB85A0299BAC4100E2B6CA /* ViewController.swift */; };
+		9EFB85A1299BAC4100E2B6CA /* TableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EFB85A0299BAC4100E2B6CA /* TableViewController.swift */; };
 		9EFB85A4299BAC4100E2B6CA /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9EFB85A2299BAC4100E2B6CA /* Main.storyboard */; };
 		9EFB85A6299BAC4500E2B6CA /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9EFB85A5299BAC4500E2B6CA /* Assets.xcassets */; };
 		9EFB85A9299BAC4500E2B6CA /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9EFB85A7299BAC4500E2B6CA /* LaunchScreen.storyboard */; };
@@ -86,11 +85,10 @@
 		9E92BDE129BDD6DC0045F88E /* SupportData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SupportData.swift; sourceTree = "<group>"; };
 		9E9FA8B329B8C77C0057EBB2 /* ErrorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorView.swift; sourceTree = "<group>"; };
 		9E9FA8B529B8C90F0057EBB2 /* Error.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Error.swift; sourceTree = "<group>"; };
-		9E9FA8B929B93B1E0057EBB2 /* Сonstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Сonstants.swift"; sourceTree = "<group>"; };
 		9EE4C17B29E70D40004153BA /* CircularProgressView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CircularProgressView.swift; sourceTree = "<group>"; };
 		9EFB859C299BAC4100E2B6CA /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		9EFB859E299BAC4100E2B6CA /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		9EFB85A0299BAC4100E2B6CA /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		9EFB85A0299BAC4100E2B6CA /* TableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewController.swift; sourceTree = "<group>"; };
 		9EFB85A3299BAC4100E2B6CA /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		9EFB85A5299BAC4500E2B6CA /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		9EFB85A8299BAC4500E2B6CA /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -192,7 +190,6 @@
 			isa = PBXGroup;
 			children = (
 				9E9FA87229B5CCF60057EBB2 /* models */,
-				9E9FA8B929B93B1E0057EBB2 /* Сonstants.swift */,
 				9E9FA87029B5CCDD0057EBB2 /* API */,
 				9E12CEA629B23BD9000771F8 /* fonts */,
 				9E12CEB729B24C98000771F8 /* BlurEffectView.swift */,
@@ -203,7 +200,7 @@
 				9E9FA8B329B8C77C0057EBB2 /* ErrorView.swift */,
 				9EFB859C299BAC4100E2B6CA /* AppDelegate.swift */,
 				9EFB859E299BAC4100E2B6CA /* SceneDelegate.swift */,
-				9EFB85A0299BAC4100E2B6CA /* ViewController.swift */,
+				9EFB85A0299BAC4100E2B6CA /* TableViewController.swift */,
 				9E92BDDF29BCBBAC0045F88E /* SearchBar.swift */,
 				9EFB85A2299BAC4100E2B6CA /* Main.storyboard */,
 				9EFB85A5299BAC4500E2B6CA /* Assets.xcassets */,
@@ -432,8 +429,7 @@
 				9E9FA8B629B8C90F0057EBB2 /* Error.swift in Sources */,
 				9E12337029DAF5DE00FF3E14 /* SortedBottomSheetViewController.swift in Sources */,
 				9E12CEA529B23BD0000771F8 /* EmployeeInfoViewController.swift in Sources */,
-				9EFB85A1299BAC4100E2B6CA /* ViewController.swift in Sources */,
-				9E9FA8BA29B93B1E0057EBB2 /* Сonstants.swift in Sources */,
+				9EFB85A1299BAC4100E2B6CA /* TableViewController.swift in Sources */,
 				9EFB859D299BAC4100E2B6CA /* AppDelegate.swift in Sources */,
 				9EE4C17C29E70D40004153BA /* CircularProgressView.swift in Sources */,
 				9E92BDE229BDD6DC0045F88E /* SupportData.swift in Sources */,

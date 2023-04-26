@@ -53,9 +53,8 @@ enum ApiType {
 class APIManager {
     static let shared = APIManager()
     
-    
     func getUsers(completion: @escaping (_: () throws -> [User]) -> ())  {
-        var request = ApiType.getUsers.request
+        let request = ApiType.getUsers.request
         URLSession.shared.dataTask(with: request) { data, response, error in
             completion({
                 if error != nil {

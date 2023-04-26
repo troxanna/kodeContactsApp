@@ -12,7 +12,10 @@ extension DateFormatter {
         self.dateFormat = "yyyy-MM-dd"
         let dateString = self.date(from: date)
         self.dateFormat = dateFormat
-        let date = self.string(from: dateString!)
+        guard let dateStringFormat = dateString else {
+            return ""
+        }
+        let date = self.string(from: dateStringFormat)
         return date
     }
     
