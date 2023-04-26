@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Bucket
+   uuid = "388685B3-AD65-4648-B7E5-A2E0214D2F74"
+   type = "0"
+   version = "2.0">
+   <Breakpoints>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "1D92210A-D049-43F9-8A76-A5FAD5CE8B2B"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "kodeContactsApp/ViewController.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "152"
+            endingLineNumber = "152"
+            landmarkName = "createTableView()"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "0A3C4E15-61E8-48AA-8146-B3AD56BEC87D"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "kodeContactsApp/ViewController.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "295"
+            endingLineNumber = "295"
+            landmarkName = "filteredEmployees(for:)"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "0A3C4E15-61E8-48AA-8146-B3AD56BEC87D - 6f8becc8867dd57"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "kodeContactsApp.ViewController.filteredEmployees(for: Swift.String) throws -&gt; ()"
+                  moduleName = "kodeContactsApp"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/anevodchikova/Desktop/development/swift/projects/kodeContactsApp/kodeContactsApp/ViewController.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "260"
+                  endingLineNumber = "260"
+                  offsetFromSymbolStart = "464">
+               </Location>
+               <Location
+                  uuid = "0A3C4E15-61E8-48AA-8146-B3AD56BEC87D - 9073dfb48c6d87f9"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 (kodeContactsApp.User) -&gt; Swift.Bool in kodeContactsApp.ViewController.filteredEmployees(for: Swift.String) throws -&gt; ()"
+                  moduleName = "kodeContactsApp"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/anevodchikova/Desktop/development/swift/projects/kodeContactsApp/kodeContactsApp/ViewController.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "260"
+                  endingLineNumber = "260"
+                  offsetFromSymbolStart = "79">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+   </Breakpoints>
+</Bucket>
