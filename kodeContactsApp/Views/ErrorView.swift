@@ -92,7 +92,6 @@ extension ErrorView {
     
     
     @objc private func buttonRepeatRequestPressed() {
-        //после подключения API вызвать запрос списка контактов тут
         self.removeFromSuperview()
         self.delegate?.buttonRepeatRequestPressed()
     }

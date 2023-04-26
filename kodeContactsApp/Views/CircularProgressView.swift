@@ -63,6 +63,7 @@ extension CircularProgressView {
         basicAnimation.repeatCount = .infinity
         basicAnimation.fillMode = .forwards
         basicAnimation.isRemovedOnCompletion = false
+        
         progressLayer.add(basicAnimation, forKey: AnimationType.spinner.rawValue)
     }
     
