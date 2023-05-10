@@ -9,7 +9,7 @@ import Foundation
 
 extension DateFormatter {
     func getDateString(dateFormat: String, date: String) -> (String) {
-        self.dateFormat = "yyyy-MM-dd"
+        self.dateFormat = DateFormat.api.rawValue
         let dateString = self.date(from: date)
         self.dateFormat = dateFormat
         guard let dateStringFormat = dateString else {
@@ -20,7 +20,7 @@ extension DateFormatter {
     }
     
     func getMonth(date: String) -> Int {
-        self.dateFormat = "yyyy-MM-dd"
+        self.dateFormat = DateFormat.api.rawValue
         let date = self.date(from: date)
         if let month = date?.monthInt {
             return month
@@ -29,7 +29,7 @@ extension DateFormatter {
     }
     
     func getCurrentMonth(date: String) -> Int {
-        self.dateFormat = "yyyy-MM-dd"
+        self.dateFormat = DateFormat.api.rawValue
         let date = self.date(from: date)
         if let month = date?.monthInt {
             return month
@@ -38,7 +38,7 @@ extension DateFormatter {
     }
     
     func getDay(date: String) -> Int {
-        self.dateFormat = "yyyy-MM-dd"
+        self.dateFormat = DateFormat.api.rawValue
         let date = self.date(from: date)
         if let day = date?.dayInt {
             return day
@@ -47,7 +47,7 @@ extension DateFormatter {
     }
     
     func getCurrentDay(date: String) -> Int {
-        self.dateFormat = "yyyy-MM-dd"
+        self.dateFormat = DateFormat.api.rawValue
         let date = self.date(from: date)
         if let day = date?.dayInt {
             return day

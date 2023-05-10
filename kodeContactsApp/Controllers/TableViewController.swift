@@ -73,6 +73,10 @@ class TableViewController: UIViewController, SkeletonTableViewDataSource {
         super.viewDidLayoutSubviews()
         refreshView.animationCircular()
     }
+    
+    override var preferredStatusBarStyle : UIStatusBarStyle {
+        return .darkContent
+    }
 }
 
 //MARK: UITableViewDelegate
@@ -176,34 +180,38 @@ private extension TableViewController {
     }
     
     func updateDataTableView() {
-        APIManager.shared.getUsers { [weak self] users in
-            do {
-                let data = try users()
-                DispatchQueue.main.async {
-                    guard let self = self else { return }
-                    self.employees[0] = data
-                    self.sortedEmployees[0] = data
-                    self.filteredEmployees[0] = data
-                    self.handlerFilteredEmployees(for: self.departmentSegmentedControll.currentActiveSegment)
-                    self.searchEmployees[0] = []
-                    self.searchEmployees[1] = []
-                    if let searchText = self.searchBar.searchTextField.text {
-                        if searchText != "" {
-                            self.handlerSearch(searchText: searchText)
+        if currentReachabilityStatus == .notReachable {
+            handlerErrorInternetConnection()
+        } else {
+            APIManager.shared.getUsers { [weak self] users in
+                do {
+                    let data = try users()
+                    DispatchQueue.main.async {
+                        guard let self = self else { return }
+                        self.employees[0] = data
+                        self.sortedEmployees[0] = data
+                        self.filteredEmployees[0] = data
+                        self.handlerFilteredEmployees(for: self.departmentSegmentedControll.currentActiveSegment)
+                        self.searchEmployees[0] = []
+                        self.searchEmployees[1] = []
+                        if let searchText = self.searchBar.searchTextField.text {
+                            if searchText != "" {
+                                self.handlerSearch(searchText: searchText)
+                            }
                         }
+                        self.tableView.reloadData()
+                        self.skeletonHide()
                     }
-                    self.tableView.reloadData()
-                    self.skeletonHide()
                 }
-            }
-            catch AppError.emptyDataError {
-                DispatchQueue.main.async {
-                    self?.showError(screenError: .searchError)
+                catch AppError.emptyDataError {
+                    DispatchQueue.main.async {
+                        self?.showError(screenError: .searchError)
+                    }
                 }
-            }
-            catch {
-                DispatchQueue.main.async {
-                    self?.showError(screenError: .criticalError)
+                catch {
+                    DispatchQueue.main.async {
+                        self?.showError(screenError: .criticalError)
+                    }
                 }
             }
         }
@@ -292,6 +300,9 @@ extension TableViewController: DepartmentSegmentedControlDelegate {
     }
     
     func filteredEmployees(for department: String) throws {
+        if employees[0].isEmpty && employees[1].isEmpty {
+            return
+        }
         if department == Departaments.all.value {
             filteredEmployees[0] = employees[0]
         } else {
@@ -376,6 +387,7 @@ extension TableViewController: UISearchBarDelegate {
     private func searchEmployees(searchText: String) throws {
         if filteredEmployees[0].isEmpty && filteredEmployees[1].isEmpty {
             throw AppError.emptyDataError
+//            return
         }
         logicSearch(for: 0, searchText: searchText)
         logicSearch(for: 1, searchText: searchText)
@@ -476,7 +488,7 @@ extension TableViewController {
     
     private func refresh() {
         tableView.refreshControl?.beginRefreshing()
-        DispatchQueue.main.asyncAfter(deadline: .now() + 2.5) {
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {
             self.searchBar.endEditing(true)
             self.updateDataTableView()
             self.refreshView.stopAnimation(for: AnimationType.spinner.rawValue)
@@ -533,3 +545,16 @@ extension TableViewController {
     }
 }
 
+//MARK: UpdateErrorViewController
+private extension TableViewController {
+    func handlerErrorInternetConnection() {
+        let vc = InternetConnectionErrorViewController()
+        vc.modalPresentationStyle = .overCurrentContext
+        vc.modalTransitionStyle = .crossDissolve
+        present(vc, animated: true, completion: nil)
+        DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
+            vc.dismiss(animated: true)
+            self.skeletonHide()
+        }
+    }
+}
