@@ -26,7 +26,6 @@
 		9E40A54729D75E9B002E7D4F /* CheckBoxControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E40A54629D75E9B002E7D4F /* CheckBoxControl.swift */; };
 		9E41A84529B4D55400EB60B9 /* APIManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E41A84429B4D55300EB60B9 /* APIManager.swift */; };
 		9E92BDE029BCBBAC0045F88E /* SearchBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E92BDDF29BCBBAC0045F88E /* SearchBar.swift */; };
-		9E92BDE229BDD6DC0045F88E /* SupportData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E92BDE129BDD6DC0045F88E /* SupportData.swift */; };
 		9E9FA8B429B8C77C0057EBB2 /* ErrorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E9FA8B329B8C77C0057EBB2 /* ErrorView.swift */; };
 		9E9FA8B629B8C90F0057EBB2 /* Error.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E9FA8B529B8C90F0057EBB2 /* Error.swift */; };
 		9ED88DF629F97B9C00DD7E5F /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9ED88DF529F97B9C00DD7E5F /* Main.storyboard */; };
@@ -34,6 +33,7 @@
 		9EF8AEEF2A0AB5B600AC6011 /* InternetConnectionErrorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EF8AEEE2A0AB5B600AC6011 /* InternetConnectionErrorViewController.swift */; };
 		9EF8AEF22A0ABB7E00AC6011 /* TestInternetConnection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EF8AEF12A0ABB7E00AC6011 /* TestInternetConnection.swift */; };
 		9EF8AEF42A0B112400AC6011 /* ExtensionUINavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EF8AEF32A0B112400AC6011 /* ExtensionUINavigationController.swift */; };
+		9EF8AEF62A0B1A6600AC6011 /* SupportAppData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EF8AEF52A0B1A6600AC6011 /* SupportAppData.swift */; };
 		9EFB859D299BAC4100E2B6CA /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EFB859C299BAC4100E2B6CA /* AppDelegate.swift */; };
 		9EFB859F299BAC4100E2B6CA /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EFB859E299BAC4100E2B6CA /* SceneDelegate.swift */; };
 		9EFB85A1299BAC4100E2B6CA /* TableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EFB85A0299BAC4100E2B6CA /* TableViewController.swift */; };
@@ -87,7 +87,6 @@
 		9E40A54629D75E9B002E7D4F /* CheckBoxControl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckBoxControl.swift; sourceTree = "<group>"; };
 		9E41A84429B4D55300EB60B9 /* APIManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIManager.swift; sourceTree = "<group>"; };
 		9E92BDDF29BCBBAC0045F88E /* SearchBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchBar.swift; sourceTree = "<group>"; };
-		9E92BDE129BDD6DC0045F88E /* SupportData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SupportData.swift; sourceTree = "<group>"; };
 		9E9FA8B329B8C77C0057EBB2 /* ErrorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorView.swift; sourceTree = "<group>"; };
 		9E9FA8B529B8C90F0057EBB2 /* Error.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Error.swift; sourceTree = "<group>"; };
 		9ED88DF529F97B9C00DD7E5F /* Main.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
@@ -95,6 +94,7 @@
 		9EF8AEEE2A0AB5B600AC6011 /* InternetConnectionErrorViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InternetConnectionErrorViewController.swift; sourceTree = "<group>"; };
 		9EF8AEF12A0ABB7E00AC6011 /* TestInternetConnection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestInternetConnection.swift; sourceTree = "<group>"; };
 		9EF8AEF32A0B112400AC6011 /* ExtensionUINavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtensionUINavigationController.swift; sourceTree = "<group>"; };
+		9EF8AEF52A0B1A6600AC6011 /* SupportAppData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SupportAppData.swift; sourceTree = "<group>"; };
 		9EFB859C299BAC4100E2B6CA /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		9EFB859E299BAC4100E2B6CA /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		9EFB85A0299BAC4100E2B6CA /* TableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewController.swift; sourceTree = "<group>"; };
@@ -174,7 +174,7 @@
 			children = (
 				9E12CEA029B23BAC000771F8 /* EmployeesData.swift */,
 				9E9FA8B529B8C90F0057EBB2 /* Error.swift */,
-				9E92BDE129BDD6DC0045F88E /* SupportData.swift */,
+				9EF8AEF52A0B1A6600AC6011 /* SupportAppData.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -493,6 +493,7 @@
 				9EF8AEF42A0B112400AC6011 /* ExtensionUINavigationController.swift in Sources */,
 				9E12CEB629B24C82000771F8 /* ExtensionUIButton.swift in Sources */,
 				9E41A84529B4D55400EB60B9 /* APIManager.swift in Sources */,
+				9EF8AEF62A0B1A6600AC6011 /* SupportAppData.swift in Sources */,
 				9E40A54729D75E9B002E7D4F /* CheckBoxControl.swift in Sources */,
 				9E92BDE029BCBBAC0045F88E /* SearchBar.swift in Sources */,
 				9E9FA8B629B8C90F0057EBB2 /* Error.swift in Sources */,
@@ -501,7 +502,6 @@
 				9EFB85A1299BAC4100E2B6CA /* TableViewController.swift in Sources */,
 				9EFB859D299BAC4100E2B6CA /* AppDelegate.swift in Sources */,
 				9EE4C17C29E70D40004153BA /* CircularProgressView.swift in Sources */,
-				9E92BDE229BDD6DC0045F88E /* SupportData.swift in Sources */,
 				9E9FA8B429B8C77C0057EBB2 /* ErrorView.swift in Sources */,
 				9E40A54529C8AB65002E7D4F /* CheckBox.swift in Sources */,
 				9E12CEB829B24C98000771F8 /* BlurEffectView.swift in Sources */,

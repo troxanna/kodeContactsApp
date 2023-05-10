@@ -1,8 +1,8 @@
 //
-//  Image.swift
+//  SupportAppData.swift
 //  kodeContactsApp
 //
-//  Created by Anastasia Nevodchikova on 12.03.2023.
+//  Created by Anastasia Nevodchikova on 10.05.2023.
 //
 
 import Foundation
