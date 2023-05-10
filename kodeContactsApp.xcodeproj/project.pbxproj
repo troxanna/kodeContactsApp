@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		9E056F5629FAC41D00EB0580 /* InternetConnectionErrorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E056F5529FAC41D00EB0580 /* InternetConnectionErrorView.swift */; };
 		9E12337029DAF5DE00FF3E14 /* SortedBottomSheetViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E12336F29DAF5DE00FF3E14 /* SortedBottomSheetViewController.swift */; };
 		9E12337229DB3F2600FF3E14 /* YearTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E12337129DB3F2600FF3E14 /* YearTableViewCell.swift */; };
 		9E12337429DB483B00FF3E14 /* ExtensoinDateFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E12337329DB483B00FF3E14 /* ExtensoinDateFormatter.swift */; };
@@ -30,6 +31,9 @@
 		9E9FA8B629B8C90F0057EBB2 /* Error.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E9FA8B529B8C90F0057EBB2 /* Error.swift */; };
 		9ED88DF629F97B9C00DD7E5F /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9ED88DF529F97B9C00DD7E5F /* Main.storyboard */; };
 		9EE4C17C29E70D40004153BA /* CircularProgressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EE4C17B29E70D40004153BA /* CircularProgressView.swift */; };
+		9EF8AEEF2A0AB5B600AC6011 /* InternetConnectionErrorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EF8AEEE2A0AB5B600AC6011 /* InternetConnectionErrorViewController.swift */; };
+		9EF8AEF22A0ABB7E00AC6011 /* TestInternetConnection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EF8AEF12A0ABB7E00AC6011 /* TestInternetConnection.swift */; };
+		9EF8AEF42A0B112400AC6011 /* ExtensionUINavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EF8AEF32A0B112400AC6011 /* ExtensionUINavigationController.swift */; };
 		9EFB859D299BAC4100E2B6CA /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EFB859C299BAC4100E2B6CA /* AppDelegate.swift */; };
 		9EFB859F299BAC4100E2B6CA /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EFB859E299BAC4100E2B6CA /* SceneDelegate.swift */; };
 		9EFB85A1299BAC4100E2B6CA /* TableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EFB85A0299BAC4100E2B6CA /* TableViewController.swift */; };
@@ -61,6 +65,7 @@
 /* Begin PBXFileReference section */
 		2EFDDAE566D207D5C520E3B1 /* Pods-kodeContactsApp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-kodeContactsApp.debug.xcconfig"; path = "Target Support Files/Pods-kodeContactsApp/Pods-kodeContactsApp.debug.xcconfig"; sourceTree = "<group>"; };
 		6DC899923867EBC5E76D64BC /* Pods-kodeContactsApp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-kodeContactsApp.release.xcconfig"; path = "Target Support Files/Pods-kodeContactsApp/Pods-kodeContactsApp.release.xcconfig"; sourceTree = "<group>"; };
+		9E056F5529FAC41D00EB0580 /* InternetConnectionErrorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InternetConnectionErrorView.swift; sourceTree = "<group>"; };
 		9E12336F29DAF5DE00FF3E14 /* SortedBottomSheetViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SortedBottomSheetViewController.swift; sourceTree = "<group>"; };
 		9E12337129DB3F2600FF3E14 /* YearTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YearTableViewCell.swift; sourceTree = "<group>"; };
 		9E12337329DB483B00FF3E14 /* ExtensoinDateFormatter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtensoinDateFormatter.swift; sourceTree = "<group>"; };
@@ -87,6 +92,9 @@
 		9E9FA8B529B8C90F0057EBB2 /* Error.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Error.swift; sourceTree = "<group>"; };
 		9ED88DF529F97B9C00DD7E5F /* Main.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
 		9EE4C17B29E70D40004153BA /* CircularProgressView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CircularProgressView.swift; sourceTree = "<group>"; };
+		9EF8AEEE2A0AB5B600AC6011 /* InternetConnectionErrorViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InternetConnectionErrorViewController.swift; sourceTree = "<group>"; };
+		9EF8AEF12A0ABB7E00AC6011 /* TestInternetConnection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestInternetConnection.swift; sourceTree = "<group>"; };
+		9EF8AEF32A0B112400AC6011 /* ExtensionUINavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtensionUINavigationController.swift; sourceTree = "<group>"; };
 		9EFB859C299BAC4100E2B6CA /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		9EFB859E299BAC4100E2B6CA /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		9EFB85A0299BAC4100E2B6CA /* TableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewController.swift; sourceTree = "<group>"; };
@@ -204,6 +212,7 @@
 				9E12337329DB483B00FF3E14 /* ExtensoinDateFormatter.swift */,
 				9E12337729DF4C6C00FF3E14 /* ExtensionDate.swift */,
 				9E12CEB529B24C82000771F8 /* ExtensionUIButton.swift */,
+				9EF8AEF32A0B112400AC6011 /* ExtensionUINavigationController.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -216,6 +225,7 @@
 				9E24788529BB8FFE003AB605 /* DepartmentSegmentedControl.swift */,
 				9E12CEA429B23BCF000771F8 /* EmployeeInfoViewController.swift */,
 				9E40A54629D75E9B002E7D4F /* CheckBoxControl.swift */,
+				9EF8AEEE2A0AB5B600AC6011 /* InternetConnectionErrorViewController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -230,8 +240,18 @@
 				9E40A54429C8AB65002E7D4F /* CheckBox.swift */,
 				9E12337129DB3F2600FF3E14 /* YearTableViewCell.swift */,
 				9EE4C17B29E70D40004153BA /* CircularProgressView.swift */,
+				9E056F5529FAC41D00EB0580 /* InternetConnectionErrorView.swift */,
 			);
 			path = Views;
+			sourceTree = "<group>";
+		};
+		9EF8AEF02A0ABB6900AC6011 /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				9E9FA87029B5CCDD0057EBB2 /* API */,
+				9EF8AEF12A0ABB7E00AC6011 /* TestInternetConnection.swift */,
+			);
+			path = Helpers;
 			sourceTree = "<group>";
 		};
 		9EFB8590299BAC4100E2B6CA = {
@@ -252,6 +272,7 @@
 		9EFB859B299BAC4100E2B6CA /* kodeContactsApp */ = {
 			isa = PBXGroup;
 			children = (
+				9EF8AEF02A0ABB6900AC6011 /* Helpers */,
 				9E9FA87229B5CCF60057EBB2 /* Models */,
 				9ED88DFB29F97D0B00DD7E5F /* Views */,
 				9ED88DFA29F97C9800DD7E5F /* Controllers */,
@@ -259,7 +280,6 @@
 				9ED88DF829F97C2000DD7E5F /* Resourses */,
 				9ED88DF729F97BD100DD7E5F /* Storyboard */,
 				9ED88DF429F97AA000DD7E5F /* Application */,
-				9E9FA87029B5CCDD0057EBB2 /* API */,
 				9E12CEA629B23BD9000771F8 /* Fonts */,
 			);
 			path = kodeContactsApp;
@@ -470,6 +490,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9EF8AEF42A0B112400AC6011 /* ExtensionUINavigationController.swift in Sources */,
 				9E12CEB629B24C82000771F8 /* ExtensionUIButton.swift in Sources */,
 				9E41A84529B4D55400EB60B9 /* APIManager.swift in Sources */,
 				9E40A54729D75E9B002E7D4F /* CheckBoxControl.swift in Sources */,
@@ -484,13 +505,16 @@
 				9E9FA8B429B8C77C0057EBB2 /* ErrorView.swift in Sources */,
 				9E40A54529C8AB65002E7D4F /* CheckBox.swift in Sources */,
 				9E12CEB829B24C98000771F8 /* BlurEffectView.swift in Sources */,
+				9E056F5629FAC41D00EB0580 /* InternetConnectionErrorView.swift in Sources */,
 				9E12337429DB483B00FF3E14 /* ExtensoinDateFormatter.swift in Sources */,
+				9EF8AEF22A0ABB7E00AC6011 /* TestInternetConnection.swift in Sources */,
 				9EFB859F299BAC4100E2B6CA /* SceneDelegate.swift in Sources */,
 				9E12337829DF4C6C00FF3E14 /* ExtensionDate.swift in Sources */,
 				9E24788629BB8FFE003AB605 /* DepartmentSegmentedControl.swift in Sources */,
 				9E12337229DB3F2600FF3E14 /* YearTableViewCell.swift in Sources */,
 				9E12CEA329B23BBA000771F8 /* EmployeeTableViewCell.swift in Sources */,
 				9E12CEA129B23BAD000771F8 /* EmployeesData.swift in Sources */,
+				9EF8AEEF2A0AB5B600AC6011 /* InternetConnectionErrorViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

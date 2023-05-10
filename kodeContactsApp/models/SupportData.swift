@@ -45,4 +45,9 @@ enum Color: String {
     case lotion
     case darkCharcoal
     case black
+    case coralRed
+}
+
+enum DateFormat: String {
+    case api = "yyyy-MM-dd"
 }

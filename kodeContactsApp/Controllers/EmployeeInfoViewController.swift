@@ -269,7 +269,7 @@ extension EmployeeInfoViewController {
 
     private func getUserAge(from: String) -> (Int, String) {
         let formatter = DateFormatter()
-        formatter.dateFormat = "yyyy-MM-dd"
+        formatter.dateFormat = DateFormat.api.rawValue
         let date = formatter.date(from: person.birthday)
         let calendar = Calendar.current
         let currentDate = Date()
