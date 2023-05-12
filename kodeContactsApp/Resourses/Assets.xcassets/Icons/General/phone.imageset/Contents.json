@@ -1,19 +1,8 @@
 {
   "images" : [
     {
-      "filename" : "phone-alt.png",
-      "idiom" : "universal",
-      "scale" : "1x"
-    },
-    {
-      "filename" : "phone-alt 1.png",
-      "idiom" : "universal",
-      "scale" : "2x"
-    },
-    {
-      "filename" : "phone-alt 2.png",
-      "idiom" : "universal",
-      "scale" : "3x"
+      "filename" : "phone.svg",
+      "idiom" : "universal"
     }
   ],
   "info" : {

@@ -1,19 +1,8 @@
 {
   "images" : [
     {
-      "filename" : "activeSorted.png",
-      "idiom" : "universal",
-      "scale" : "1x"
-    },
-    {
-      "filename" : "activeSorted 1.png",
-      "idiom" : "universal",
-      "scale" : "2x"
-    },
-    {
-      "filename" : "activeSorted 2.png",
-      "idiom" : "universal",
-      "scale" : "3x"
+      "filename" : "sortActive.svg",
+      "idiom" : "universal"
     }
   ],
   "info" : {

@@ -27,7 +27,7 @@ private extension SearchBar {
         
         
         setRightImage(imageName: Icons.sortInactive.rawValue, offset: UIOffset(horizontal: -8, vertical: 0))
-        setLeftImage(imageName: Icons.search.rawValue, offset: UIOffset(horizontal: 8, vertical: 0))
+        setLeftImage(imageName: Icons.searchInactive.rawValue, offset: UIOffset(horizontal: 8, vertical: 0))
         setClearImage(imageName: Icons.clear.rawValue, offset: UIOffset(horizontal: -8, vertical: 0))
         
         configurationText(offset: UIOffset(horizontal: 4, vertical: 0))
@@ -93,5 +93,9 @@ private extension SearchBar {
 extension SearchBar {
     func setSortedIcon(for state: Icons) {
         setImage(imageName: state.rawValue, offset: UIOffset(horizontal: -8, vertical: 0), type: .bookmark)
+    }
+    
+    func setSearchIcon(for state: Icons) {
+        setImage(imageName: state.rawValue, offset: UIOffset(horizontal: 8, vertical: 0), type: .search)
     }
 }

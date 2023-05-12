@@ -8,7 +8,7 @@
 import Foundation
 
 enum Icons: String {
-    case star, phone, avatarURL, arrowBack, search, sortActive, sortInactive, clear, checkBoxActive, checkBoxInactive, flyingSaucer, searchError
+    case star, phone, avatarURL, arrowBack, searchActive, searchInactive, sortActive, sortInactive, clear, checkBoxActive, checkBoxInactive, flyingSaucer, searchError
 }
 
 enum Font: String {

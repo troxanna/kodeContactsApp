@@ -1,19 +1,8 @@
 {
   "images" : [
     {
-      "filename" : "Selected.png",
-      "idiom" : "universal",
-      "scale" : "1x"
-    },
-    {
-      "filename" : "Selected 1.png",
-      "idiom" : "universal",
-      "scale" : "2x"
-    },
-    {
-      "filename" : "Selected 2.png",
-      "idiom" : "universal",
-      "scale" : "3x"
+      "filename" : "checkBoxActive.svg",
+      "idiom" : "universal"
     }
   ],
   "info" : {

@@ -355,6 +355,7 @@ extension TableViewController: UISearchBarDelegate {
     
     private func updateSearchBarForBeginEditing() {
         searchBar.setShowsCancelButton(true, animated: true)
+        searchBar.setSearchIcon(for: Icons.searchActive)
         searchBar.placeholder = nil
         searchBar.searchTextField.rightViewMode = .never
     }
@@ -364,6 +365,7 @@ extension TableViewController: UISearchBarDelegate {
         searchBar.endEditing(true)
         searchBar.searchTextField.rightViewMode = .always
         searchBar.setShowsCancelButton(false, animated: true)
+        searchBar.setSearchIcon(for: Icons.searchInactive)
     }
     
     private func didTapSortButton() {
