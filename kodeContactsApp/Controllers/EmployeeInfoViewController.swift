@@ -141,16 +141,16 @@ extension EmployeeInfoViewController {
     //MARK: EmployeeInfoView
     private func configurationEmployeeInfoView() {
         view.addSubview(employeeInfoView)
-            employeeInfoView.snp.makeConstraints({ make in
+            employeeInfoView.snp.makeConstraints { make in
             make.edges.equalToSuperview()
-        })
+        }
         
         employeeInfoView.addSubview(avatarImage)
-        avatarImage.snp.makeConstraints({ make in
+        avatarImage.snp.makeConstraints { make in
             make.size.equalTo(CGSize(width: 104, height: 104))
             make.centerX.equalTo(employeeInfoView)
             make.top.equalTo(employeeInfoView).inset(72)
-        })
+        }
         
         let xStack = UIStackView()
         xStack.axis = .horizontal
@@ -158,12 +158,12 @@ extension EmployeeInfoViewController {
         xStack.addArrangedSubview(userTag)
         xStack.spacing = 4
         xStack.alignment = .center
-        nameLabel.snp.makeConstraints({ make in
+        nameLabel.snp.makeConstraints { make in
             make.height.equalTo(28)
-        })
-        userTag.snp.makeConstraints({ make in
+        }
+        userTag.snp.makeConstraints { make in
             make.height.equalTo(22)
-        })
+        }
         
         let yStack = UIStackView()
         yStack.axis = .vertical
@@ -172,26 +172,26 @@ extension EmployeeInfoViewController {
         yStack.spacing = 12
         yStack.alignment = .center
         
-        position.snp.makeConstraints({ make in
+        position.snp.makeConstraints { make in
             make.height.equalTo(16)
-        })
+        }
         
         employeeInfoView.addSubview(yStack)
-        yStack.snp.makeConstraints({ make in
+        yStack.snp.makeConstraints { make in
             make.top.equalTo(avatarImage.snp.bottom).offset(24)
             make.centerX.equalTo(employeeInfoView)
-        })
+        }
     }
     
     //MARK: EmployeeDetailsInfoView
     private func configurationEmployeeDetailsInfoView() {
         view.addSubview(employeeDetailsInfoView)
-        employeeDetailsInfoView.snp.makeConstraints({ make in
+        employeeDetailsInfoView.snp.makeConstraints { make in
             make.bottom.equalTo(view.snp.bottom)
             make.left.equalTo(view.snp.left)
             make.right.equalTo(view.snp.right)
             make.top.equalTo(position.snp.bottom).offset(24)
-        })
+        }
         
         configurationEmployeeDateBirthdayView()
         configurationHorizontalLine()
@@ -201,12 +201,12 @@ extension EmployeeInfoViewController {
     
     private func configurationHorizontalLine() {
         employeeDetailsInfoView.addSubview(line)
-        line.snp.makeConstraints({ make in
+        line.snp.makeConstraints { make in
             make.height.equalTo(0.5)
             make.left.equalTo(employeeDetailsInfoView.snp.left).inset(16)
             make.right.equalTo(employeeDetailsInfoView.snp.right).inset(16)
             make.top.equalTo(stackDateBirthDay.snp.bottom)
-        })
+        }
     }
     
     private func configurationEmployeeDateBirthdayView() {
@@ -216,36 +216,35 @@ extension EmployeeInfoViewController {
         stackDateBirthDay.addArrangedSubview(dateBirthDay)
         stackDateBirthDay.addArrangedSubview(age)
         
-        dateBirthDay.snp.makeConstraints({ make in
+        dateBirthDay.snp.makeConstraints { make in
             make.height.equalTo(60)
             make.left.equalTo(imageStar.snp.right).offset(14)
-        })
+        }
 
-        age.snp.makeConstraints({ make in
+        age.snp.makeConstraints { make in
             make.height.equalTo(60)
-        })
+        }
         
         employeeDetailsInfoView.addSubview(stackDateBirthDay)
-        stackDateBirthDay.snp.makeConstraints({ make in
+        stackDateBirthDay.snp.makeConstraints { make in
             make.left.equalTo(employeeDetailsInfoView.snp.left).inset(16)
             make.right.equalTo(employeeDetailsInfoView.snp.right).inset(16)
             make.top.equalTo(employeeDetailsInfoView.snp.top)
-        })
+        }
         
-        //как настроить высоту чере приоритеты?
-        imageStar.snp.makeConstraints({ make in
+        imageStar.snp.makeConstraints { make in
             make.size.equalTo(CGSize(width: 20, height: 20))
-        })
+        }
     }
     
     private func configurationEmployeeNumberPhoneButton() {
 
         employeeDetailsInfoView.addSubview(numberPhone)
-        numberPhone.snp.makeConstraints({ make in
+        numberPhone.snp.makeConstraints { make in
             make.left.equalTo(employeeDetailsInfoView.snp.left).inset(16)
             make.top.equalTo(line.snp.bottom)
             make.height.equalTo(60)
-        })
+        }
         numberPhone.setTitleInsets(imageTitlePadding: 14)
         
         numberPhone.addTarget(self, action: #selector(buttonNumberPhonePressed), for: .touchUpInside)
@@ -256,18 +255,23 @@ extension EmployeeInfoViewController {
 //MARK: Private data formatter functions
 extension EmployeeInfoViewController {
     private func fullData() {
-        let tmpYear = getUserAge(from: person.birthday)
+        let userAge = getUserAge(from: person.birthday)
         let formatter = DateFormatter()
         
         nameLabel.text = "\(person.firstName) \(person.lastName)"
         userTag.text = person.userTag.lowercased()
         position.text = person.position
-        dateBirthDay.text = formatter.getDateString(dateFormat: "d MMMM y", date: person.birthday)
-        age.text = "\(tmpYear.0) \(tmpYear.1)"
+        dateBirthDay.text = formatter.getDateString(dateFormat: DateFormat.viewInfo.rawValue, date: person.birthday)
         numberPhone.setTitle(formatPhoneNumber(number: person.phone), for: .normal)
+        
+        if #available(iOS 15, *) {
+            age.text = String(localized: "\(userAge) age")
+        } else {
+            age.text = NSLocalizedString("\(userAge) age", comment: "")
+        }
     }
 
-    private func getUserAge(from: String) -> (Int, String) {
+    private func getUserAge(from: String) -> Int {
         let formatter = DateFormatter()
         formatter.dateFormat = DateFormat.api.rawValue
         let date = formatter.date(from: person.birthday)
@@ -276,22 +280,13 @@ extension EmployeeInfoViewController {
         
         if let someDate = date {
             let year = calendar.dateComponents([.year], from: someDate, to: currentDate).year ?? 0
-            switch year {
-            case 5...20:
-                return (year, "лет")
-            case let year where year % 10 == 1:
-                return (year, "год")
-            case let year where year % 10 < 5 && year % 10 != 0:
-                return (year, "года")
-            default:
-                return (year, "лет")
-            }
+            return year
         }
-        return (0, "")
+        return 0
     }
     
     private func formatPhoneNumber(number: String) -> String {
-        let mask = "+7 (XXX) XXX XX XX"
+        let mask = PhoneNumberFormat.ru.rawValue
         var result = ""
         var index = number.startIndex
         for ch in mask where index < number.endIndex {
@@ -341,7 +336,7 @@ extension EmployeeInfoViewController {
             self.callPhoneNumber()
             self.blurView.removeFromSuperview()
         }
-        let actionCancel = UIAlertAction(title: "Отмена", style: .cancel){(actionSheet) in
+        let actionCancel = UIAlertAction(title: NumberPhoneAlertData.cancelButtonTitle.text, style: .cancel){(actionSheet) in
             self.blurView.removeFromSuperview()
         }
         actionSheet.addAction(actionCall)

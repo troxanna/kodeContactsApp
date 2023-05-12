@@ -10,7 +10,7 @@ import SkeletonView
 
 class EmployeeTableViewCell: UITableViewCell {
     //MARK: Properties
-    static let identifier = "EmployeeCell"
+    static let identifier = IdentifierTableViewCell.employee.rawValue
     
     private let mainTitleLabel: UILabel = {
         let label = UILabel()
@@ -95,21 +95,21 @@ class EmployeeTableViewCell: UITableViewCell {
 extension EmployeeTableViewCell {
     private func createEmployeeCell() {
         
-        avatarImageView.snp.makeConstraints({ make in
+        avatarImageView.snp.makeConstraints { make in
             make.size.equalTo(CGSize(width: 72, height: 72))
-        })
+        }
         
-        titleLabel.snp.makeConstraints({ make in
+        titleLabel.snp.makeConstraints { make in
             make.height.equalTo(20)
-        })
+        }
         
-        userTagLabel.snp.makeConstraints({ make in
+        userTagLabel.snp.makeConstraints { make in
             make.height.equalTo(18)
-        })
+        }
         
-        descriptionLabel.snp.makeConstraints({ make in
+        descriptionLabel.snp.makeConstraints { make in
             make.height.equalTo(16)
-        })
+        }
         
         configurationConstraints()
         
@@ -122,43 +122,43 @@ extension EmployeeTableViewCell {
         mainTitleLabel.addSubview(userTagLabel)
         
 
-        userTagLabel.snp.makeConstraints({ make in
+        userTagLabel.snp.makeConstraints { make in
             make.leading.equalTo(titleLabel.snp.trailing).offset(4)
             make.bottom.equalTo(titleLabel.snp.bottom)
-        })
+        }
 
-        titleLabel.snp.makeConstraints({ make in
+        titleLabel.snp.makeConstraints { make in
             make.leading.equalTo(mainTitleLabel.snp.leading)
             make.top.equalTo(mainTitleLabel.snp.top)
             make.bottom.equalTo(mainTitleLabel.snp.bottom)
-        })
+        }
 
         contentView.addSubview(avatarImageView)
         contentView.addSubview(mainTitleLabel)
         contentView.addSubview(descriptionLabel)
         contentView.addSubview(userAgeLabel)
 
-        avatarImageView.snp.makeConstraints({ make in
+        avatarImageView.snp.makeConstraints { make in
             make.leading.equalTo(contentView.snp.leading).offset(16)
             make.centerY.equalTo(contentView)
-        })
+        }
         
-        mainTitleLabel.snp.makeConstraints({ make in
+        mainTitleLabel.snp.makeConstraints { make in
             make.trailing.equalTo(contentView.snp.trailing).offset(16)
             make.top.equalTo(contentView.snp.top).offset(22)
             make.leading.equalTo(avatarImageView.snp.trailing).offset(16)
-        })
+        }
         
-        descriptionLabel.snp.makeConstraints({ make in
+        descriptionLabel.snp.makeConstraints { make in
             make.leading.equalTo(mainTitleLabel.snp.leading)
             make.top.equalTo(mainTitleLabel.snp.bottom).offset(4)
             make.trailing.equalTo(mainTitleLabel.snp.trailing).offset(16)
-        })
+        }
         
-        userAgeLabel.snp.makeConstraints({ make in
+        userAgeLabel.snp.makeConstraints { make in
             make.centerY.equalTo(contentView.snp.centerY)
             make.right.equalTo(contentView.snp.right).inset(16)
-        })
+        }
     }
     
     private func fetchAvatarImage(urlString: String) {
@@ -186,7 +186,7 @@ extension EmployeeTableViewCell {
         titleLabel.text = "\(data.firstName) \(data.lastName)"
         descriptionLabel.text = data.position
         userTagLabel.text = userTag
-        userAgeLabel.text = formatter.getDateString(dateFormat: "d MMM", date: data.birthday)
+        userAgeLabel.text = formatter.getDateString(dateFormat: DateFormat.viewList.rawValue, date: data.birthday)
         fetchAvatarImage(urlString: data.avatarURL)
     }
 

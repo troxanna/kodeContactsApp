@@ -14,14 +14,14 @@ class CheckBoxControl: UIView {
     weak var delegate: CheckBoxControlDelegate?
     
     private let buttonAlpha: CheckBox = {
-        let button = CheckBox(title: SortedType.alphabetically.rawValue)
+        let button = CheckBox(title: SortedType.alphabetically.text)
         button.addTarget(self, action: #selector(buttonClickedSelected), for: .touchUpInside)
         button.isChecked = false
         return button
     }()
     
     private let buttonBirthday: CheckBox = {
-        let button = CheckBox(title: SortedType.birthday.rawValue)
+        let button = CheckBox(title: SortedType.birthday.text)
         button.addTarget(self, action: #selector(buttonClickedSelected), for: .touchUpInside)
         button.isChecked = false
         return button
@@ -48,17 +48,17 @@ private extension CheckBoxControl {
         addSubview(buttonAlpha)
         addSubview(buttonBirthday)
         
-        buttonAlpha.snp.makeConstraints({ make in
+        buttonAlpha.snp.makeConstraints { make in
             make.height.equalTo(24)
             make.top.equalTo(self.snp.top).inset(20)
             make.left.equalTo(self.snp.left)
-        })
-        buttonBirthday.snp.makeConstraints({ make in
+        }
+        buttonBirthday.snp.makeConstraints { make in
             make.height.equalTo(24)
             make.top.equalTo(buttonAlpha.snp.bottom).offset(36)
             make.bottom.equalTo(self.snp.bottom).inset(20)
             make.left.equalTo(self.snp.left)
-        })
+        }
     }
 }
 

@@ -13,7 +13,7 @@ class InternetConnectionErrorView: UIView {
         let label = UILabel()
         label.textColor = UIColor(named: Color.white.rawValue)
         label.numberOfLines = 0
-        label.text = "Не могу обновить данные.\nПроверь соединение с интернетом."
+        label.text = ErrorMessage.networkError.text
         label.font = UIFont(name: Font.interMedium.rawValue, size: 13) ?? UIFont.systemFont(ofSize: 13, weight: .medium)
         return label
     }()
@@ -33,10 +33,10 @@ private extension InternetConnectionErrorView {
     func setup() {
         backgroundColor = UIColor(named: Color.coralRed.rawValue)
         addSubview(textLabel)
-        textLabel.snp.makeConstraints({ make in
+        textLabel.snp.makeConstraints { make in
             make.right.equalTo(self.snp.right).inset(24)
             make.left.equalTo(self.snp.left).inset(24)
             make.bottom.equalTo(self.snp.bottom).inset(12)
-        })
+        }
     }
 }

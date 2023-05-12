@@ -8,17 +8,7 @@
 import Foundation
 
 enum Icons: String {
-    case star, phone, avatarURL, arrowBack, search, sortActive, sortInactive, clear, checkBoxActive, checkBoxInactive
-}
-
-enum SearchTextFieldData: String {
-    case placeholder = "Введи имя, тег, почту..."
-    case cancelButtonTitle = "Отмена"
-}
-
-enum SortedType: String {
-    case alphabetically = "По алфавиту"
-    case birthday = "По дню рождения"
+    case star, phone, avatarURL, arrowBack, search, sortActive, sortInactive, clear, checkBoxActive, checkBoxInactive, flyingSaucer, searchError
 }
 
 enum Font: String {
@@ -50,4 +40,14 @@ enum Color: String {
 
 enum DateFormat: String {
     case api = "yyyy-MM-dd"
+    case viewInfo = "d MMMM y"
+    case viewList = "d MMM"
+}
+
+enum PhoneNumberFormat: String {
+    case ru = "+7 (XXX) XXX XX XX"
+}
+enum IdentifierTableViewCell: String {
+    case employee = "EmployeeCell"
+    case year = "YearCell"
 }

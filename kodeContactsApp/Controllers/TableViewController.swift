@@ -153,16 +153,16 @@ private extension TableViewController {
         view.addSubview(tableView)
         view.addSubview(departmentSegmentedControll)
 
-        tableView.snp.makeConstraints({ make in
+        tableView.snp.makeConstraints { make in
             make.right.left.bottom.equalToSuperview()
             //offset 16
             make.top.equalTo(departmentSegmentedControll.snp.bottom)
 
-        })
-        departmentSegmentedControll.snp.makeConstraints({ make in
+        }
+        departmentSegmentedControll.snp.makeConstraints { make in
             make.top.equalTo(view.safeAreaLayoutGuide.snp.top)
             make.left.right.equalToSuperview()
-        })
+        }
         
         departmentSegmentedControll.delegate = self
     }
@@ -248,16 +248,16 @@ extension TableViewController {
         
         switch screenError {
         case .criticalError:
-            errorView!.snp.makeConstraints({ make in
+            errorView!.snp.makeConstraints { make in
                 make.edges.equalToSuperview()
-            })
+            }
             navigationController?.isNavigationBarHidden = true
             departmentSegmentedControll.removeFromSuperview()
         default:
-            errorView!.snp.makeConstraints({ make in
+            errorView!.snp.makeConstraints { make in
                 make.right.left.bottom.equalToSuperview()
                 make.top.equalTo(departmentSegmentedControll.snp.bottom)
-            })
+            }
             tableView.isHidden = true
         }
         self.skeletonHide()
@@ -360,7 +360,7 @@ extension TableViewController: UISearchBarDelegate {
     }
     
     private func updateSearchBarEndEditing() {
-        searchBar.placeholder = SearchTextFieldData.placeholder.rawValue
+        searchBar.placeholder = SearchTextFieldData.placeholder.text
         searchBar.endEditing(true)
         searchBar.searchTextField.rightViewMode = .always
         searchBar.setShowsCancelButton(false, animated: true)
@@ -478,9 +478,9 @@ extension TableViewController {
         refreshLoadingView.clipsToBounds = true
 
         refreshLoadingView.addSubview(refreshView)
-        refreshView.snp.makeConstraints({ make in
+        refreshView.snp.makeConstraints { make in
             make.center.equalTo(refreshLoadingView.snp.center)
-        })
+        }
 
         tableView.refreshControl!.addSubview(self.refreshLoadingView)
     }

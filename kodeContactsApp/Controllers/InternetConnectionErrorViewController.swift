@@ -31,10 +31,10 @@ private extension InternetConnectionErrorViewController {
         view.alpha = 1.0
 
         view.addSubview(errorView)
-        errorView.snp.makeConstraints({ make in
+        errorView.snp.makeConstraints { make in
             make.width.equalTo(UIScreen.main.bounds.width)
             make.height.equalTo(UINavigationController.navigationBarHeight())
-        })
+        }
     }
     
     func setupPanGesture() {

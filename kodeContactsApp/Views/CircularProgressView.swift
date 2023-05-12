@@ -19,9 +19,9 @@ class CircularProgressView: UIView {
         self.layer.cornerRadius = 10
         self.clipsToBounds = true
         
-        self.snp.makeConstraints({ make in
+        self.snp.makeConstraints { make in
             make.size.equalTo(CGSize(width: 50, height: 50))
-        })
+        }
 
     }
     

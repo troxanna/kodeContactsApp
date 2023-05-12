@@ -71,14 +71,14 @@ extension ErrorView {
         
         self.addSubview(errorStack)
         
-        errorStack.snp.makeConstraints({ make in
+        errorStack.snp.makeConstraints { make in
             make.centerX.equalToSuperview()
             make.centerY.equalToSuperview()
-        })
+        }
         
-        titleErrorLabel.snp.makeConstraints({ make in
+        titleErrorLabel.snp.makeConstraints { make in
             make.top.equalTo(imageError.snp.bottom).offset(8)
-        })
+        }
     }
     
     private func contentConfigurationErrorView(errorDescription: ErrorData) {
@@ -86,7 +86,7 @@ extension ErrorView {
         titleErrorLabel.text = errorDescription.title
         messageErrorLabel.text = errorDescription.message
         if errorDescription.repeatRequest == true {
-            buttonRepeatRequest.setTitle("Попробовать снова", for: .normal)
+            buttonRepeatRequest.setTitle("Try again", for: .normal)
         }
     }
     

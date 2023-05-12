@@ -9,7 +9,7 @@ import UIKit
 
 class YearTableViewCell: UITableViewCell {
 
-    static let identifier = "YearCell"
+    static let identifier = IdentifierTableViewCell.year.rawValue
     
     private let titleLabel: UILabel = {
         let label = UILabel()
@@ -60,24 +60,24 @@ class YearTableViewCell: UITableViewCell {
         contentView.addSubview(leftLine)
         contentView.addSubview(rightLine)
         
-        titleLabel.snp.makeConstraints({ make in
+        titleLabel.snp.makeConstraints { make in
             make.centerX.equalTo(contentView.snp.centerX)
             make.centerY.equalTo(contentView.snp.centerY)
-        })
+        }
         
-        leftLine.snp.makeConstraints({ make in
+        leftLine.snp.makeConstraints { make in
             make.height.equalTo(1)
             make.width.equalTo(72)
             make.centerY.equalTo(contentView.snp.centerY)
             make.left.equalTo(contentView.snp.left).inset(24)
-        })
+        }
         
-        rightLine.snp.makeConstraints({ make in
+        rightLine.snp.makeConstraints { make in
             make.height.equalTo(1)
             make.width.equalTo(72)
             make.centerY.equalTo(contentView.snp.centerY)
             make.right.equalTo(contentView.snp.right).inset(24)
-        })
+        }
         
         setTitle()
     }

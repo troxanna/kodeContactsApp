@@ -70,7 +70,7 @@ private extension SearchBar {
             .foregroundColor: UIColor(named: Color.silverSand.rawValue),
             .font: UIFont(name: Font.interMedium.rawValue, size: 15) ?? UIFont.systemFont(ofSize: 15, weight: .medium)
         ]
-        searchTextField.attributedPlaceholder = NSAttributedString(string: SearchTextFieldData.placeholder.rawValue, attributes: attributes)
+        searchTextField.attributedPlaceholder = NSAttributedString(string: SearchTextFieldData.placeholder.text, attributes: attributes)
     }
     
     func configurationInputText() {
@@ -85,7 +85,7 @@ private extension SearchBar {
             .font: UIFont(name: Font.interSemiBold.rawValue, size: 14) ?? UIFont.systemFont(ofSize: 14, weight: .semibold)
         ]
         UIBarButtonItem.appearance(whenContainedInInstancesOf: [UISearchBar.self]).setTitleTextAttributes(attributes, for: .normal)
-        UIBarButtonItem.appearance(whenContainedInInstancesOf: [UISearchBar.self]).title = SearchTextFieldData.cancelButtonTitle.rawValue
+        UIBarButtonItem.appearance(whenContainedInInstancesOf: [UISearchBar.self]).title = SearchTextFieldData.cancelButtonTitle.text
     }
 }
 

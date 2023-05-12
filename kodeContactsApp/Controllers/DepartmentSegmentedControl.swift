@@ -82,10 +82,10 @@ class DepartmentSegmentedControl: UIView, UIScrollViewDelegate {
             guard let viewSegment = segmentViews.last else { break }
             guard let buttonSegment = configurationContentSegmentButtons(item: item) else { break }
             viewSegment.addSubview(buttonSegment)
-            buttonSegment.snp.makeConstraints({ make in
+            buttonSegment.snp.makeConstraints { make in
                 make.left.equalTo(viewSegment.snp.left).inset(12)
                 make.right.equalTo(viewSegment.snp.right).inset(12)
-            })
+            }
             segmentsStackView.addArrangedSubview(viewSegment)
         }
         
@@ -115,39 +115,39 @@ extension DepartmentSegmentedControl {
     
     private func makeConstraintsScrollView() {
         self.addSubview(scrollView)
-        scrollView.snp.makeConstraints({ make in
+        scrollView.snp.makeConstraints { make in
             make.edges.equalToSuperview()
-        })
+        }
     }
     
     private func makeConstraintsContentView() {
         scrollView.addSubview(contentView)
-        contentView.snp.makeConstraints({ make in
+        contentView.snp.makeConstraints { make in
             make.edges.equalTo(scrollView.contentLayoutGuide)
             make.top.equalTo(scrollView.frameLayoutGuide.snp.top)
             make.bottom.equalTo(scrollView.frameLayoutGuide.snp.bottom)
             make.height.equalTo(36)
-        })
+        }
     }
     
     private func makeConstraintsLine() {
         contentView.addSubview(line)
-        line.snp.makeConstraints({ make in
+        line.snp.makeConstraints { make in
             make.height.equalTo(0.33)
             make.left.equalTo(contentView.snp.left)
             make.right.equalTo(contentView.snp.right)
             make.bottom.equalTo(contentView.snp.bottom)
-        })
+        }
     }
     
     private func makeConstraintsSegmentsStackView() {
         contentView.addSubview(segmentsStackView)
-        segmentsStackView.snp.makeConstraints({ make in
+        segmentsStackView.snp.makeConstraints { make in
             make.right.equalTo(contentView.snp.right).inset(16)
             make.left.equalTo(contentView.snp.left).inset(16)
             make.top.equalTo(contentView.snp.top)
             make.bottom.equalTo(line.snp.top)
-        })
+        }
     }
     
     private func makeConstraintsSegmentView() {
@@ -157,12 +157,12 @@ extension DepartmentSegmentedControl {
     private func makeConstraintsActiveLineForBotton(sender: UIButton) {
         guard let viewSegment = sender.superview else { return }
         contentView.addSubview(activeLine)
-        activeLine.snp.makeConstraints({ make in
+        activeLine.snp.makeConstraints { make in
             make.height.equalTo(2)
             make.bottom.equalTo(line.snp.top)
             make.leading.equalTo(viewSegment.snp.leading)
             make.trailing.equalTo(viewSegment.snp.trailing)
-        })
+        }
     }
     
     private func setupActiveSegment(_ sender: UIButton) {

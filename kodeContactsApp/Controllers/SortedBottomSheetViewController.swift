@@ -37,7 +37,7 @@ class SortedBottomSheetViewController: UIViewController, CheckBoxControlDelegate
         let label = UILabel()
         label.font = UIFont(name: Font.interSemiBold.rawValue, size: 20) ?? UIFont.systemFont(ofSize: 20, weight: .semibold)
         label.textColor = UIColor(named: Color.richBlack.rawValue)
-        label.text = "Сортировка"
+        label.text = SortedBottomSheetData.sorting.text
         return label
     }()
     
@@ -166,13 +166,13 @@ private extension SortedBottomSheetViewController {
         dimmedView.translatesAutoresizingMaskIntoConstraints = false
         containerView.translatesAutoresizingMaskIntoConstraints = false
         
-        dimmedView.snp.makeConstraints({ make in
+        dimmedView.snp.makeConstraints { make in
             make.edges.equalTo(view.snp.edges)
-        })
-        containerView.snp.makeConstraints({ make in
+        }
+        containerView.snp.makeConstraints { make in
             make.leading.equalTo(view.snp.leading)
             make.trailing.equalTo(view.snp.trailing)
-        })
+        }
         
         containerViewHeightConstraint = containerView.heightAnchor.constraint(equalToConstant: defaultHeight)
         containerViewBottomConstraint = containerView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: defaultHeight)
@@ -197,41 +197,41 @@ private extension SortedBottomSheetViewController {
         titleView.addSubview(backButton)
 
         
-        titleView.snp.makeConstraints({ make in
+        titleView.snp.makeConstraints { make in
             make.height.equalTo(24)
             make.left.equalTo(containerView.snp.left).offset(16)
             make.right.equalTo(containerView.snp.right).inset(16)
             make.top.equalTo(containerView.snp.top).offset(24)
-        })
+        }
         
-        backButton.snp.makeConstraints({ make in
+        backButton.snp.makeConstraints { make in
             make.left.equalTo(titleView.snp.left)
             make.top.equalTo(titleView.snp.top)
             make.bottom.equalTo(titleView.snp.bottom)
-        })
+        }
         
-        titleLabel.snp.makeConstraints({ make in
+        titleLabel.snp.makeConstraints { make in
             make.centerX.equalTo(titleView.snp.centerX)
             make.top.equalTo(titleView.snp.top)
             make.bottom.equalTo(titleView.snp.bottom)
-        })
+        }
         
-        line.snp.makeConstraints({ make in
+        line.snp.makeConstraints { make in
             make.height.equalTo(4)
             make.width.equalTo(56)
             make.centerX.equalTo(containerView.snp.centerX)
             make.top.equalTo(containerView.snp.top).offset(12)
-        })
+        }
     }
     
     func configurationCheckBoxControl() {
         containerView.addSubview(checkBoxControl)
         checkBoxControl.translatesAutoresizingMaskIntoConstraints = false
-        checkBoxControl.snp.makeConstraints({ make in
+        checkBoxControl.snp.makeConstraints { make in
             make.top.equalTo(titleView.snp.top).inset(34)
             make.left.equalTo(containerView.snp.left).offset(24)
             make.right.equalTo(containerView.snp.right).offset(24)
-        })
+        }
     }
 }
 
