@@ -1,0 +1,19 @@
+/* 
+  Localizable.strings
+  kodeContactsApp
+
+  Created by Anastasia Nevodchikova on 12.05.2023.
+  
+*/
+
+"Sorting" = "Сортировка";
+"Cancel" = "Отмена";
+"Try again" = "Попробовать снова";
+"Enter name, tag, email..." = "Введи имя, тег, почту...";
+"By alphabetically" = "По алфавиту";
+"By birthday" = "По дню рождения";
+"Try to edit your request" = "Попробуй скорректировать запрос";
+"We'll try to fix it quickly" = "Постараемся быстро починить";
+"Can't update data.\nCheck your internet connection." = "Не могу обновить данные.\nПроверь соединение с интернетом.";
+"We didn't find anyone" = "Мы никого не нашли";
+"Some superintelligence broke everything" = "Какой-то сверхразум все сломал";
