@@ -48,7 +48,7 @@ class DepartmentSegmentedControl: UIView, UIScrollViewDelegate {
     
     private var segmentButtons: [UIButton] = []
     private var segmentViews: [UIView] = []
-    private var activeSegment: String = Departaments.all.value
+    private var activeSegment: String = Departments.all.value
     var currentActiveSegment: String {
         get {
             return activeSegment

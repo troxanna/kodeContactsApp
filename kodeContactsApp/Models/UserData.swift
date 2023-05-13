@@ -7,8 +7,8 @@
 
 import Foundation
 
-//MARK: - Departaments
-enum Departaments: String, CaseIterable {
+//MARK: - Departments
+enum Departments: String, CaseIterable {
     case all
     case android
     case ios
@@ -56,7 +56,7 @@ enum Departaments: String, CaseIterable {
     
     static var departments: [String] {
         var array: [String] = []
-        for item in Departaments.allCases {
+        for item in Departments.allCases {
             array.append(item.value)
         }
         return array
@@ -64,7 +64,7 @@ enum Departaments: String, CaseIterable {
 }
 
 
-// MARK: - EmployeesData
+// MARK: - Users
 struct Users: Codable {
     let items: [User]
 }

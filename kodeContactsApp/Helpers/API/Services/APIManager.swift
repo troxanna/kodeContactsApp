@@ -77,7 +77,7 @@ class APIManager {
 extension APIManager {
     private func validationValueDepartment(users: [User]) throws {
         for item in users {
-            guard let _ = Departaments(rawValue: item.department) else {
+            guard let _ = Departments(rawValue: item.department) else {
                 throw AppError.validationError
             }
         }

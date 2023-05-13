@@ -32,20 +32,6 @@ enum NumberPhoneAlertData {
     }
 }
 
-enum SortedType {
-    case alphabetically
-    case birthday
-    
-    var text: String {
-        switch self {
-        case .alphabetically:
-            return String.localize("By alphabetically")
-        case .birthday:
-            return String.localize("By birthday")
-        }
-    }
-}
-
 enum SortedBottomSheetData {
     case sorting
     

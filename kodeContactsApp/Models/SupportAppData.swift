@@ -23,6 +23,20 @@ enum AnimationType: String {
     case spinner
 }
 
+enum SortedType {
+    case alphabetically
+    case birthday
+    
+    var text: String {
+        switch self {
+        case .alphabetically:
+            return String.localize("By alphabetically")
+        case .birthday:
+            return String.localize("By birthday")
+        }
+    }
+}
+
 enum Color: String {
     case hanPurple
     case cultured
@@ -50,4 +64,8 @@ enum PhoneNumberFormat: String {
 enum IdentifierTableViewCell: String {
     case employee = "EmployeeCell"
     case year = "YearCell"
+}
+
+enum TypeEmployeeList {
+    case filtered, sorted, base, search
 }

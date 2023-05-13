@@ -46,7 +46,7 @@ enum ErrorTitle: String {
         case .searchError:
             return String.localize("We didn't find anyone")
         case .criticalError:
-            return String.localize("Some superintelligence broke everything")
+            return String.localize("Some super intelligence broke everything")
         }
         
     }

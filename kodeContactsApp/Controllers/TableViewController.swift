@@ -24,7 +24,6 @@ protocol SortedBottomSheetViewControllerDelegate: AnyObject {
 class TableViewController: UIViewController, SkeletonTableViewDataSource {
     
     //MARK: Private properties
-    private var sortedType = SortedType.alphabetically
     private var errorView: ErrorView?
     
     private var refreshLoadingView: UIView!
@@ -37,7 +36,7 @@ class TableViewController: UIViewController, SkeletonTableViewDataSource {
     }()
     
     private var departmentSegmentedControll: DepartmentSegmentedControl = {
-        let segmentedControl = DepartmentSegmentedControl(frame: .zero, items: Departaments.departments)
+        let segmentedControl = DepartmentSegmentedControl(frame: .zero, items: Departments.departments)
         segmentedControl.selectedSegmentIndex = 0
         return segmentedControl
     }()
@@ -47,11 +46,8 @@ class TableViewController: UIViewController, SkeletonTableViewDataSource {
         searchBar.isUserInteractionDisabledWhenSkeletonIsActive = true
         return searchBar
     }()
-
-    private var employees: [[User]] = [[], []]
-    private var filteredEmployees: [[User]] = [[], []]
-    private var sortedEmployees: [[User]] = [[], []]
-    private var searchEmployees: [[User]] = [[], []]
+    
+    private let employeesList = EmployeeList() //weak?
 
     //MARK: Override functions
     override func viewDidLoad() {
@@ -82,7 +78,7 @@ class TableViewController: UIViewController, SkeletonTableViewDataSource {
 //MARK: UITableViewDelegate
 extension TableViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        if indexPath.section == 0 && indexPath.row == sortedEmployees[indexPath.section].count && sortedEmployees[1].count != 0 {
+        if indexPath.section == 0 && indexPath.row == employeesList.readSortedEmployees[indexPath.section].count && employeesList.readSortedEmployees[1].count != 0 {
             return
         }
         guard let cell = tableView.cellForRow(at: indexPath) as? EmployeeTableViewCell else {
@@ -90,7 +86,7 @@ extension TableViewController: UITableViewDelegate {
         }
         
         let viewController = EmployeeInfoViewController()
-        viewController.sendData(person: sortedEmployees[indexPath.section][indexPath.row])
+        viewController.sendData(person: employeesList.readSortedEmployees[indexPath.section][indexPath.row])
         viewController.sendImage(image: cell.avatarImage)
         navigationController?.pushViewController(viewController, animated: true)
         
@@ -101,10 +97,10 @@ extension TableViewController: UITableViewDelegate {
 //MARK: UITableViewDataSource
 extension TableViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if section == 0 && sortedEmployees[1].count != 0 {
-            return sortedEmployees[section].count + 1
+        if section == 0 && employeesList.readSortedEmployees[1].count != 0 {
+            return employeesList.readSortedEmployees[section].count + 1
         }
-        return sortedEmployees[section].count
+        return employeesList.readSortedEmployees[section].count
     }
     
     func numberOfSections(in tableView: UITableView) -> Int {
@@ -116,15 +112,15 @@ extension TableViewController: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        if indexPath.section == 0 && indexPath.row == sortedEmployees[indexPath.section].count && sortedEmployees[1].count != 0 {
+        if indexPath.section == 0 && indexPath.row == employeesList.readSortedEmployees[indexPath.section].count && employeesList.readSortedEmployees[1].count != 0 {
             return tableView.dequeueReusableCell(withIdentifier: YearTableViewCell.identifier) as! YearTableViewCell
         }
         
         let cell = tableView.dequeueReusableCell(withIdentifier: EmployeeTableViewCell.identifier) as! EmployeeTableViewCell
-        let employee = sortedEmployees[indexPath.section][indexPath.row]
+        let employee = employeesList.readSortedEmployees[indexPath.section][indexPath.row]
         
         cell.fullDataCell(data: employee)
-        if sortedType == SortedType.birthday {
+        if employeesList.sortedType == SortedType.birthday {
             cell.userAgeIsHidden = false
         } else {
             cell.userAgeIsHidden = true
@@ -188,12 +184,8 @@ private extension TableViewController {
                     let data = try users()
                     DispatchQueue.main.async {
                         guard let self = self else { return }
-                        self.employees[0] = data
-                        self.sortedEmployees[0] = data
-                        self.filteredEmployees[0] = data
+                        self.employeesList.insertData(data)
                         self.handlerFilteredEmployees(for: self.departmentSegmentedControll.currentActiveSegment)
-                        self.searchEmployees[0] = []
-                        self.searchEmployees[1] = []
                         if let searchText = self.searchBar.searchTextField.text {
                             if searchText != "" {
                                 self.handlerSearch(searchText: searchText)
@@ -286,7 +278,7 @@ extension TableViewController: DepartmentSegmentedControlDelegate {
     
     func handlerFilteredEmployees(for department: String) {
         do {
-            try filteredEmployees(for: department)
+            try employeesList.filteredEmployees(for: department)
             errorView?.removeFromSuperview()
             tableView.isHidden = false
             tableView.reloadData()
@@ -296,25 +288,6 @@ extension TableViewController: DepartmentSegmentedControlDelegate {
         }
         catch {
             showError(screenError: .criticalError)
-        }
-    }
-    
-    func filteredEmployees(for department: String) throws {
-        if employees[0].isEmpty && employees[1].isEmpty {
-            return
-        }
-        if department == Departaments.all.value {
-            filteredEmployees[0] = employees[0]
-        } else {
-            filteredEmployees[0] = employees[0].filter { Departaments(rawValue: $0.department)?.value == department }
-        }
-        if sortedType == SortedType.birthday {
-            sortedByBirthday(by: filteredEmployees)
-        } else if sortedType == SortedType.alphabetically {
-            sortedByAlphabetically(by: filteredEmployees)
-        }
-        if filteredEmployees[0].isEmpty && filteredEmployees[1].isEmpty {
-            throw AppError.searchError
         }
     }
 }
@@ -369,7 +342,7 @@ extension TableViewController: UISearchBarDelegate {
     }
     
     private func didTapSortButton() {
-        let vc = SortedBottomSheetViewController(currentSortedType: sortedType)
+        let vc = SortedBottomSheetViewController(currentSortedType: employeesList.sortedType)
         vc.delegate = self
         vc.modalPresentationStyle = .overCurrentContext
         self.present(vc, animated: false)
@@ -377,49 +350,12 @@ extension TableViewController: UISearchBarDelegate {
     
     private func handlerSearch(searchText: String) {
         do {
-            try searchEmployees(searchText: searchText)
+            try employeesList.searchEmployees(searchText: searchText)
             errorView?.removeFromSuperview()
             tableView.isHidden = false
             tableView.reloadData()
         } catch {
             showError(screenError: .searchError)
-        }
-    }
-    
-    private func searchEmployees(searchText: String) throws {
-        if filteredEmployees[0].isEmpty && filteredEmployees[1].isEmpty {
-            throw AppError.emptyDataError
-//            return
-        }
-        logicSearch(for: 0, searchText: searchText)
-        logicSearch(for: 1, searchText: searchText)
-        print(searchEmployees[0])
-        
-        if searchEmployees[0].isEmpty && searchEmployees[1].isEmpty {
-            throw AppError.emptyDataError
-        }
-        
-        if sortedType == SortedType.birthday {
-            sortedByBirthday(by: searchEmployees)
-        } else if sortedType == SortedType.alphabetically {
-            sortedByAlphabetically(by: searchEmployees)
-        }
-    }
-    
-    private func logicSearch(for index: Int, searchText: String) {
-        for item in filteredEmployees[index] {
-            if item.firstName.contains(searchText) || item.lastName.contains(searchText) || item.userTag.lowercased().contains(searchText) {
-                if searchEmployees[index].contains(item) {
-                    continue
-                }
-                searchEmployees[index].append(item)
-            } else {
-                if searchEmployees[index].contains(item) {
-                    print(item.id)
-                    let removeIndex = searchEmployees[index].firstIndex(of: item)
-                    searchEmployees[index].remove(at: removeIndex!)
-                }
-            }
         }
     }
 }
@@ -428,41 +364,16 @@ extension TableViewController: UISearchBarDelegate {
 extension TableViewController: SortedBottomSheetViewControllerDelegate {
     func sortedTableView(by selectedSortedType: SortedType) {
         
-        if selectedSortedType == SortedType.birthday && sortedType != SortedType.birthday {
-            sortedByBirthday(by: filteredEmployees)
+        if selectedSortedType == SortedType.birthday && employeesList.sortedType != SortedType.birthday {
+            employeesList.sortedByBirthday(by: TypeEmployeeList.filtered)
             searchBar.setSortedIcon(for: Icons.sortActive)
         }
-        else if selectedSortedType == SortedType.alphabetically && sortedType != SortedType.alphabetically {
-            sortedByAlphabetically(by: filteredEmployees)
+        else if selectedSortedType == SortedType.alphabetically && employeesList.sortedType != SortedType.alphabetically {
+            employeesList.sortedByAlphabetically(by: TypeEmployeeList.filtered)
             searchBar.setSortedIcon(for: Icons.sortInactive)
         }
-        sortedType = selectedSortedType
+        employeesList.sortedType = selectedSortedType
         tableView.reloadData()
-    }
-    
-    private func sortedByBirthday(by employeesInput: [[User]]) {
-        let dateFormatter = DateFormatter()
-        let currentDate = Date()
-        var tmpEmployees = employeesInput
-        
-        //Сортировка по дате рождения
-        tmpEmployees[0] = tmpEmployees[0].sorted {
-            dateFormatter.getMonth(date: $0.birthday) < dateFormatter.getMonth(date: $1.birthday)
-        }
-        tmpEmployees[0] = tmpEmployees[0].sorted {
-            dateFormatter.getDay(date: $0.birthday) < dateFormatter.getDay(date: $1.birthday) && dateFormatter.getMonth(date: $0.birthday) == dateFormatter.getMonth(date: $1.birthday)
-        }
-        
-        //Распределение пользователей по разделам таблицы в зависимости от даты рождения (текущий год/следующий год)
-        sortedEmployees[0] = tmpEmployees[0].filter { dateFormatter.getMonth(date: $0.birthday) <= 12 && dateFormatter.getMonth(date: $0.birthday) > currentDate.monthInt || (dateFormatter.getMonth(date: $0.birthday) == currentDate.monthInt && dateFormatter.getDay(date: $0.birthday) >= currentDate.dayInt)}
-        sortedEmployees[1] = tmpEmployees[0].filter {!(dateFormatter.getMonth(date: $0.birthday) <= 12 && dateFormatter.getMonth(date: $0.birthday) > currentDate.monthInt || (dateFormatter.getMonth(date: $0.birthday) == currentDate.monthInt && dateFormatter.getDay(date: $0.birthday) >= currentDate.dayInt))}
-    }
-    
-    private func sortedByAlphabetically(by employeesInput: [[User]]) {
-        sortedEmployees[0] = employeesInput[0].sorted {
-            $0.firstName < $1.firstName
-        }
-        sortedEmployees[1] = []
     }
 }
 
