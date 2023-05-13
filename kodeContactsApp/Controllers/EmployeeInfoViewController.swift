@@ -262,7 +262,7 @@ extension EmployeeInfoViewController {
         userTag.text = person.userTag.lowercased()
         position.text = person.position
         dateBirthDay.text = formatter.getDateString(dateFormat: DateFormat.viewInfo.rawValue, date: person.birthday)
-        numberPhone.setTitle(formatPhoneNumber(number: person.phone), for: .normal)
+        numberPhone.setTitle(NumberPhoneFormatter.formatPhoneNumber(number: person.phone), for: .normal)
         
         if #available(iOS 15, *) {
             age.text = String(localized: "\(userAge) age")
@@ -283,37 +283,6 @@ extension EmployeeInfoViewController {
             return year
         }
         return 0
-    }
-    
-    private func formatPhoneNumber(number: String) -> String {
-        let mask = PhoneNumberFormat.ru.rawValue
-        var result = ""
-        var index = number.startIndex
-        for ch in mask where index < number.endIndex {
-            if number[index] == "-" {
-                result.append(ch)
-                index = number.index(after: index)
-            }
-            else if ch == "X" {
-                result.append(number[index])
-                index = number.index(after: index)
-            }
-            else {
-                result.append(ch)
-            }
-        }
-        return result
-    }
-    
-    private func removeNumberFormat(number: String) -> String {
-        let digits = CharacterSet.decimalDigits
-        var text = ""
-        for char in number.unicodeScalars {
-            if digits.contains(char) {
-                text.append(char.description)
-            }
-        }
-        return text
     }
 }
 
@@ -354,7 +323,7 @@ extension EmployeeInfoViewController {
     
     private func callPhoneNumber() {
         if let number = numberPhone.title(for: .normal),
-            let url = URL(string: "tel://+\(removeNumberFormat(number: number))") {
+           let url = URL(string: "tel://+\(NumberPhoneFormatter.removeNumberFormat(number: number))") {
             if (UIApplication.shared.canOpenURL(url)) {
                 UIApplication.shared.open(url, options: [:], completionHandler: nil)
             }
