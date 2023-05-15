@@ -5,3 +5,16 @@
   Created by Anastasia Nevodchikova on 12.05.2023.
   
 */
+
+"By alphabetically" = "По алфавиту";
+"By birthday" = "По дню рождения";
+"Enter name, tag, email..." = "Введи имя, тег, почту...";
+"Cancel" = "Отмена";
+"Sorting" = "Сортировка";
+"We didn't find anyone" = "Мы никого не нашли";
+"Some super intelligence broke everything" = "Какой-то сверхразум все сломал";
+"Try to edit your request" = "Попробуй скорректировать запрос";
+"We'll try to fix it quickly" = "Постараемся быстро починить";
+"Can't update data.\nCheck your internet connection." = "Не могу обновить данные.\nПроверь соединение с интернетом.";
+"Try again" = "Попробовать снова";
+"All" = "Все";

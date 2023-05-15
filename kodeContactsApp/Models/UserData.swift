@@ -26,7 +26,7 @@ enum Departments: String, CaseIterable {
     var value: String {
         switch self {
         case .all:
-            return "Все"
+            return String.localize("All")
         case .android:
             return "Android"
         case .ios:
