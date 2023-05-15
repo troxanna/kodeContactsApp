@@ -86,7 +86,7 @@ extension ErrorView {
         titleErrorLabel.text = errorDescription.title
         messageErrorLabel.text = errorDescription.message
         if errorDescription.repeatRequest == true {
-            buttonRepeatRequest.setTitle("Try again", for: .normal)
+            buttonRepeatRequest.setTitle(String.localize("Try again"), for: .normal)
         }
     }
     
