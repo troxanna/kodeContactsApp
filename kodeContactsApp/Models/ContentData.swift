@@ -14,9 +14,9 @@ enum SearchTextFieldData {
     var text: String {
         switch self {
         case .placeholder:
-            return String.localize("Enter name, tag, email...")
+            return String.localize("search_text_field_data.placeholder")
         case .cancelButtonTitle:
-            return String.localize("Cancel")
+            return String.localize("search_text_field_data.cancel_button_title")
         }
     }
 }
@@ -27,7 +27,7 @@ enum NumberPhoneAlertData {
     var text: String {
         switch self {
         case .cancelButtonTitle:
-            return String.localize("Cancel")
+            return String.localize("number_phone_alert_data.cancel_button_title")
         }
     }
 }
@@ -38,7 +38,7 @@ enum SortedBottomSheetData {
     var text: String {
         switch self {
         case .sorting:
-            return String.localize("Sorting")
+            return String.localize("sorted_bottom_sheet_data.sorting")
         }
     }
 }

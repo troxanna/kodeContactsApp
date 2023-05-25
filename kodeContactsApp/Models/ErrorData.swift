@@ -27,11 +27,11 @@ enum ErrorMessage: String {
     var text: String {
         switch self {
         case .searchError:
-            return String.localize("Try to edit your request")
+            return String.localize("error_message.search_error")
         case .criticalError:
-            return String.localize("We'll try to fix it quickly")
+            return String.localize("error_message.critical_error")
         case .networkError:
-            return String.localize("Can't update data.\nCheck your internet connection.")
+            return String.localize("error_message.network_error")
         }
         
     }
@@ -44,14 +44,13 @@ enum ErrorTitle: String {
     var text: String {
         switch self {
         case .searchError:
-            return String.localize("We didn't find anyone")
+            return String.localize("error_title.search_error")
         case .criticalError:
-            return String.localize("Some super intelligence broke everything")
+            return String.localize("error_title.critical_error")
         }
         
     }
 }
-
 
 enum ScreenError {
     case searchError

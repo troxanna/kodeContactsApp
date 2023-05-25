@@ -117,6 +117,7 @@ extension TableViewController: UITableViewDataSource {
         }
         
         let cell = tableView.dequeueReusableCell(withIdentifier: EmployeeTableViewCell.identifier) as! EmployeeTableViewCell
+        
         let employee = employeesList.readSortedEmployees[indexPath.section][indexPath.row]
         
         cell.fullDataCell(data: employee)

@@ -6,14 +6,28 @@
   
 */
 
-"Sorting" = "Сортировка";
-"Cancel" = "Отмена";
-"Try again" = "Попробовать снова";
-"Enter name, tag, email..." = "Введи имя, тег, почту...";
-"By alphabetically" = "По алфавиту";
-"By birthday" = "По дню рождения";
-"Try to edit your request" = "Попробуй скорректировать запрос";
-"We'll try to fix it quickly" = "Постараемся быстро починить";
-"Can't update data.\nCheck your internet connection." = "Не могу обновить данные.\nПроверь соединение с интернетом.";
-"We didn't find anyone" = "Мы никого не нашли";
-"Some superintelligence broke everything" = "Какой-то сверхразум все сломал";
+"departments.all" = "All";
+"departments.android" = "Android";
+"departments.ios" = "iOS";
+"departments.designers" = "Designers";
+"departments.managers" = "Managers";
+"departments.qa" = "QA";
+"departments.back_office" = "Back office";
+"departments.frontend" = "Frontend";
+"departments.hr" = "HR";
+"departments.pr" = "PR";
+"departments.backend" = "Backend";
+"departments.support" = "Support";
+"departments.analytics" = "Analytics";
+"button_repeat_request.try_again" = "Try again";
+"error_message.network_error" = "Can't update data.\nCheck your internet connection.";
+"error_message.critical_error" = "We'll try to fix it quickly";
+"error_message.search_error" = "Try to edit your request";
+"error_title.critical_error" = "Some super intelligence broke everything";
+"error_title.search_error" = "We didn't find anyone";
+"search_text_field_data.cancel_button_title" = "Cancel";
+"number_phone_alert_data.cancel_button_title" = "Cancel";
+"search_text_field_data.placeholder" = "Enter name, tag, email...";
+"sorted_bottom_sheet_data.sorting" = "Sorting";
+"sorted_type.alphabetically" = "By alphabetically";
+"sorted_type.birthday" = "By birthday";

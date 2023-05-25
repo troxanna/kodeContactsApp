@@ -26,31 +26,31 @@ enum Departments: String, CaseIterable {
     var value: String {
         switch self {
         case .all:
-            return String.localize("All")
+            return String.localize("departments.all")
         case .android:
-            return "Android"
+            return String.localize("departments.android")
         case .ios:
-            return "iOS"
+            return String.localize("departments.ios")
         case .design:
-            return "Designers"
+            return String.localize("departments.designers")
         case .management:
-            return "Managers"
+            return String.localize("departments.managers")
         case .qa:
-            return "QA"
+            return String.localize("departments.qa")
         case .back_office:
-            return "Back office"
+            return String.localize("departments.back_office")
         case .frontend:
-            return "Frontend"
+            return String.localize("departments.frontend")
         case .hr:
-            return "HR"
+            return String.localize("departments.hr")
         case .pr:
-            return "PR"
+            return String.localize("departments.pr")
         case .backend:
-            return "Backend"
+            return String.localize("departments.backend")
         case .support:
-            return "Support"
+            return String.localize("departments.support")
         case .analytics:
-            return "Analytics"
+            return String.localize("departments.analytics")
         }
     }
     

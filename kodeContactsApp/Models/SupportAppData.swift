@@ -30,9 +30,9 @@ enum SortedType {
     var text: String {
         switch self {
         case .alphabetically:
-            return String.localize("By alphabetically")
+            return String.localize("sorted_type.alphabetically")
         case .birthday:
-            return String.localize("By birthday")
+            return String.localize("sorted_type.birthday")
         }
     }
 }
