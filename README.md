@@ -2,16 +2,10 @@
 https://github.com/appKODE/trainee-test-ios
 
 #  Результат
-![Simulator Screen Shot - iPhone 14 - 2023-07-01 at 12 21 11](https://github.com/troxanna/kodeContactsApp/assets/81263173/29c982ec-64d1-407e-afa8-99e3740eae84)
-![Simulator Screen Shot - iPhone 14 - 2023-07-01 at 12 21 27](https://github.com/troxanna/kodeContactsApp/assets/81263173/9feeb27f-6f92-4556-a004-564638c9ff68)
-![Simulator Screen Shot - iPhone 14 - 2023-07-01 at 12 21 44](https://github.com/troxanna/kodeContactsApp/assets/81263173/f9e733df-1339-4046-86d5-74a6c2c1f856)
-![Simulator Screen Shot - iPhone 14 - 2023-07-01 at 12 21 53](https://github.com/troxanna/kodeContactsApp/assets/81263173/c76a6013-68df-47ee-a7bd-1a182bb12910)
-![Simulator Screen Shot - iPhone 14 - 2023-07-01 at 12 21 57](https://github.com/troxanna/kodeContactsApp/assets/81263173/980d04ab-d484-41ab-a8cb-30ace0fa332b)
-![Simulator Screen Shot - iPhone 14 - 2023-07-01 at 12 22 02](https://github.com/troxanna/kodeContactsApp/assets/81263173/e4e05d8b-269e-477b-9abd-1c2380355846)
-![Simulator Screen Shot - iPhone 14 - 2023-07-01 at 12 22 14](https://github.com/troxanna/kodeContactsApp/assets/81263173/4b49c7ce-648f-4816-8a54-66a9a3b6bd35)
-![Simulator Screen Shot - iPhone 14 - 2023-07-01 at 12 22 25](https://github.com/troxanna/kodeContactsApp/assets/81263173/0e808f5d-02c8-4d7d-b874-b635c1b0f5df)
-![Simulator Screen Shot - iPhone 14 - 2023-07-01 at 12 23 02](https://github.com/troxanna/kodeContactsApp/assets/81263173/cd0f8648-bafe-4089-b2d6-e25335869e6e)
-![Simulator Screen Shot - iPhone 14 - 2023-07-01 at 12 23 16](https://github.com/troxanna/kodeContactsApp/assets/81263173/c7f80455-038a-464d-9ce7-c3fd64bb890d)
+<img width="1475" alt="Снимок экрана 2023-07-01 в 12 25 55" src="https://github.com/troxanna/kodeContactsApp/assets/81263173/39e90d1e-c7c6-491f-b087-0248512fc03b">
+<img width="1463" alt="Снимок экрана 2023-07-01 в 12 26 02" src="https://github.com/troxanna/kodeContactsApp/assets/81263173/d131377f-c671-4d1a-a8ae-e683c3a258e8">
+<img width="1410" alt="Снимок экрана 2023-07-01 в 12 26 10" src="https://github.com/troxanna/kodeContactsApp/assets/81263173/103890dc-516c-4e61-b020-8b95b68b3d03">
+
 
 
 
