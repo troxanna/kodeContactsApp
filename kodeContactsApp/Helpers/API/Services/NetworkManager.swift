@@ -38,8 +38,8 @@ enum ApiType {
         }
     }
     
-    var request: URLRequest {
-        let url = URL(string: path, relativeTo: URL(string: baseURL)!)!
+    var request: URLRequest? {
+        guard let url = URL(string: path, relativeTo: URL(string: baseURL)) else { return nil }
         var request = URLRequest(url: url)
         request.allHTTPHeaderFields = headers
         switch self {
@@ -53,8 +53,8 @@ enum ApiType {
 class APIManager {
     static let shared = APIManager()
     
-    func getUsers(completion: @escaping (_: () throws -> [User]) -> ())  {
-        let request = ApiType.getUsers.request
+    func getUsers(completion: @escaping (_: () throws -> [User]) -> ()) throws {
+        guard let request = ApiType.getUsers.request else { throw AppError.validationError }
         URLSession.shared.dataTask(with: request) { data, response, error in
             completion({
                 if error != nil {
@@ -83,3 +83,44 @@ extension APIManager {
         }
     }
 }
+
+class ImageManager {
+    static let shared = ImageManager()
+    
+    func fetchAvatarImage(urlString: String, completion: @escaping (Data?) -> Void) {
+        guard let imageUrl = URL(string: urlString) else {
+            completion(nil)
+            return
+        }
+        let request = URLRequest(url: imageUrl)
+        URLSession.shared.dataTask(with: request) { data, response, error  in
+            guard let data = data, let response = response else {
+                completion(nil)
+                return
+            }
+            if let imageData = self.getCachedImage(from: imageUrl) {
+                completion(imageData)
+                return
+            }
+            completion(data)
+            self.saveDataToCache(data: data, response: response)
+        }.resume()
+    }
+}
+
+//MARK: Cached functions
+private extension ImageManager {
+    func getCachedImage(from url: URL) -> Data? {
+        let request = URLRequest(url: url)
+        guard let cachedResponse = URLCache.shared.cachedResponse(for: request) else { return nil }
+        return cachedResponse.data
+    }
+    
+    func saveDataToCache(data: Data, response: URLResponse) {
+        guard let url = response.url else { return }
+        let request = URLRequest(url: url)
+        let cachedResponse = CachedURLResponse(response: response, data: data)
+        URLCache.shared.storeCachedResponse(cachedResponse, for: request)
+    }
+}
+

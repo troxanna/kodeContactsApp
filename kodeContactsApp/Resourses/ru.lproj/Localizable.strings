@@ -2,19 +2,32 @@
   Localizable.strings
   kodeContactsApp
 
-  Created by Anastasia Nevodchikova on 12.05.2023.
+  Created by Anastasia Nevodchikova on 07.07.2023.
   
 */
 
-"By alphabetically" = "По алфавиту";
-"By birthday" = "По дню рождения";
-"Enter name, tag, email..." = "Введи имя, тег, почту...";
-"Cancel" = "Отмена";
-"Sorting" = "Сортировка";
-"We didn't find anyone" = "Мы никого не нашли";
-"Some super intelligence broke everything" = "Какой-то сверхразум все сломал";
-"Try to edit your request" = "Попробуй скорректировать запрос";
-"We'll try to fix it quickly" = "Постараемся быстро починить";
-"Can't update data.\nCheck your internet connection." = "Не могу обновить данные.\nПроверь соединение с интернетом.";
-"Try again" = "Попробовать снова";
-"All" = "Все";
+"sorted_type.alphabetically" = "По алфавиту";
+"sorted_type.birthday" = "По дню рождения";
+"search_text_field_data.placeholder" = "Введи имя, тег, почту...";
+"search_text_field_data.cancel_button_title" = "Отмена";
+"number_phone_alert_data.cancel_button_title" = "Отмена";
+"sorted_bottom_sheet_data.sorting" = "Сортировка";
+"error_title.search_error" = "Мы никого не нашли";
+"error_title.critical_error" = "Какой-то сверхразум все сломал";
+"error_message.search_error" = "Попробуй скорректировать запрос";
+"error_message.critical_error" = "Постараемся быстро починить";
+"error_message.network_error" = "Не могу обновить данные.\nПроверь соединение с интернетом.";
+"button_repeat_request.try_again" = "Попробовать снова";
+"departments.all" = "Все";
+"departments.android" = "Android";
+"departments.ios" = "iOS";
+"departments.designers" = "Designers";
+"departments.managers" = "Managers";
+"departments.qa" = "QA";
+"departments.back_office" = "Back office";
+"departments.frontend" = "Frontend";
+"departments.hr" = "HR";
+"departments.pr" = "PR";
+"departments.backend" = "Backend";
+"departments.support" = "Support";
+"departments.analytics" = "Analytics";

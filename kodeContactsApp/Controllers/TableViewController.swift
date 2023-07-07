@@ -48,6 +48,7 @@ class TableViewController: UIViewController, SkeletonTableViewDataSource {
     }()
     
     private let employeesList = EmployeeList() //weak?
+    private var onCompletion: (_: () throws -> [User]) -> () = {_ in}
 
     //MARK: Override functions
     override func viewDidLoad() {
@@ -55,6 +56,7 @@ class TableViewController: UIViewController, SkeletonTableViewDataSource {
 
         contentConfigurationView()
         createTableView()
+        initOnCompletion()
         setupTableView()
         setupRefreshControl()
     }
@@ -176,36 +178,49 @@ private extension TableViewController {
         updateDataTableView()
     }
     
+    func tableReloadData() {
+        errorView?.removeFromSuperview()
+        tableView.isHidden = false
+        tableView.reloadData()
+    }
+    
+    func initOnCompletion() {
+        onCompletion = {[weak self] users in
+            do {
+                let data = try users()
+                DispatchQueue.main.async {
+                    guard let self = self else { return }
+                    self.employeesList.insertData(data)
+                    self.handlerFilteredEmployees(for: self.departmentSegmentedControll.currentActiveSegment)
+                    if let searchText = self.searchBar.searchTextField.text {
+                        if searchText != "" {
+                            self.handlerSearch(searchText: searchText)
+                        }
+                    }
+                    self.tableView.reloadData()
+                    self.skeletonHide()
+                }
+            }
+            catch AppError.emptyDataError {
+                DispatchQueue.main.async {
+                    self?.showError(screenError: .searchError)
+                }
+            }
+            catch {
+                DispatchQueue.main.async {
+                    self?.showError(screenError: .criticalError)
+                }
+            }}
+    }
+    
     func updateDataTableView() {
         if currentReachabilityStatus == .notReachable {
             handlerErrorInternetConnection()
         } else {
-            APIManager.shared.getUsers { [weak self] users in
-                do {
-                    let data = try users()
-                    DispatchQueue.main.async {
-                        guard let self = self else { return }
-                        self.employeesList.insertData(data)
-                        self.handlerFilteredEmployees(for: self.departmentSegmentedControll.currentActiveSegment)
-                        if let searchText = self.searchBar.searchTextField.text {
-                            if searchText != "" {
-                                self.handlerSearch(searchText: searchText)
-                            }
-                        }
-                        self.tableView.reloadData()
-                        self.skeletonHide()
-                    }
-                }
-                catch AppError.emptyDataError {
-                    DispatchQueue.main.async {
-                        self?.showError(screenError: .searchError)
-                    }
-                }
-                catch {
-                    DispatchQueue.main.async {
-                        self?.showError(screenError: .criticalError)
-                    }
-                }
+            do {
+                try APIManager.shared.getUsers(completion: onCompletion)
+            } catch {
+                self.showError(screenError: .criticalError)
             }
         }
     }
@@ -280,9 +295,7 @@ extension TableViewController: DepartmentSegmentedControlDelegate {
     func handlerFilteredEmployees(for department: String) {
         do {
             try employeesList.filteredEmployees(for: department)
-            errorView?.removeFromSuperview()
-            tableView.isHidden = false
-            tableView.reloadData()
+            tableReloadData()
         }
         catch AppError.searchError {
             showError(screenError: .searchError)
@@ -352,9 +365,7 @@ extension TableViewController: UISearchBarDelegate {
     private func handlerSearch(searchText: String) {
         do {
             try employeesList.searchEmployees(searchText: searchText)
-            errorView?.removeFromSuperview()
-            tableView.isHidden = false
-            tableView.reloadData()
+            tableReloadData()
         } catch {
             showError(screenError: .searchError)
         }
